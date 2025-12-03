@@ -1,0 +1,42 @@
+<?php
+/*
+ *
+ * */
+namespace RobertWP\ImageOptimizerLite\Modules\Sort;
+
+use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\ImageOptimizerLite\Modules\tracker\Tracker;
+use RobertWP\ImageOptimizerLite\Traits\Singleton;
+
+class Sort {
+    use Singleton;
+
+    public static function maybe_register_hooks(): void
+    {
+
+        if (SettingsRegistrar::get_effective_setting('sort_enabled') !== 1) {
+            return;
+        }
+
+        $post_types = get_post_types(['public' => true], 'names'); // 获取所有公开的文章类型
+        foreach ($post_types as $type) {
+            add_filter("manage_edit-{$type}_sortable_columns", [self::class, 'make_views_column_sortable'], 20);
+        }
+
+        add_filter('pre_get_posts', [self::class, 'add_view_count_sorting'], 20);
+    }
+
+    public static function add_view_count_sorting($query): void
+    {
+        if (!is_admin() && $query->is_main_query() && $query->get('orderby') === 'views') {
+            $query->set('meta_key', Tracker::RWIOL_META_KEY_TOTAL);
+            $query->set('orderby', 'meta_value_num');
+        }
+    }
+
+    public static function make_views_column_sortable($columns) {
+        $columns['post_views'] = 'views';
+        return $columns;
+    }
+
+}

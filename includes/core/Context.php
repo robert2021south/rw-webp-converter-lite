@@ -1,0 +1,36 @@
+<?php
+namespace RobertWP\ImageOptimizerLite\Core;
+
+class Context
+{
+    public static function is_plugin_context(): bool
+    {
+        global $pagenow;
+
+        if (is_admin()) {
+            $page = sanitize_text_field(wp_unslash($_GET['page'] ?? ''));
+            // 1. 检查是否在后台文章/页面/自定义类型列表页
+            if ($pagenow === 'edit.php') {
+                return true;
+            }
+            // 2. 检查插件专属页面（如 ?page=rwiol...）
+            if (strpos($page, 'rwiol') === 0) {
+                return true;
+            }
+        }
+
+        // 3. 检查插件专属 AJAX/REST 操作
+        $action = sanitize_text_field(wp_unslash( $_REQUEST['action'] ?? '' ));
+        if (strpos($action, 'rwiol_') === 0) {
+            return true;
+        }
+
+        $uri = sanitize_text_field(wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ));
+        if (defined('REST_REQUEST') && REST_REQUEST && strpos($uri ?? '', '/wp-json/rwiol/') !== false) {
+            return true;
+        }
+
+        return false;
+    }
+}
+

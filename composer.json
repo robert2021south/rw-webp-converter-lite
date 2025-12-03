@@ -1,0 +1,24 @@
+{
+    "name": "robertwp/rw-image-optimizer-lite",
+    "description": "A WordPress plugin for image optimizer",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "RobertWP\\ImageOptimizerLite\\": "includes/",
+            "Tests\\": "tests/",
+            "WPBrowser\\": "vendor/lucatume/wp-browser/src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robert South",
+            "email": "robert2021south@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "codeception/codeception": "^5.3",
+        "lucatume/wp-browser": "^4.5"
+    }
+}

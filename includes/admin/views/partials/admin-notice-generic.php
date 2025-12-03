@@ -1,0 +1,13 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+/**
+ * @var string $message
+ * * @var string $notice_type
+ */
+?>
+
+<?php if ( ! empty( $message ) ) : ?>
+    <div class="notice notice-<?php echo esc_attr($notice_type); ?> is-dismissible">
+        <p><?php echo wp_kses($message,['strong' => []]); ?></p>
+    </div>
+<?php endif; ?>

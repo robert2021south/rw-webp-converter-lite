@@ -1,0 +1,128 @@
+name: RW PostViewStats Lite Codeception Matrix Tests (docker-compose)
+
+on:
+  push:
+    branches: [ ci ]
+  pull_request:
+    branches: [ ci ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php_version: [8.2, 8.3, 8.4]
+        wp_version: [6.6, 6.8]
+        mysql_version: [5.7, 8.0]
+
+    env:
+      WP_ADMIN_USER: ${{ secrets.WP_ADMIN_USER }}
+      WP_ADMIN_PASS: ${{ secrets.WP_ADMIN_PASS }}
+      WP_ADMIN_EMAIL: robert2021south@gmail.com
+      WP_PORT: 8080
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: rootpass
+
+    steps:
+
+      # 检出代码
+      - name: 1. Checkout code
+        uses: actions/checkout@v3
+
+      # 创建临时插件目录
+      - name: 2. Prepare plugin directory
+        run: |
+          mkdir -p docker/wordpress/wp-content/plugins/rw-image-optimizer-lite
+          rsync -a --exclude='docker' ./* docker/wordpress/wp-content/plugins/rw-image-optimizer-lite/
+          chmod -R 777 docker/wordpress/wp-content/plugins/rw-image-optimizer-lite/tests/_output
+
+      # 为矩阵创建 Docker Compose 配置文件
+      - name: 3. Generate Docker Compose config for matrix
+        run: |
+          echo "PHP_VERSION=${{ matrix.php_version }}" > docker/.env
+          echo "WP_VERSION=${{ matrix.wp_version }}" >> docker/.env
+          echo "MYSQL_VERSION=${{ matrix.mysql_version }}" >> docker/.env
+          
+          echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> docker/.env
+          echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> docker/.env
+
+      - name: 4. Start Docker Compose (Matrix)
+        run: |
+          cd docker
+          docker compose build --build-arg PHP_VERSION=${{ matrix.php_version }}
+          docker compose up -d
+          docker ps
+
+      # 等待 WordPress/PHP-FPM/MySQL 就绪
+      - name: 5. Wait for services
+        run: |
+          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
+          sleep 10
+
+      # 在容器内安装插件依赖
+      - name: 6. Install plugin dependencies
+        run: |
+          docker exec wp_fpm bash -lc '\
+            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            composer install --no-interaction --prefer-dist --optimize-autoloader;
+          '
+
+      # 安装 WP-CLI
+      - name: 7. Install WP-CLI inside wp_fpm container
+        run: |
+          docker exec wp_fpm bash -c '
+            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&
+            chmod +x wp-cli.phar &&
+            mv wp-cli.phar /usr/local/bin/wp
+          '
+
+      # 安装 WordPress && 激活插件
+      - name: 8. Install WordPress && Activate plugin
+        run: |
+          docker exec wp_fpm bash -lc "\
+            wp core install \
+              --url='http://nginx/' \
+              --title='Test Site' \
+              --admin_user='$WP_ADMIN_USER' \
+              --admin_password='$WP_ADMIN_PASS' \
+              --admin_email='$WP_ADMIN_EMAIL' \
+              --skip-email \
+              --allow-root \
+              --path=/var/www/html
+          "
+          docker exec wp_fpm bash -lc '\
+            wp plugin activate rw-image-optimizer-lite --allow-root --path=/var/www/html
+          '
+
+      # 运行 Unit 测试
+      - name: 9. Run Unit Tests
+        run: |
+          docker exec wp_fpm bash -lc '\
+            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            ./vendor/bin/codecept run Unit
+          '
+
+      # 运行 Integration 测试
+      - name: 10. Run Integration Tests
+        run: |
+          docker exec wp_fpm bash -lc '\
+            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            ./vendor/bin/codecept run Integration
+          '
+
+      # 运行 Acceptance 测试
+      - name: 11. Run Acceptance Tests
+        run: |
+          docker exec wp_fpm bash -lc '\
+            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            TEST_SELENIUM_HOST=wp_selenium TEST_SELENIUM_PORT=4444 \
+            ./vendor/bin/codecept run Acceptance
+          '
+      # 清理
+      - name: 12. Cleanup
+        if: always()
+        run: |
+          cd docker
+          docker compose down -v

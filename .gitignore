@@ -1,0 +1,5 @@
+/vendor/
+composer.lock
+/languages/*.po
+/languages/*.mo
+!/languages/*.pot
