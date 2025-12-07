@@ -14,14 +14,14 @@ class Context
                 return true;
             }
             // 2. 检查插件专属页面（如 ?page=rwiol...）
-            if (strpos($page, 'rwiol') === 0) {
+            if (str_starts_with($page, 'rwiol')) {
                 return true;
             }
         }
 
         // 3. 检查插件专属 AJAX/REST 操作
         $action = sanitize_text_field(wp_unslash( $_REQUEST['action'] ?? '' ));
-        if (strpos($action, 'rwiol_') === 0) {
+        if (str_starts_with($action, 'rwiol_')) {
             return true;
         }
 

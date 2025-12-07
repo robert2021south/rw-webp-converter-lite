@@ -2,78 +2,66 @@
 namespace RobertWP\ImageOptimizerLite\Admin\Settings;
 
 use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\ImageOptimizerLite\Admin\Ui\SettingsRenderer;
 
 class SettingsRegistrar {
     use Singleton;
 
-    const OPTION_SITE_SETTINGS = 'rwiol_site_settings';
+    const  RWIOL_SETTINGS_OPTION = 'rwiol_settings';
 
     public function register_settings(): void
     {
-        self::register_settings_fields('rwiol-settings');
+        // 注册设置组
+        register_setting(
+            'rwiol_settings_group',
+            self::RWIOL_SETTINGS_OPTION,
+            [$this, 'sanitize']    // 数据验证回调
+        );
+
+        // 注册设置 section
+        add_settings_section(
+            'rwiol_general_section',
+            __('General Settings', 'rw-image-optimizer-lite'),
+            '__return_false',
+            'rwiol_settings'
+        );
+
+        // 自动压缩上传
+        add_settings_field(
+            'auto_optimize',
+            __('Auto Optimize Uploads', 'rw-image-optimizer-lite'),
+            [SettingsRenderer::class, 'render_auto_optimize_field'],
+            'rwiol_settings',
+            'rwiol_general_section'
+        );
+
+        // 压缩等级字段
+        add_settings_field(
+            'quality',
+            __('Compression Level', 'rw-image-optimizer-lite'),
+            [SettingsRenderer::class, 'render_quality_field'],
+            'rwiol_settings',
+            'rwiol_general_section'
+        );
+
+        // WebP 转换
+        add_settings_field(
+            'webp',
+            __('Generate WebP', 'rw-image-optimizer-lite'),
+            [SettingsRenderer::class, 'render_webp_field'],
+            'rwiol_settings',
+            'rwiol_general_section'
+        );
     }
 
-    public static function register_settings_fields($page_slug): void
+    // 数据验证回调
+    public function sanitize($input): array
     {
-        // === 第一组设置：功能设置 ===
-        add_settings_section(
-            'rwiol_feature_section',
-            __('Feature Settings', 'rw-image-optimizer-lite'),
-            null,
-            $page_slug
-        );
-
-        $fields = [
-            [
-                'id' => 'rwiol_stat_field',
-                'option' => 'stat_enabled',
-                'label' => __('Enable page view statistics', 'rw-image-optimizer-lite'),
-                'desc' => __('When enabled, the page views of each article will be automatically counted.', 'rw-image-optimizer-lite')
-            ],
-            [
-                'id' => 'rwiol_sort_field',
-                'option' => 'sort_enabled',
-                'label' => __('Enable sorting', 'rw-image-optimizer-lite'),
-                'desc' => __('When enabled, You can sort the articles on the article list page by clicking "Views".', 'rw-image-optimizer-lite')
-            ],
-            [
-                'id' => 'rwiol_rest_api_field',
-                'option' => 'rest_api_enabled',
-                'label' => __('Enable REST API', 'rw-image-optimizer-lite'),
-                'desc' => __('When enabled, you can retrieve the view count of a specific post via the REST API.', 'rw-image-optimizer-lite')
-            ],
-        ];
-
-        foreach ($fields as $field) {
-            SettingsRenderer::render_checkbox_setting_field($field, $page_slug, 'rwiol_feature_section' );
-        }
-
-        // === 第二组设置：数据设置 ===
-        add_settings_section(
-            'rwiop_data_section',
-            __('Data Settings', 'rw-image-optimizer-lite'),
-            null,
-            $page_slug
-        );
-
-        $data_fields = [
-            [
-                'id' => 'rwiop_delete_data_field',
-                'option' => 'delete_data_on_uninstall',
-                'label' => __('Delete data on uninstall', 'rw-image-optimizer-lite'),
-                'desc'  => __('When checked, all statistical data will be permanently deleted when the plugin is uninstalled.', 'rw-image-optimizer-lite')
-            ]
-        ];
-
-        foreach ($data_fields as $field) {
-            SettingsRenderer::render_checkbox_setting_field($field, $page_slug, 'rwiop_data_section');
-        }
-    }
-
-    // 获取有效配置
-    public static function get_effective_setting($key) {
-        $site_settings = get_option(self::OPTION_SITE_SETTINGS, []);
-        return $site_settings[$key] ?? '0';
+        $output = [];
+        $output['auto_optimize'] = !empty($input['auto_optimize']) ? 1 : 0;
+        $output['quality'] = in_array($input['quality'], ['low','medium','high']) ? $input['quality'] : 'medium';
+        $output['webp'] = !empty($input['webp']) ? 1 : 0;
+        return $output;
     }
 
 }

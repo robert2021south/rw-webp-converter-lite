@@ -3,14 +3,19 @@ namespace RobertWP\ImageOptimizerLite\Assets;
 
 class AdminAssets {
 
-    public static function enqueue() {
-        self::enqueue_styles();
+    public static function enqueue(): void
+    {
+        self::enqueue_scripts();
     }
 
-    private static function enqueue_styles(): void
+    private static function enqueue_scripts(): void
     {
-        wp_register_style('rwiol-admin-style-min', RWIOL_ASSETS_URL. 'css/rwiol-admin-style.min.css', [], RWIOL_PLUGIN_VERSION );
-        wp_enqueue_style('rwiol-admin-style-min');
+        wp_enqueue_script('rwiol-admin-scan-min', RWIOL_PLUGIN_URL . 'assets/js/rwiol-admin-scan.min.js', ['jquery'], RWIOL_PLUGIN_VERSION , true);
+        wp_localize_script('rwiol-admin-scan-min', 'rwiol_object', [
+            'nonce'    => wp_create_nonce('rwiol_nonce'),
+        ]);
+
+
     }
 
 }

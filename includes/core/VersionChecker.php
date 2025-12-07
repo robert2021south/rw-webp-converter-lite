@@ -3,7 +3,7 @@ namespace RobertWP\ImageOptimizerLite\Core;
 
 class VersionChecker{
 
-    public static function check()
+    public static function check(): void
     {
         // 防止被其他插件或异常环境调用
         if ( ! defined('RWIOL_PLUGIN_VERSION') ) {

@@ -25,7 +25,7 @@ TODO:
 TODO:
 
 **Documentation**:
-[Full Documentation](https://docs.robertwp.com/rw-image-optimizer-pro/) - Includes both free and pro version guides.
+[Full Documentation](https://docs.robertwp.com/rw-image-optimizer-lite/) - Includes both free and pro version guides.
 
 == Installation ==
 1. Upload the `rw-image-optimizer-lite` folder to `/wp-content/plugins/`

@@ -70,10 +70,10 @@ class TemplateLoader
         // 3. 全局模板目录
         $normalized = str_replace(['..', '//'], '', $template_name);
         $global_path = self::$plugin_base_path . 'includes/templates/' . $normalized . '.php';
-
         if (file_exists($global_path)) {
             return $global_path;
         }
+
         return null;
     }
 }
