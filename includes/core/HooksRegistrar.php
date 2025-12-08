@@ -47,15 +47,15 @@ class HooksRegistrar {
         add_filter('wp_generate_attachment_metadata', [$ac, 'handle_attachment_metadata'], 10, 2);
 
         //wp_ajax_
-        add_action('wp_ajax_rwiol_scan_images', [$s, 'scan_unoptimized_images']);
-        add_action('wp_ajax_rwiol_bulk_optimize', [$bc, 'handle_batch_optimize_ajax']);
+        add_action('wp_ajax_rwwcl_scan_images', [$s, 'scan_unoptimized_images']);
+        add_action('wp_ajax_rwwcl_bulk_optimize', [$bc, 'handle_batch_optimize_ajax']);
 
         // plugin meta
-        add_action('plugin_action_links_' . plugin_basename(RWIOL_PLUGIN_FILE), [PluginMetaLinks::class, 'add_links']);
+        add_action('plugin_action_links_' . plugin_basename(RWWCL_PLUGIN_FILE), [PluginMetaLinks::class, 'add_links']);
         add_action('admin_enqueue_scripts', [AdminAssets::class, 'enqueue']);
 
         // update_option_
-        add_action('update_option_rwiol_settings', self::cb([$settings_handler, 'after_settings_saved']), 10, 2);
+        add_action('update_option_rwwcl_settings', self::cb([$settings_handler, 'after_settings_saved']), 10, 2);
 
 
     }

@@ -14,7 +14,7 @@ class Menu {
             __('RW Image Optimizer Lite', 'rw-image-optimizer-lite'),
             __('RW Image Optimizer', 'rw-image-optimizer-lite'),
             'manage_options',
-            'rwiol-settings',
+            'rwwcl-settings',
             [SettingsRenderer::class, 'render_settings_page']
         );
     }

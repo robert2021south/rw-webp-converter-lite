@@ -21,33 +21,33 @@ class SettingsRenderer {
     // 字段渲染
     public static function render_quality_field(): void
     {
-        $settings = get_option(SettingsRegistrar::RWIOL_SETTINGS_OPTION, []);
+        $settings = get_option(SettingsRegistrar::RWWCL_SETTINGS_OPTION, []);
         $value = $settings['quality'] ?? 'medium';
         ?>
         <fieldset>
-            <label><input type="radio" name="rwiol_settings[quality]" value="low" <?php checked($value,'low'); ?>> <?php _e('Low', 'rw-image-optimizer-lite'); ?></label><br>
-            <label><input type="radio" name="rwiol_settings[quality]" value="medium" <?php checked($value,'medium'); ?>> <?php _e('Medium', 'rw-image-optimizer-lite'); ?></label><br>
-            <label><input type="radio" name="rwiol_settings[quality]" value="high" <?php checked($value,'high'); ?>> <?php _e('High', 'rw-image-optimizer-lite'); ?></label>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="low" <?php checked($value,'low'); ?>> <?php _e('Low', 'rw-image-optimizer-lite'); ?></label><br>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="medium" <?php checked($value,'medium'); ?>> <?php _e('Medium', 'rw-image-optimizer-lite'); ?></label><br>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="high" <?php checked($value,'high'); ?>> <?php _e('High', 'rw-image-optimizer-lite'); ?></label>
         </fieldset>
         <?php
     }
 
     public static function render_auto_optimize_field(): void
     {
-        $settings = get_option(SettingsRegistrar::RWIOL_SETTINGS_OPTION, []);
+        $settings = get_option(SettingsRegistrar::RWWCL_SETTINGS_OPTION, []);
         $value = $settings['auto_optimize'] ?? 0;
         ?>
-        <input type="checkbox" name="rwiol_settings[auto_optimize]" value="1" <?php checked($value,1); ?>>
+        <input type="checkbox" name="rwwcl_settings[auto_optimize]" value="1" <?php checked($value,1); ?>>
         <?php _e('Automatically optimize images on upload', 'rw-image-optimizer-lite'); ?>
         <?php
     }
 
     public static function render_webp_field(): void
     {
-        $settings = get_option(SettingsRegistrar::RWIOL_SETTINGS_OPTION, []);
+        $settings = get_option(SettingsRegistrar::RWWCL_SETTINGS_OPTION, []);
         $value = $settings['webp'] ?? 0;
         ?>
-        <input type="checkbox" name="rwiol_settings[webp]" value="1" <?php checked($value,1); ?>>
+        <input type="checkbox" name="rwwcl_settings[webp]" value="1" <?php checked($value,1); ?>>
         <?php _e('Generate WebP version of images', 'rw-image-optimizer-lite'); ?>
         <?php
     }

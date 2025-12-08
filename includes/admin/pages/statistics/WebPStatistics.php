@@ -35,8 +35,8 @@ class WebPStatistics
         foreach ($results as $row) {
             $meta = wp_get_attachment_metadata($row->ID);
             $webp = $meta['webp'] ?? null;
-            $original_size = $meta['_rwiol_original_size'] ?? 0;
-            $optimized_size = $meta['_rwiol_optimized_size'] ?? $original_size;
+            $original_size = $meta['_rwwcl_original_size'] ?? 0;
+            $optimized_size = $meta['_rwwcl_optimized_size'] ?? $original_size;
 
             $stats[] = [
                 'ID'              => $row->ID,
@@ -62,7 +62,7 @@ class WebPStatistics
         $stats = $this->get_stats($paged, $search);
 
         // 搜索表单
-        echo '<form method="get"><input type="hidden" name="page" value="rwiol_webp_stats">';
+        echo '<form method="get"><input type="hidden" name="page" value="rwwcl_webp_stats">';
         echo '<input type="text" name="s" placeholder="Search by title or ID" value="' . esc_attr($search) . '">';
         echo '<button type="submit" class="button">Search</button>';
         echo '</form><br>';
@@ -114,7 +114,7 @@ class WebPStatistics
         $pages = ceil($total / $this->per_page);
         if ($pages <= 1) return;
 
-        $base_url = admin_url('admin.php?page=rwiol_webp_stats');
+        $base_url = admin_url('admin.php?page=rwwcl_webp_stats');
         if ($search) $base_url .= '&s=' . urlencode($search);
 
         echo '<div class="tablenav"><div class="tablenav-pages">';

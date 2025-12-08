@@ -21,7 +21,7 @@ class AutoCompressor
     public function handle_attachment_metadata(array $metadata, int $attachment_id): array
     {
 
-        $settings = get_option(SettingsRegistrar::RWIOL_SETTINGS_OPTION);
+        $settings = get_option(SettingsRegistrar::RWWCL_SETTINGS_OPTION);
         if (empty($settings['auto_optimize']) || $settings['auto_optimize'] != '1') {
             return $metadata;
         }

@@ -11,7 +11,7 @@ class Scanner {
      */
     public function scan_unoptimized_images(): void
     {
-        check_ajax_referer('rwiol_nonce', 'nonce');
+        check_ajax_referer('rwwcl_nonce', 'nonce');
 
         // 扫描上传目录
         $uploads = wp_get_upload_dir();
@@ -20,7 +20,7 @@ class Scanner {
         $images = $this->find_images($path);
 
         // 保存到 transient，供批量优化使用
-        set_transient('rwiol_scan_results', $images, 3600);
+        set_transient('rwwcl_scan_results', $images, 3600);
 
         wp_send_json_success([
             'count'  => count($images),
@@ -49,7 +49,7 @@ class Scanner {
 
             // 检查是否已优化
             $hash = md5($path);
-            $meta = get_option('rwiol_meta_' . $hash);
+            $meta = get_option('rwwcl_meta_' . $hash);
 
             if (!$meta || empty($meta['optimized'])) {
                 $images[] = $path;

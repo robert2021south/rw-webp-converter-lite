@@ -50,7 +50,7 @@ class Statistics {
             }
 
             // 从 postmeta 获取原始大小（在压缩时写入），key 可按需更改
-            $original_size = (int) get_post_meta($att_id, '_rwiol_original_size', true);
+            $original_size = (int) get_post_meta($att_id, '_rwwcl_original_size', true);
 
             if ($original_size > 0) {
                 // 已有记录，认为曾被优化

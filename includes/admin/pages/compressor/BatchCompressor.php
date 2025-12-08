@@ -8,9 +8,9 @@ class BatchCompressor {
 
     public function handle_batch_optimize_ajax(): void
     {
-        check_ajax_referer('rwiol_nonce', 'nonce');
+        check_ajax_referer('rwwcl_nonce', 'nonce');
 
-        $files = get_transient('rwiol_scan_results');
+        $files = get_transient('rwwcl_scan_results');
 
         if (empty($files)) {
             wp_send_json_error(['message' => __('No files to optimize.', 'rw-image-optimizer-lite')]);
@@ -29,7 +29,7 @@ class BatchCompressor {
             }
         }
 
-        delete_transient('rwiol_scan_results');
+        delete_transient('rwwcl_scan_results');
 
         wp_send_json_success([
             'optimized' => $optimized

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /** @var string $upgrade_url  */
 ?>
 
-<div class="wrap rwiol-wrap">
+<div class="wrap rwwcl-wrap">
 
     <h1><?php _e('RW Image Optimizer Lite', 'rw-image-optimizer-lite'); ?></h1>
 
@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     <form method="post" action="options.php">
         <?php
-        wp_nonce_field('rwiol_save_settings_nonce');
-        settings_fields('rwiol_settings_group');
-        do_settings_sections('rwiol_settings');
+        wp_nonce_field('rwwcl_save_settings_nonce');
+        settings_fields('rwwcl_settings_group');
+        do_settings_sections('rwwcl_settings');
         submit_button(__('Save Changes', 'rw-image-optimizer-lite'));
         ?>
     </form>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     ============================ -->
     <h3 class="title"><?php _e('Pro Features (Preview)', 'rw-image-optimizer-lite'); ?></h3>
 
-    <fieldset disabled class="rwiol-pro-feature">
+    <fieldset disabled class="rwwcl-pro-feature">
         <label for="pro_webp_auto">
             <input type="checkbox" id="pro_webp_auto" name="pro_webp_auto">
             <?php _e('Auto-convert all uploads to WebP (Pro)', 'rw-image-optimizer-lite'); ?>
@@ -62,27 +62,27 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
     <p><?php _e('Scan your existing Media Library and optimize uncompressed images.', 'rw-image-optimizer-lite'); ?></p>
 
-    <button id="rwiol-scan-btn" class="button button-secondary">
+    <button id="rwwcl-scan-btn" class="button button-secondary">
         <?php _e('Scan Unoptimized Images', 'rw-image-optimizer-lite'); ?>
     </button>
 
-    <button id="rwiol-start-bulk-btn" class="button button-primary" disabled>
+    <button id="rwwcl-start-bulk-btn" class="button button-primary" disabled>
         <?php _e('Start Bulk Optimization', 'rw-image-optimizer-lite'); ?>
     </button>
 
     <!-- Pro 专用按钮灰显 -->
-    <button id="rwiol-start-bulk-pro" class="button button-primary" disabled>
+    <button id="rwwcl-start-bulk-pro" class="button button-primary" disabled>
         <?php _e('Start Pro Bulk Optimization', 'rw-image-optimizer-lite'); ?>
     </button>
     <p class="description">
         <?php _e('Scheduled and advanced bulk optimization available in Pro version.', 'rw-image-optimizer-lite'); ?>
     </p>
 
-    <div id="rwiol-progress" style="margin-top: 15px; display: none;">
-        <div class="rwiol-progress-bar">
-            <span class="rwiol-progress-value" style="width:0%;"></span>
+    <div id="rwwcl-progress" style="margin-top: 15px; display: none;">
+        <div class="rwwcl-progress-bar">
+            <span class="rwwcl-progress-value" style="width:0%;"></span>
         </div>
-        <p id="rwiol-progress-text">0%</p>
+        <p id="rwwcl-progress-text">0%</p>
     </div>
 
     <hr>
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
     <!-- ===========================
          SECTION 4: PRO Features Teaser
     ============================ -->
-    <div class="rwiol-pro-upgrade-box">
+    <div class="rwwcl-pro-upgrade-box">
         <h2><?php _e('Upgrade to PRO', 'rw-image-optimizer-lite'); ?></h2>
         <p><?php _e('Unlock advanced features such as AVIF, advanced WebP settings, unused images cleaner, optimization scheduler, and more.', 'rw-image-optimizer-lite'); ?></p>
         <a href="<?php echo esc_url($upgrade_url);?>" target="_blank" class="button button-primary">
@@ -132,7 +132,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
      CSS for Gray Display
 =========================== -->
 <style>
-    .rwiol-pro-feature {
+    .rwwcl-pro-feature {
         opacity: 0.5;
         pointer-events: none;
         margin-bottom: 20px;

@@ -93,9 +93,9 @@ class Compressor
         $new_size = @filesize($file_path) ?: $original_size;
 
         // 写入 postmeta
-        update_post_meta($attachment_id, '_rwiol_original_size', $original_size);
-        update_post_meta($attachment_id, '_rwiol_optimized_size', $new_size);
-        update_post_meta($attachment_id, '_rwiol_optimized', 1);
+        update_post_meta($attachment_id, '_rwwcl_original_size', $original_size);
+        update_post_meta($attachment_id, '_rwwcl_optimized_size', $new_size);
+        update_post_meta($attachment_id, '_rwwcl_optimized', 1);
 
         error_log("Compressed JPG file: {$file_path}, original_size={$original_size}, new_size={$new_size}");
 
@@ -130,9 +130,9 @@ class Compressor
 
         $new_size = @filesize($file_path) ?: $original_size;
 
-        update_post_meta($attachment_id, '_rwiol_original_size', $original_size);
-        update_post_meta($attachment_id, '_rwiol_optimized_size', $new_size);
-        update_post_meta($attachment_id, '_rwiol_optimized', 1);
+        update_post_meta($attachment_id, '_rwwcl_original_size', $original_size);
+        update_post_meta($attachment_id, '_rwwcl_optimized_size', $new_size);
+        update_post_meta($attachment_id, '_rwwcl_optimized', 1);
 
         error_log("Compressed PNG file: {$file_path}, original_size={$original_size}, new_size={$new_size}");
 

@@ -14,19 +14,19 @@ class Bootstrap {
 
         HooksRegistrar::register();
 
-        TemplateLoader::init(plugin_dir_path(RWIOL_PLUGIN_FILE));
+        TemplateLoader::init(plugin_dir_path(RWWCL_PLUGIN_FILE));
 
         self::$initialized = true;
     }
 
     public static function activate(): void {
-        update_option(RWIOL_VERSION_OPTION, RWIOL_PLUGIN_VERSION);
+        update_option(RWWCL_VERSION_OPTION, RWWCL_PLUGIN_VERSION);
 
         $data = [];
         $data['auto_optimize'] = 1;
         $data['quality'] = 'medium';
         $data['webp'] = 1;
-        update_option( SettingsRegistrar::RWIOL_SETTINGS_OPTION, $data );
+        update_option( SettingsRegistrar::RWWCL_SETTINGS_OPTION, $data );
     }
 
     public static function deactivate(): void {

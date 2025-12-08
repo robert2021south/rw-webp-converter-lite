@@ -10,9 +10,9 @@ class AdminAssets {
 
     private static function enqueue_scripts(): void
     {
-        wp_enqueue_script('rwiol-admin-scan-min', RWIOL_PLUGIN_URL . 'assets/js/rwiol-admin-scan.min.js', ['jquery'], RWIOL_PLUGIN_VERSION , true);
-        wp_localize_script('rwiol-admin-scan-min', 'rwiol_object', [
-            'nonce'    => wp_create_nonce('rwiol_nonce'),
+        wp_enqueue_script('rwwcl-admin-scan-min', RWWCL_PLUGIN_URL . 'assets/js/rwwcl-admin-scan.min.js', ['jquery'], RWWCL_PLUGIN_VERSION , true);
+        wp_localize_script('rwwcl-admin-scan-min', 'rwwcl_object', [
+            'nonce'    => wp_create_nonce('rwwcl_nonce'),
         ]);
 
 
