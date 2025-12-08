@@ -1,7 +1,7 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Compressor;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Compressor;
 
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class BatchCompressor {
     use Singleton;
@@ -13,7 +13,7 @@ class BatchCompressor {
         $files = get_transient('rwwcl_scan_results');
 
         if (empty($files)) {
-            wp_send_json_error(['message' => __('No files to optimize.', 'rw-image-optimizer-lite')]);
+            wp_send_json_error(['message' => __('No files to optimize.', 'rw-webp-converter-lite')]);
         }
 
         $optimized = 0;

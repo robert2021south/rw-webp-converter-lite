@@ -1,10 +1,10 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Ui;
+namespace RobertWP\WebPConverterLite\Admin\Ui;
 
-use RobertWP\ImageOptimizerLite\Admin\Pages\Statistics\Statistics;
-use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsRegistrar;
-use RobertWP\ImageOptimizerLite\Utils\Helper;
-use RobertWP\ImageOptimizerLite\Utils\TemplateLoader;
+use RobertWP\WebPConverterLite\Admin\Pages\Statistics\Statistics;
+use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\WebPConverterLite\Utils\Helper;
+use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class SettingsRenderer {
 
@@ -25,9 +25,9 @@ class SettingsRenderer {
         $value = $settings['quality'] ?? 'medium';
         ?>
         <fieldset>
-            <label><input type="radio" name="rwwcl_settings[quality]" value="low" <?php checked($value,'low'); ?>> <?php _e('Low', 'rw-image-optimizer-lite'); ?></label><br>
-            <label><input type="radio" name="rwwcl_settings[quality]" value="medium" <?php checked($value,'medium'); ?>> <?php _e('Medium', 'rw-image-optimizer-lite'); ?></label><br>
-            <label><input type="radio" name="rwwcl_settings[quality]" value="high" <?php checked($value,'high'); ?>> <?php _e('High', 'rw-image-optimizer-lite'); ?></label>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="low" <?php checked($value,'low'); ?>> <?php _e('Low', 'rw-webp-converter-lite'); ?></label><br>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="medium" <?php checked($value,'medium'); ?>> <?php _e('Medium', 'rw-webp-converter-lite'); ?></label><br>
+            <label><input type="radio" name="rwwcl_settings[quality]" value="high" <?php checked($value,'high'); ?>> <?php _e('High', 'rw-webp-converter-lite'); ?></label>
         </fieldset>
         <?php
     }
@@ -38,7 +38,7 @@ class SettingsRenderer {
         $value = $settings['auto_optimize'] ?? 0;
         ?>
         <input type="checkbox" name="rwwcl_settings[auto_optimize]" value="1" <?php checked($value,1); ?>>
-        <?php _e('Automatically optimize images on upload', 'rw-image-optimizer-lite'); ?>
+        <?php _e('Automatically optimize images on upload', 'rw-webp-converter-lite'); ?>
         <?php
     }
 
@@ -48,7 +48,7 @@ class SettingsRenderer {
         $value = $settings['webp'] ?? 0;
         ?>
         <input type="checkbox" name="rwwcl_settings[webp]" value="1" <?php checked($value,1); ?>>
-        <?php _e('Generate WebP version of images', 'rw-image-optimizer-lite'); ?>
+        <?php _e('Generate WebP version of images', 'rw-webp-converter-lite'); ?>
         <?php
     }
 

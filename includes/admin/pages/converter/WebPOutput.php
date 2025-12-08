@@ -1,9 +1,9 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Converter;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Converter;
 
 use DOMDocument;
 use DOMException;
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class WebPOutput
 {

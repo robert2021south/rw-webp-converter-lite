@@ -1,11 +1,11 @@
 {
-    "name": "robertwp/rw-image-optimizer-lite",
+    "name": "robertwp/rw-webp-converter-lite",
     "description": "A WordPress plugin for image optimizer",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "RobertWP\\ImageOptimizerLite\\": "includes/",
+            "RobertWP\\WebPConverterLite\\": "includes/",
             "Tests\\": "tests/",
             "WPBrowser\\": "vendor/lucatume/wp-browser/src/"
         }

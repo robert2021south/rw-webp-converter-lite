@@ -1,5 +1,5 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Utils;
+namespace RobertWP\WebPConverterLite\Utils;
 
 class TemplateLoader
 {

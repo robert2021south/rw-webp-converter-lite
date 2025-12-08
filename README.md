@@ -1,2 +1,2 @@
-# rw-image-optimizer-lite
+# rw-webp-converter-lite
 RW Image Optimizer Lite

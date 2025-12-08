@@ -1,8 +1,8 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\UI;
+namespace RobertWP\WebPConverterLite\Admin\UI;
 
-use RobertWP\ImageOptimizerLite\Core\CallbackWrapper;
-use RobertWP\ImageOptimizerLite\Utils\TemplateLoader;
+use RobertWP\WebPConverterLite\Core\CallbackWrapper;
+use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class AdminNotice {
     private static bool $conflict_notice_shown = false;
@@ -54,46 +54,46 @@ class AdminNotice {
             // context: settings
             'settings:success' => [
                 'type' => 'success',
-                'message' => __('Settings saved successfully.', 'rw-image-optimizer-lite')
+                'message' => __('Settings saved successfully.', 'rw-webp-converter-lite')
             ],
 
             //context:  export
             'export:no_posts' => [
-                'message' => __('No posts found to export.', 'rw-image-optimizer-lite'),
+                'message' => __('No posts found to export.', 'rw-webp-converter-lite'),
                 'type' => 'warning'
             ],
 
             // common context
             'common:success' => [
                 'type' => 'success',
-                'message' => __('Operation completed successfully.', 'rw-image-optimizer-lite')
+                'message' => __('Operation completed successfully.', 'rw-webp-converter-lite')
             ],
             'common:failure' => [
                 'type' => 'error',
-                'message' => __('Operation failed. Please try again.', 'rw-image-optimizer-lite')
+                'message' => __('Operation failed. Please try again.', 'rw-webp-converter-lite')
             ],
             'common:pro_only' => [
                 'type' => 'warning',
-                'message' => __('<strong>Pro Feature:</strong> This feature is only available in the Pro version.', 'rw-image-optimizer-lite')
+                'message' => __('<strong>Pro Feature:</strong> This feature is only available in the Pro version.', 'rw-webp-converter-lite')
             ],
             'common:ins_perm' => [
-                'message' => __('You do not have sufficient permissions', 'rw-image-optimizer-lite'),
+                'message' => __('You do not have sufficient permissions', 'rw-webp-converter-lite'),
                 'type' => 'error'
             ],
             'common:inv_req' => [
-                'message' => __('Invalid request', 'rw-image-optimizer-lite'),
+                'message' => __('Invalid request', 'rw-webp-converter-lite'),
                 'type' => 'error'
             ],
             'common:inv_nonce' => [
-                'message' => __('Invalid Nonce', 'rw-image-optimizer-lite'),
+                'message' => __('Invalid Nonce', 'rw-webp-converter-lite'),
                 'type' => 'error'
             ],
             'common:sec_chk_fail' => [
-                'message' => __('Security check failed.', 'rw-image-optimizer-lite'),
+                'message' => __('Security check failed.', 'rw-webp-converter-lite'),
                 'type' => 'error'
             ],
             'common:unc_exce' => [
-                'message' => __('Uncaught exception.', 'rw-image-optimizer-lite'),
+                'message' => __('Uncaught exception.', 'rw-webp-converter-lite'),
                 'type' => 'error'
             ],
 

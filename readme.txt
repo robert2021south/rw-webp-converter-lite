@@ -10,8 +10,8 @@ License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Language: en_US
 Languages Folder: /languages
-Text Domain: rw-image-optimizer-lite
-Update URI: https://wordpress.org/plugins/rw-image-optimizer-lite/
+Text Domain: rw-webp-converter-lite
+Update URI: https://wordpress.org/plugins/rw-webp-converter-lite/
 
 TODO:A lightweight plugin to track post views via AJAX with anti-duplicate mechanisms and privacy-friendly design.
 
@@ -25,10 +25,10 @@ TODO:
 TODO:
 
 **Documentation**:
-[Full Documentation](https://docs.robertwp.com/rw-image-optimizer-lite/) - Includes both free and pro version guides.
+[Full Documentation](https://docs.robertwp.com/rw-webp-converter-lite/) - Includes both free and pro version guides.
 
 == Installation ==
-1. Upload the `rw-image-optimizer-lite` folder to `/wp-content/plugins/`
+1. Upload the `rw-webp-converter-lite` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure settings in Settings → RW Image Optimizer Lite (optional)
 

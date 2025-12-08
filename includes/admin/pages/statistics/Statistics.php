@@ -1,8 +1,8 @@
 <?php
 
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Statistics;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Statistics;
 
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class Statistics {
     use Singleton;

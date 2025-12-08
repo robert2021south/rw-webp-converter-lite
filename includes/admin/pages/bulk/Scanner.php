@@ -1,7 +1,7 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Bulk;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Bulk;
 
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class Scanner {
     use Singleton;

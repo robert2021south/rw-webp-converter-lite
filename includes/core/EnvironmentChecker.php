@@ -1,8 +1,8 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Core;
+namespace RobertWP\WebPConverterLite\Core;
 
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
-use RobertWP\ImageOptimizerLite\Utils\TemplateLoader;
+use RobertWP\WebPConverterLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class EnvironmentChecker {
     use Singleton;
@@ -15,8 +15,8 @@ class EnvironmentChecker {
         if (!$has_imagick && !$has_gd) {
             $type = 'error';
             $message = __(
-                '<p><strong>rw-image-optimizer-lite:</strong> Your server has neither Imagick nor GD installed. Image optimization cannot work. Please install at least one of them.</p>',
-                'rw-image-optimizer-lite'
+                '<p><strong>rw-webp-converter-lite:</strong> Your server has neither Imagick nor GD installed. Image optimization cannot work. Please install at least one of them.</p>',
+                'rw-webp-converter-lite'
             );
             TemplateLoader::load('partials/admin-notice-generic', [
                 'message' => $message,

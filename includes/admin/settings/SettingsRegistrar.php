@@ -1,8 +1,8 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Settings;
+namespace RobertWP\WebPConverterLite\Admin\Settings;
 
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
-use RobertWP\ImageOptimizerLite\Admin\Ui\SettingsRenderer;
+use RobertWP\WebPConverterLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Admin\Ui\SettingsRenderer;
 
 class SettingsRegistrar {
     use Singleton;
@@ -21,7 +21,7 @@ class SettingsRegistrar {
         // 注册设置 section
         add_settings_section(
             'rwwcl_general_section',
-            __('General Settings', 'rw-image-optimizer-lite'),
+            __('General Settings', 'rw-webp-converter-lite'),
             '__return_false',
             'rwwcl_settings'
         );
@@ -29,7 +29,7 @@ class SettingsRegistrar {
         // 自动压缩上传
         add_settings_field(
             'auto_optimize',
-            __('Auto Optimize Uploads', 'rw-image-optimizer-lite'),
+            __('Auto Optimize Uploads', 'rw-webp-converter-lite'),
             [SettingsRenderer::class, 'render_auto_optimize_field'],
             'rwwcl_settings',
             'rwwcl_general_section'
@@ -38,7 +38,7 @@ class SettingsRegistrar {
         // 压缩等级字段
         add_settings_field(
             'quality',
-            __('Compression Level', 'rw-image-optimizer-lite'),
+            __('Compression Level', 'rw-webp-converter-lite'),
             [SettingsRenderer::class, 'render_quality_field'],
             'rwwcl_settings',
             'rwwcl_general_section'
@@ -47,7 +47,7 @@ class SettingsRegistrar {
         // WebP 转换
         add_settings_field(
             'webp',
-            __('Generate WebP', 'rw-image-optimizer-lite'),
+            __('Generate WebP', 'rw-webp-converter-lite'),
             [SettingsRenderer::class, 'render_webp_field'],
             'rwwcl_settings',
             'rwwcl_general_section'

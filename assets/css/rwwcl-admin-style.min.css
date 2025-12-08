@@ -3,8 +3,8 @@
    ====================== */
 @font-face {
     font-family: 'rwwcl_article_stat';
-    src: url(../webfonts/rw-image-optimizer-lite.eot?39147086);
-    src: url('../webfonts/rw-image-optimizer-lite.eot?39147086#iefix') format('embedded-opentype'), url(../webfonts/rw-image-optimizer-lite.ttf?39147086) format('truetype'), url(../webfonts/rw-image-optimizer-lite.woff?39147086) format('woff'), url('../webfonts/rw-image-optimizer-lite.svg?39147086#icomoon') format('svg');
+    src: url(../webfonts/rw-webp-converter-lite.eot?39147086);
+    src: url('../webfonts/rw-webp-converter-lite.eot?39147086#iefix') format('embedded-opentype'), url(../webfonts/rw-webp-converter-lite.ttf?39147086) format('truetype'), url(../webfonts/rw-webp-converter-lite.woff?39147086) format('woff'), url('../webfonts/rw-webp-converter-lite.svg?39147086#icomoon') format('svg');
     font-weight: 400;
     font-style: normal;
     font-display: swap

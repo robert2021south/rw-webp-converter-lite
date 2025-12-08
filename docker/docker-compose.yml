@@ -65,7 +65,7 @@ services:
     networks:
       - wpnet
     volumes:
-      - ./wordpress/wp-content/plugins/rw-image-optimizer-lite/tests/_output:/home/seluser/Downloads
+      - ./wordpress/wp-content/plugins/rw-webp-converter-lite/tests/_output:/home/seluser/Downloads
 
   phpmyadmin:
     image: phpmyadmin:latest

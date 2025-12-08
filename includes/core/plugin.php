@@ -1,5 +1,5 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Core;
+namespace RobertWP\WebPConverterLite\Core;
 
 require_once __DIR__ . '/../autoload.php';
 

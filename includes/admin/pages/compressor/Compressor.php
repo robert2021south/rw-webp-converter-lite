@@ -1,9 +1,9 @@
 <?php
 
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Compressor;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Compressor;
 
 use Imagick;
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 use Throwable;
 
 class Compressor

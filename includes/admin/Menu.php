@@ -1,8 +1,8 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin;
+namespace RobertWP\WebPConverterLite\Admin;
 
-use RobertWP\ImageOptimizerLite\Admin\Ui\SettingsRenderer;
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Admin\Ui\SettingsRenderer;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class Menu {
     use Singleton;
@@ -11,10 +11,10 @@ class Menu {
     {
         add_submenu_page(
             'tools.php',
-            __('RW Image Optimizer Lite', 'rw-image-optimizer-lite'),
-            __('RW Image Optimizer', 'rw-image-optimizer-lite'),
+            __('RW WebP Converter Lite', 'rw-webp-converter-lite'),
+            __('RW WebP Converter', 'rw-webp-converter-lite'),
             'manage_options',
-            'rwwcl-settings',
+            'rwwcl-settings',                                                           
             [SettingsRenderer::class, 'render_settings_page']
         );
     }

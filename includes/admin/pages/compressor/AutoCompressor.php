@@ -1,10 +1,10 @@
 <?php
 
-namespace RobertWP\ImageOptimizerLite\Admin\Pages\Compressor;
+namespace RobertWP\WebPConverterLite\Admin\Pages\Compressor;
 
-use RobertWP\ImageOptimizerLite\Admin\Pages\Converter\WebPConverter;
-use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsRegistrar;
-use RobertWP\ImageOptimizerLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Admin\Pages\Converter\WebPConverter;
+use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\WebPConverterLite\Traits\Singleton;
 use Throwable;
 
 class AutoCompressor

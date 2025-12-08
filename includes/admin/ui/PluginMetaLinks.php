@@ -1,9 +1,9 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\UI;
+namespace RobertWP\WebPConverterLite\Admin\UI;
 
 class PluginMetaLinks {
     public static function add_links($links){
-        $settings_link = '<a href="' . admin_url('admin.php?page=rwwcl-settings') . '">' . __('Settings', 'rw-image-optimizer-lite') . '</a>';
+        $settings_link = '<a href="' . admin_url('admin.php?page=rwwcl-settings') . '">' . __('Settings', 'rw-webp-converter-lite') . '</a>';
         array_unshift($links, $settings_link);
         return $links;
 

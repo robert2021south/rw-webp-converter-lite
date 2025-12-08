@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function ($class) {
-    $prefix = 'RobertWP\\ImageOptimizerLite\\';
+    $prefix = 'RobertWP\\WebPConverterLite\\';
 
     if (strpos($class, $prefix) !== 0) {
         return;

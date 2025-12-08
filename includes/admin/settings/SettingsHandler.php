@@ -1,5 +1,5 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Admin\Settings;
+namespace RobertWP\WebPConverterLite\Admin\Settings;
 
 class SettingsHandler {
 

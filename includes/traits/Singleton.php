@@ -1,5 +1,5 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Traits;
+namespace RobertWP\WebPConverterLite\Traits;
 
 use Exception;
 

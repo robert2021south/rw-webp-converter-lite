@@ -1,8 +1,8 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Core;
+namespace RobertWP\WebPConverterLite\Core;
 
-use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsRegistrar;
-use RobertWP\ImageOptimizerLite\Utils\TemplateLoader;
+use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class Bootstrap {
     private static bool $initialized = false;

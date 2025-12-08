@@ -34,9 +34,9 @@ jobs:
       # 创建临时插件目录
       - name: 2. Prepare plugin directory
         run: |
-          mkdir -p docker/wordpress/wp-content/plugins/rw-image-optimizer-lite
-          rsync -a --exclude='docker' ./* docker/wordpress/wp-content/plugins/rw-image-optimizer-lite/
-          chmod -R 777 docker/wordpress/wp-content/plugins/rw-image-optimizer-lite/tests/_output
+          mkdir -p docker/wordpress/wp-content/plugins/rw-webp-converter-lite
+          rsync -a --exclude='docker' ./* docker/wordpress/wp-content/plugins/rw-webp-converter-lite/
+          chmod -R 777 docker/wordpress/wp-content/plugins/rw-webp-converter-lite/tests/_output
 
       # 为矩阵创建 Docker Compose 配置文件
       - name: 3. Generate Docker Compose config for matrix
@@ -65,7 +65,7 @@ jobs:
       - name: 6. Install plugin dependencies
         run: |
           docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             composer install --no-interaction --prefer-dist --optimize-autoloader;
           '
 
@@ -93,14 +93,14 @@ jobs:
               --path=/var/www/html
           "
           docker exec wp_fpm bash -lc '\
-            wp plugin activate rw-image-optimizer-lite --allow-root --path=/var/www/html
+            wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
           '
 
       # 运行 Unit 测试
       - name: 9. Run Unit Tests
         run: |
           docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             ./vendor/bin/codecept run Unit
           '
 
@@ -108,7 +108,7 @@ jobs:
       - name: 10. Run Integration Tests
         run: |
           docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             ./vendor/bin/codecept run Integration
           '
 
@@ -116,7 +116,7 @@ jobs:
       - name: 11. Run Acceptance Tests
         run: |
           docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-image-optimizer-lite && \
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             TEST_SELENIUM_HOST=wp_selenium TEST_SELENIUM_PORT=4444 \
             ./vendor/bin/codecept run Acceptance
           '

@@ -1,15 +1,15 @@
 <?php
-namespace RobertWP\ImageOptimizerLite\Core;
+namespace RobertWP\WebPConverterLite\Core;
 
-use RobertWP\ImageOptimizerLite\Admin\Menu;
-use RobertWP\ImageOptimizerLite\Admin\Pages\Bulk\Scanner;
-use RobertWP\ImageOptimizerLite\Admin\Pages\Compressor\AutoCompressor;
-use RobertWP\ImageOptimizerLite\Admin\Pages\Compressor\BatchCompressor;
-use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsHandler;
-use RobertWP\ImageOptimizerLite\Admin\Settings\SettingsRegistrar;
-use RobertWP\ImageOptimizerLite\Admin\UI\AdminNotice;
-use RobertWP\ImageOptimizerLite\Admin\UI\PluginMetaLinks;
-use RobertWP\ImageOptimizerLite\Assets\AdminAssets;
+use RobertWP\WebPConverterLite\Admin\Menu;
+use RobertWP\WebPConverterLite\Admin\Pages\Bulk\Scanner;
+use RobertWP\WebPConverterLite\Admin\Pages\Compressor\AutoCompressor;
+use RobertWP\WebPConverterLite\Admin\Pages\Compressor\BatchCompressor;
+use RobertWP\WebPConverterLite\Admin\Settings\SettingsHandler;
+use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\WebPConverterLite\Admin\UI\AdminNotice;
+use RobertWP\WebPConverterLite\Admin\UI\PluginMetaLinks;
+use RobertWP\WebPConverterLite\Assets\AdminAssets;
 
 class HooksRegistrar {
 
