@@ -76,4 +76,10 @@ class TemplateLoader
 
         return null;
     }
+
+    public static function exists(string $template_name, string $module = ''): bool
+    {
+        return self::locate($template_name, $module) !== null;
+    }
+
 }

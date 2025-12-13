@@ -22,10 +22,18 @@ class Bootstrap {
     public static function activate(): void {
         update_option(RWWCL_VERSION_OPTION, RWWCL_PLUGIN_VERSION);
 
-        $data = [];
-        $data['auto_optimize'] = 1;
-        $data['quality'] = 'medium';
-        $data['webp'] = 1;
+        $defaults = [
+            'auto_optimize'            => 1,
+            'webp_quality'             => 80,
+            'keep_original'            => 1,
+            'overwrite_webp'           => 0,
+            'skip_small'               => 300,
+            'delete_data_on_uninstall' => 0,
+        ];
+
+        $existing = get_option(SettingsRegistrar::RWWCL_SETTINGS_OPTION, []);
+        $data = wp_parse_args($existing, $defaults);
+
         update_option( SettingsRegistrar::RWWCL_SETTINGS_OPTION, $data );
     }
 

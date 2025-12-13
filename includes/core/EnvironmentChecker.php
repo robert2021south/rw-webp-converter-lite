@@ -1,6 +1,7 @@
 <?php
 namespace RobertWP\WebPConverterLite\Core;
 
+use Imagick;
 use RobertWP\WebPConverterLite\Traits\Singleton;
 use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
@@ -9,15 +10,34 @@ class EnvironmentChecker {
 
     public static function maybe_show_image_library_notice(): void {
 
-        $has_imagick = class_exists('Imagick') && extension_loaded('imagick');
-        $has_gd = function_exists('gd_info');
+        $imagick_supported = false;
+        $gd_supported = false;
 
-        if (!$has_imagick && !$has_gd) {
+        // Check Imagick support
+        if (class_exists('Imagick') && extension_loaded('imagick')) {
+            $formats = Imagick::queryFormats();
+            if (is_array($formats) && in_array('WEBP', $formats, true)) {
+                $imagick_supported = true;
+            }
+        }
+
+        // Check GD support
+        if (function_exists('gd_info')) {
+            $gd_info = gd_info();
+            if (!empty($gd_info['WebP Support'])) {
+                $gd_supported = true;
+            }
+        }
+
+        // If neither supports WebP, show error
+        if (!$imagick_supported && !$gd_supported) {
             $type = 'error';
             $message = __(
-                '<p><strong>rw-webp-converter-lite:</strong> Your server has neither Imagick nor GD installed. Image optimization cannot work. Please install at least one of them.</p>',
+                '<p><strong>RW WebP Converter Lite:</strong> Your server does not support WebP conversion.</p>
+                 <p>You need <code>Imagick</code> (with WebP support) or <code>GD</code> (compiled with WebP support).</p>',
                 'rw-webp-converter-lite'
             );
+
             TemplateLoader::load('partials/admin-notice-generic', [
                 'message' => $message,
                 'notice_type' => $type

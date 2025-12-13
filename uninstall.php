@@ -3,35 +3,39 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     exit;
 }
 
-function rwwcl_delete_all_options_metas(): void
-{
-    //option to be delete
-    $rwwcl_version_option = 'rwwcl_version';
-    $rwwcl_site_settings_option = 'rwwcl_site_settings';
+// 插件核心 option
+$settings_option = 'rwwcl_settings';
+$version_option  = 'rwwcl_version';
 
-    // 1. 如果设置了删除插件时同时删除数据，就删除 postmeta中的数据
-    $all_settings = get_option($rwwcl_site_settings_option, []);
-    $delete_data = !empty($all_settings['delete_data_on_uninstall']);
+// 读取设置
+$settings = get_option( $settings_option, [] );
 
-    if ($delete_data) {
-        global $wpdb;
-        $query = $wpdb->prepare(
-            "DELETE FROM $wpdb->postmeta WHERE meta_key LIKE %s",
-            '_rwwcl_%'
-        );
-        $wpdb->query($query);
-    }
+// 是否允许卸载时清理数据（建议你未来加一个设置项）
+$delete_data = ! empty( $settings['delete_data_on_uninstall'] );
 
-    // 2. 删除选项
-    $option_names = array(
-        $rwwcl_version_option,
-        $rwwcl_site_settings_option
-    );
+// 1️⃣ 删除插件 options
+delete_option( $settings_option );
+delete_option( $version_option );
 
-    foreach ($option_names as $option_name) {
-        delete_option(sanitize_key($option_name));
-    }
+// 2️⃣ 删除插件 transients
+$transients = [
+    'rwwcl_last_converted',
+    'rwwcl_bulk_progress',
+    'rwwcl_total_images',
+];
 
+foreach ( $transients as $transient ) {
+    delete_transient( $transient );
 }
 
-rwwcl_delete_all_options_metas();
+// 3️⃣ 删除 postmeta（仅在用户允许时）
+if ( $delete_data ) {
+    global $wpdb;
+
+    $wpdb->query(
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
+            $wpdb->esc_like( '_rwwcl_' ) . '%'
+        )
+    );
+}

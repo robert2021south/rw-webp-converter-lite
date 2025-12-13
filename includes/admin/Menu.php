@@ -1,7 +1,7 @@
 <?php
 namespace RobertWP\WebPConverterLite\Admin;
 
-use RobertWP\WebPConverterLite\Admin\Ui\SettingsRenderer;
+use RobertWP\WebPConverterLite\Admin\UI\AdminPageRenderer;
 use RobertWP\WebPConverterLite\Traits\Singleton;
 
 class Menu {
@@ -9,14 +9,12 @@ class Menu {
 
     public function add_settings_menu(): void
     {
-        add_submenu_page(
-            'tools.php',
-            __('RW WebP Converter Lite', 'rw-webp-converter-lite'),
-            __('RW WebP Converter', 'rw-webp-converter-lite'),
+        add_management_page(
+            __( 'RW WebP Converter Lite', 'rw-webp-converter-lite' ),
+            __( 'RW WebP Converter', 'rw-webp-converter-lite' ),
             'manage_options',
-            'rwwcl-settings',                                                           
-            [SettingsRenderer::class, 'render_settings_page']
+            'rwwcl-main',
+            [AdminPageRenderer::class, 'render_main_page']
         );
     }
-
 }
