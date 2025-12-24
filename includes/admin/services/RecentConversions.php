@@ -91,4 +91,9 @@ class RecentConversions {
         set_transient($this->transient_key, $new, $this->ttl);
     }
 
+    public function clear(): void
+    {
+        delete_transient($this->transient_key);
+    }
+
 }

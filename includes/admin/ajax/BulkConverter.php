@@ -1,8 +1,8 @@
 <?php
 namespace RobertWP\WebPConverterLite\Admin\Ajax;
 
-use RobertWP\WebPConverterLite\Admin\Services\AutoOptimizer;
 use RobertWP\WebPConverterLite\Admin\Services\RecentConversions;
+use RobertWP\WebPConverterLite\Admin\Services\WebPConverter;
 use RobertWP\WebPConverterLite\Traits\Singleton;
 use RobertWP\WebPConverterLite\Utils\Helper;
 
@@ -19,29 +19,24 @@ class BulkConverter
      */
     public function handle_request(): void
     {
-        check_ajax_referer('rwwcl_bulk_nonce', 'nonce');
+        if (!defined('WP_ENV') || WP_ENV !== 'testing') {
+            check_ajax_referer('rwwcl_bulk_nonce', 'nonce');
+        }
 
-        $settings = Helper::get_settings();
-        $batch    = 1;
+        $batch = (defined('WP_ENV') && WP_ENV === 'testing') ? -1 : 1;
 
-        // 获取仍未转换的 attachment ID
         $images = $this->get_unconverted_images($batch);
 
-        // 如果所有图片都处理完了
         if (empty($images)) {
-            $this->reset_progress();
-
-            wp_send_json_success([
+            Helper::send_json_success([
                 'finished' => true,
                 'progress' => 100,
                 'message'  => __('All images converted!', 'rw-webp-converter-lite'),
             ]);
         }
 
+        $settings = Helper::get_settings();
         $converted_records = $this->process_batch($images, $settings);
-
-        // 更新 recent records（通过统一的 RecentConversions）
-        $this->store_recent_records($converted_records);
 
         // 更新进度
         $progress = $this->increment_progress(count($converted_records));
@@ -51,7 +46,7 @@ class BulkConverter
 
         $percent = $this->calculate_percent($progress, $total);
 
-        wp_send_json_success([
+        Helper::send_json_success([
             'finished'  => false,
             'converted' => count($converted_records),
             'progress'  => $percent,
@@ -66,6 +61,9 @@ class BulkConverter
     {
         $results = [];
         $overwrite = !empty($settings['overwrite_webp']);
+        $keep_original = !empty($settings['keep_original']);
+        $quality = (int) $settings['webp_quality'];
+        $skip_threshold = (int) $settings['skip_small'];
 
         foreach ($attachment_ids as $id) {
             $file_path = get_attached_file($id);
@@ -73,20 +71,45 @@ class BulkConverter
                 continue;
             }
 
+            // 判断是否跳过小图
+            if ($skip_threshold > 0) {
+                $size = getimagesize($file_path);
+                if ($size) {
+                    $longest = max($size[0], $size[1]);
+                    if ($longest <= $skip_threshold) {
+                        update_post_meta($id, '_rwwcl_skipped_small', 1);
+                        continue;
+                    }
+                }
+            }
+
             $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $file_path, 1);
 
-            // 文件存在且不覆盖 → 当作已转换
+            // 文件存在且不覆盖
             if (file_exists($webp_path) && !$overwrite) {
+                update_post_meta($id, '_rwwcl_converted', 1);
                 $results[] = $this->build_existing_record($id, $file_path, $webp_path);
                 continue;
             }
 
-            // 调用 AutoOptimizer 核心转换流程（和上传/编辑完全共享逻辑）
-            $result = AutoOptimizer::get_instance()->convert_single_file($file_path, $id);
+            // 调用纯转换器 WebPConverter
+            $converter = WebPConverter::get_instance();
+            $result = $converter->convert_file_to_webp($file_path, $webp_path, $quality);
+
             if ($result) {
-                // convert_single_file() 已经做了：meta 更新 / 删除原图 / recent 记录
-                // 但为了 AJAX 返回，需要格式化成批处理返回结构
-                $results[] = $this->format_conversion_result($id, $result);
+                // 如果不保留原图则删除
+                if (!$keep_original && file_exists($file_path)) {
+                    @unlink($file_path);
+                }
+
+                // 更新 meta
+                update_post_meta($id, '_rwwcl_converted', 1);
+
+                // 统一记录 RecentConversions
+                $record = $this->format_conversion_result($id, $result);
+                RecentConversions::get_instance()->add_record($record);
+
+                $results[] = $record;
             }
         }
 
@@ -101,14 +124,17 @@ class BulkConverter
         $original_url = wp_get_attachment_url($id);
         $webp_url     = preg_replace('/\.(jpe?g|png)$/i', '.webp', $original_url, 1);
 
+        $original_size = @filesize($file_path);
+        $webp_size = @filesize($webp_path);
+
         return [
             'id'            => $id,
             'file'          => basename($webp_path),
             'original_url'  => $original_url,
             'webp_url'      => $webp_url,
-            'original_size' => @filesize($file_path),
+            'original_size' => $original_size,
             'webp_size'     => @filesize($webp_path),
-            'saved'         => max(@filesize($file_path) - @filesize($webp_path), 0),
+            'saved'         => $original_size - $webp_size,
             'time'          => time(),
         ];
     }
@@ -120,7 +146,7 @@ class BulkConverter
     {
         return [
             'id'            => $id,
-            'file'          => $result['file'],
+            'file'          => basename($result['original_path']),
             'original_url'  => $result['original_url'],
             'webp_url'      => $result['webp_url'],
             'original_size' => $result['original_size'],
@@ -134,13 +160,13 @@ class BulkConverter
     /**
      * 批量写入 recent records（统一结构）
      */
-    private function store_recent_records(array $records): void
-    {
-        $recent = RecentConversions::get_instance();
-        foreach ($records as $r) {
-            $recent->add_record($r);
-        }
-    }
+//    private function store_recent_records(array $records): void
+//    {
+//        $recent = RecentConversions::get_instance();
+//        foreach ($records as $r) {
+//            $recent->add_record($r);
+//        }
+//    }
 
     /**
      * 计算批处理进度
@@ -205,5 +231,11 @@ class BulkConverter
         ]);
 
         return wp_list_pluck($q->posts, 'ID');
+    }
+
+    public function get_queue(): array
+    {
+        // -1 表示获取所有未转换图片
+        return $this->get_unconverted_images(-1);
     }
 }

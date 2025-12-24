@@ -12,15 +12,13 @@ class AdminPageRenderer
     public static function render_main_page(): void
     {
         // 当前选中的 tab
-        $active_tab = $_GET['tab'] ?? 'dashboard';
+        $active_tab = $_GET['tab'] ?? 'overview';
 
         // 所有 tab 键和标签
         $tabs = [
-            'dashboard' => __( 'Dashboard', 'rw-webp-converter-lite' ),
-            'bulk'      => __( 'Bulk Convert', 'rw-webp-converter-lite' ),
-            'status'    => __( 'Conversion Status', 'rw-webp-converter-lite' ),
-            'settings'  => __( 'Settings', 'rw-webp-converter-lite' ),
-            'about'     => __( 'About', 'rw-webp-converter-lite' ),
+            'overview' => __( 'Overview', 'rw-webp-converter-lite' ),
+            'settings' => __( 'Settings', 'rw-webp-converter-lite' ),
+            'about'    => __( 'About', 'rw-webp-converter-lite' ),
         ];
 
         // 为每个 tab 生成完整 URL
@@ -37,7 +35,7 @@ class AdminPageRenderer
 
         // 确保 active_tab 在允许的 tab 里
         if (!isset($tabs[$active_tab])) {
-            $active_tab = 'dashboard';
+            $active_tab = 'overview';
         }
 
         // 可选：额外数据传给模板

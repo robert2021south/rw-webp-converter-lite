@@ -1,6 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
+use RobertWP\WebPConverterLite\Admin\Services\Statistics;
 use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
 use RobertWP\WebPConverterLite\Admin\Ui\SettingsRenderer;
 use RobertWP\WebPConverterLite\Utils\TemplateLoader;
@@ -30,7 +31,19 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
     <div class="rwwcl-tab-content">
         <?php
+
+        //
+        $stats = Statistics::get_instance()->get_global_stats();
+        $stats['remaining_images'] = max(0, $stats['total_images'] - $stats['converted_images']);
+
+        //
+        $recent_records = get_transient('rwwcl_last_converted') ?: [];
+
         switch ($active_tab) {
+            case 'overview':
+                $tab_data['stats'] = $stats;
+                $tab_data['recent_records'] = $recent_records;
+                break;
             case 'settings':
                 // 准备表单相关的参数
                 $form_args = [
@@ -44,14 +57,11 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
                 $tab_data['form_args'] = $form_args;
                 $tab_data['pro_fields'] = $pro_fields;
                 break;
-            case 'status':
-                $tab_data['conversion_status'] = [];//get_conversion_status();
-                break;
             default:
                 $tab_data = [];
                 break;
         }
-        // 载入对应 tab 内容
+        // load template
         TemplateLoader::load("main/tab-{$active_tab}", $tab_data);
         ?>
     </div>

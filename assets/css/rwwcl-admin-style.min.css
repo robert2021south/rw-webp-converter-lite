@@ -1,3 +1,171 @@
+/* ====================
+   通用样式
+   ==================== */
+
+/* 主容器 */
+.rwwcl-admin-wrap {
+    max-width: 1200px;
+    margin: 20px;
+}
+
+/* 选项卡样式 */
+.rwwcl-tab-wrapper {
+    margin: 20px 0 25px;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.rwwcl-tab-wrapper .nav-tab {
+    margin-bottom: -1px;
+    background: #f1f1f1;
+    border: 1px solid #ccd0d4;
+    border-bottom: none;
+    padding: 8px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #50575e;
+}
+
+.rwwcl-tab-wrapper .nav-tab:hover {
+    background: #f9f9f9;
+    color: #135e96;
+}
+
+.rwwcl-tab-wrapper .nav-tab-active {
+    background: #fff;
+    color: #1d2327;
+    border-bottom-color: #fff;
+}
+
+.rwwcl-tab-content {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-top: none;
+    padding: 20px 30px;
+    border-radius: 0 0 4px 4px;
+}
+
+/* 卡片样式 - 用于overview页面 */
+.rwwcl-cards,
+.rwwcl-status-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.rwwcl-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.rwwcl-card:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-color: #8c8f94;
+}
+
+.rwwcl-card h3,
+.rwwcl-card h4 {
+    margin-top: 0;
+    color: #1d2327;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.rwwcl-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.rwwcl-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #50575e;
+}
+
+.rwwcl-card p {
+    margin: 8px 0 0;
+    color: #646970;
+    line-height: 1.5;
+}
+
+.rwwcl-card strong {
+    font-size: 24px;
+    color: #2271b1;
+    font-weight: 600;
+}
+
+/* 状态卡片容器 - overview页面专用 */
+.rwwcl-status-cards {
+    margin-top: 30px;
+}
+
+/* ====================
+   Overview页面专用样式
+   ==================== */
+
+/* 批量转换按钮区域 */
+.rwwcl-bulk-convert {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.rwwcl-bulk-convert h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1d2327;
+}
+
+/* 按钮样式 */
+#rwwcl-start-bulk {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    height: auto;
+    min-height: 36px;
+}
+
+#rwwcl-start-bulk:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 提示文字 */
+.rwwcl-auto-hint {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #646970;
+}
+
+.rwwcl-auto-hint strong {
+    color: #d63638;
+}
+
+/* 进度条区域 */
+.rwwcl-bulk-progress {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.rwwcl-progress-heading {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1d2327;
+    font-size: 14px;
+}
+
 /* 外层进度条容器 */
 .rwwcl-progress-wrapper {
     width: 100%;
@@ -20,33 +188,642 @@
 .rwwcl-progress-text {
     font-weight: bold;
     margin-top: 5px;
+    color: #2271b1;
+    font-size: 14px;
 }
 
-/* 设置说明文字的样式 */
-.rwwcl-settings .description {
-    font-size: 13px;
-    color: #555;
-    margin-top: 3px;
-    display: block;
+/* 最近转换表格 */
+.rwwcl-status-table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-/* 保持 checkbox 与文字垂直对齐 */
-.rwwcl-settings input[type="checkbox"] {
+.rwwcl-status-table thead th {
+    background: #f6f7f7;
+    border-bottom: 2px solid #c3c4c7;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.rwwcl-status-table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
     vertical-align: middle;
-    margin-right: 6px;
 }
 
-/* 数字输入框美化 */
-.rwwcl-settings input[type="number"] {
-    width: 80px;
+.rwwcl-status-table tbody tr:hover {
+    background: #f9f9f9;
 }
 
+/* 已删除文件的样式 */
 .rwwcl-status-table .rwwcl-deleted {
     color: #999;
     font-style: italic;
 }
+
 .rwwcl-status-table .rwwcl-deleted a {
     pointer-events: none;
     cursor: default;
     color: #999;
+}
+
+/* ====================
+   Settings页面专用样式
+   ==================== */
+/* ====================
+   Lite设置区域
+   ==================== */
+
+.rwwcl-lite-settings-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.rwwcl-lite-settings-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* ====================
+   PRO功能展示区域
+   ==================== */
+
+.rwwcl-pro-settings-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 25px;
+    position: relative;
+}
+
+.rwwcl-pro-settings-section .pro-badge {
+    background:#ffb900;
+    color:#000;
+    padding:2px 8px;
+    border-radius:3px;
+    font-size:12px;
+    margin-right:8px;
+}
+
+.rwwcl-pro-settings-section h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.rwwcl-pro-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.rwwcl-pro-feature-card {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.rwwcl-pro-feature-card:hover {
+    border-color: #ffb900;
+    box-shadow: 0 2px 8px rgba(255, 185, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.rwwcl-pro-feature-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ffb900, #ff9900);
+    border-radius: 6px 6px 0 0;
+}
+
+.rwwcl-pro-feature-header h4 {
+    margin: 0 0 15px 0;
+    color: #1d2327;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.rwwcl-pro-feature-preview input,
+.rwwcl-pro-feature-preview select,
+.rwwcl-pro-checkbox-preview input {
+    cursor: not-allowed !important;
+    background-color: #f6f7f7 !important;
+    border-color: #dcdcde !important;
+    color: #8c8f94 !important;
+    opacity: 0.7;
+}
+
+.rwwcl-pro-checkbox-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rwwcl-pro-feature-desc {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #646970;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* 升级按钮区域 */
+.rwwcl-pro-upgrade-cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.rwwcl-pro-upgrade-cta:before {
+    content: '⭐';
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 60px;
+    opacity: 0.2;
+    transform: rotate(15deg);
+}
+
+/* ====================
+   响应式设计
+   ==================== */
+
+@media screen and (max-width: 768px) {
+    .rwwcl-pro-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rwwcl-lite-settings-section,
+    .rwwcl-pro-settings-section {
+        padding: 20px;
+    }
+}
+/* Pro字段样式 */
+.rwwcl-settings table.form-table tr.pro-field {
+    opacity: 0.7;
+    background: #f9f9f9;
+}
+
+.rwwcl-settings table.form-table tr.pro-field:hover {
+    opacity: 0.9;
+}
+
+/* 提交按钮 */
+.rwwcl-settings .submit {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ====================
+   响应式设计
+   ==================== */
+
+@media screen and (max-width: 768px) {
+    .rwwcl-cards,
+    .rwwcl-status-cards {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .rwwcl-card {
+        min-width: 100%;
+    }
+
+    .rwwcl-settings .form-table th,
+    .rwwcl-settings .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .rwwcl-settings .form-table th {
+        padding-bottom: 5px;
+    }
+
+    .rwwcl-status-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* 动画效果 */
+@keyframes rwwcl-pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.rwwcl-loading {
+    animation: rwwcl-pulse 1.5s infinite;
+}
+
+/* 成功/错误消息 */
+.rwwcl-notice {
+    padding: 12px 15px;
+    margin: 15px 0;
+    border-left: 4px solid #00a32a;
+    background: #edfaef;
+    border-radius: 4px;
+}
+
+.rwwcl-notice.error {
+    border-left-color: #d63638;
+    background: #fcf0f1;
+}
+
+.rwwcl-notice.warning {
+    border-left-color: #f0c33c;
+    background: #fef8ee;
+}
+
+
+/* ====================
+   About页面专用样式
+   ==================== */
+
+.rwwcl-about {
+    max-width: 1200px;
+}
+
+.rwwcl-about .about-header {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.rwwcl-about .about-header .version {
+    color: #666;
+    font-style: italic;
+}
+
+.rwwcl-about .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.rwwcl-about .feature-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 4px solid #3498db;
+}
+
+.rwwcl-about .feature-item .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: #3498db;
+    margin-bottom: 15px;
+}
+
+.rwwcl-about .feature-item h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.rwwcl-about .benefits-list {
+    margin: 20px 0;
+}
+
+.rwwcl-about .benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #f0f7ff;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 3px solid #2980b9;
+}
+
+.rwwcl-about benefit .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #2980b9;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.rwwcl-about .benefit h4 {
+    margin: 0 0 8px 0;
+    color: #2c3e50;
+}
+
+.rwwcl-about .benefit p {
+    margin: 0;
+    color: #555;
+}
+
+.rwwcl-about .cta-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.rwwcl-about .cta-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.rwwcl-about .cta-item .dashicons {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: #9b59b6;
+    flex-shrink: 0;
+}
+
+.rwwcl-about .pro-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+}
+
+.rwwcl-about .pro-banner h3 {
+    color: white;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rwwcl-about .pro-banner h3 .dashicons {
+    color: #ffd700;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.rwwcl-about .pro-features {
+    columns: 2;
+    column-gap: 40px;
+    margin: 20px 0;
+}
+
+.rwwcl-about .pro-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    break-inside: avoid;
+}
+
+.rwwcl-about .pro-features li .dashicons {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.rwwcl-about .pro-cta {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.rwwcl-about .pro-cta .button-primary {
+    background: #ffd700;
+    border-color: #ffd700;
+    color: #333;
+    font-weight: bold;
+}
+
+.rwwcl-about .pro-cta .button-primary:hover {
+    background: #ffed4e;
+    border-color: #ffed4e;
+}
+
+.rwwcl-about .about-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    color: #666;
+}
+
+.rwwcl-about .footer-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.rwwcl-about .footer-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+.rwwcl-about .footer-links a:hover {
+    text-decoration: underline;
+}
+
+.rwwcl-about .footer-links a .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .rwwcl-about .pro-features {
+        columns: 1;
+    }
+
+    .rwwcl-about .cta-content {
+        grid-template-columns: 1fr;
+    }
+
+    .rwwcl-about .benefit {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rwwcl-about .footer-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+}
+
+/* ====================
+   PRO字段样式
+   ==================== */
+
+/* ====================
+   简洁版PRO字段样式
+   ==================== */
+
+.rwwcl-pro-field-wrapper {
+    position: relative;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.rwwcl-pro-field-wrapper:hover {
+    opacity: 1;
+}
+
+/* PRO徽章 */
+.rwwcl-pro-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ffb900;
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+/* PRO字段中的输入框 */
+.rwwcl-pro-checkbox input[type="checkbox"],
+.rwwcl-pro-number-field input[type="number"],
+.rwwcl-pro-select-field select,
+.rwwcl-pro-textarea-field textarea,
+.rwwcl-pro-text-field input[type="text"] {
+    cursor: not-allowed !important;
+    background-color: #f6f7f7 !important;
+    border-color: #dcdcde !important;
+    color: #8c8f94 !important;
+    opacity: 0.7;
+}
+
+/* Select下拉箭头 */
+.rwwcl-pro-select-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238c8f94'%3E%3Cpath d='M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
+/* PRO字段标签 */
+.rwwcl-pro-checkbox span,
+.rwwcl-pro-number-field label,
+.rwwcl-pro-select-field label,
+.rwwcl-pro-textarea-field label,
+.rwwcl-pro-text-field label {
+    color: #646970;
+    font-weight: 500;
+}
+
+/* PRO字段描述 */
+.rwwcl-pro-field-wrapper .description {
+    color: #8c8f94;
+    font-style: italic;
+}
+
+/* ====================
+   分组版样式
+   ==================== */
+
+/* PRO功能区域提示 */
+.rwwcl-pro-section-notice {
+    background: #f8f9fa;
+    border-left: 4px solid #ffb900;
+    border-radius: 0 4px 4px 0;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.rwwcl-pro-section-notice h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1d2327;
+}
+
+.rwwcl-pro-section-notice ul {
+    margin: 0 0 15px 20px;
+    color: #646970;
+}
+
+.rwwcl-pro-section-notice li {
+    margin-bottom: 5px;
+}
+
+/* PRO功能表格 */
+.rwwcl-pro-features-table {
+    margin-top: 20px;
+}
+
+.rwwcl-pro-feature {
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.rwwcl-pro-feature:hover {
+    opacity: 1;
+    background: #f9f9f9;
+}
+
+.rwwcl-pro-feature th {
+    position: relative;
+}
+
+.rwwcl-pro-tag {
+    background: #ffb900;
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* 简洁字段容器 */
+.rwwcl-pro-field-simple {
+    opacity: 0.7;
+}
+
+.rwwcl-pro-field-simple .rwwcl-pro-text {
+    color: #8c8f94;
+    font-style: italic;
+}
+
+.rwwcl-pro-field-simple input,
+.rwwcl-pro-field-simple select,
+.rwwcl-pro-field-simple textarea {
+    cursor: not-allowed !important;
+    background-color: #f6f7f7 !important;
+    border-color: #dcdcde !important;
+    color: #8c8f94 !important;
 }

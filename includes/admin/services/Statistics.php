@@ -13,7 +13,7 @@ class Statistics
      */
     private function to_webp(string $path): string
     {
-        return preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $path);
+        return preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $path,1);
     }
 
     /**
@@ -25,7 +25,9 @@ class Statistics
 
         $total = count($attachments);
         $converted = 0;
+        $skipped_small = 0;
         $original_total = 0;
+        $original_total_converted  = 0;
         $webp_total = 0;
 
         foreach ($attachments as $id) {
@@ -35,18 +37,30 @@ class Statistics
 
             if ($stats['webp_exists']) {
                 $converted++;
+                //
+                $original_total_converted += (int) $stats['original_size'];
                 $webp_total += $stats['webp_size'];
             }
+
+            if (get_post_meta($id, '_rwwcl_skipped_small', true)) {
+                $skipped_small++;
+            }
         }
+
+        $remaining_convertible = max(0, $total - $converted - $skipped_small);
 
         return [
             'total_images'        => $total,
             'converted_images'    => $converted,
+            'skipped_small_images'  => $skipped_small,
+            'remaining_convertible'  => $remaining_convertible,
             'conversion_rate'     => $total > 0 ? round(($converted / $total) * 100, 1) : 0,
             'total_original_size' => $original_total,
             'total_webp_size'     => $webp_total,
-            'space_saved'         => max($original_total - $webp_total, 0),
+            'space_saved'         => ( $converted > 0 && $original_total_converted > 0 ) ? max($original_total_converted - $webp_total, 0) : 0
         ];
+
+
     }
 
 
@@ -67,7 +81,7 @@ class Statistics
                 'webp_url'      => $stats['webp_url'],
                 'original_size' => $stats['original_size'],
                 'webp_size'     => $stats['webp_size'],
-                'saved'         => max($stats['original_size'] - $stats['webp_size'], 0),
+                'saved'         => $stats['original_size'] - $stats['webp_size'],
                 'webp_exists'   => $stats['webp_exists'],
             ];
         }

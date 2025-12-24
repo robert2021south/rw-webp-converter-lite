@@ -45,7 +45,7 @@ modules:
         title: 'Test Blog'
         loadOnly: true
       WPWebDriver:
-        url: 'http://nginx/'
+        url: 'http://nginx.local/'
         adminPath: '/wp-admin'
         adminUsername: 'admin'
         adminPassword: 'pBlaWDphJvFab5Jbi3KR9q6s'

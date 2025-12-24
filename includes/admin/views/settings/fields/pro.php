@@ -1,26 +1,33 @@
 <?php
 if (!defined('ABSPATH')) exit;
-/** @var string $type */
-/** @var string $value */
-/** @var string $label */
-/** @var string $description */
+/** @var array $field */
 ?>
-<fieldset disabled style="opacity:0.5;">
-    <label>
-        <?php if ($type === 'checkbox'): ?>
-            <input type="checkbox" <?php checked($value, 1); ?>>
-        <?php elseif ($type === 'number'): ?>
-            <input type="number" value="<?php echo esc_attr($value ?? 50); ?>" style="width:80px;">
-        <?php elseif ($type === 'select'): ?>
-            <select><option><?php echo esc_html($value ?? 'Default'); ?></option></select>
-        <?php elseif ($type === 'textarea'): ?>
-            <textarea rows="3" style="width:100%;"><?php echo esc_textarea($value ?? ''); ?></textarea>
+<div class="rwwcl-pro-feature-card">
+    <div class="rwwcl-pro-feature-header">
+        <h4><?php echo esc_html($field['label']); ?></h4>
+    </div>
+    <div class="rwwcl-pro-feature-preview">
+        <?php if ($field['type'] === 'checkbox'): ?>
+            <div class="rwwcl-pro-checkbox-preview">
+                <input type="checkbox" disabled>
+                <span><?php echo esc_html__('Enabled in PRO', 'rw-webp-converter-lite'); ?></span>
+            </div>
+        <?php elseif ($field['type'] === 'select'): ?>
+            <select disabled style="width:100%;">
+                <option><?php echo esc_html__('Multiple options available', 'rw-webp-converter-lite'); ?></option>
+            </select>
+        <?php elseif ($field['type'] === 'number'): ?>
+            <div class="rwwcl-pro-number-preview">
+                <input type="number" disabled value="50">
+            </div>
+        <?php else: ?>
+            <input type="text" disabled value="<?php echo esc_attr__('Available in PRO', 'rw-webp-converter-lite'); ?>" style="width:100%;">
         <?php endif; ?>
+    </div>
 
-        <?php echo esc_html($label); ?>
-    </label>
-
-    <?php if (!empty($description)) : ?>
-        <p class="description"><?php echo esc_html($description); ?></p>
+    <?php if (!empty($field['description'])) : ?>
+        <div class="rwwcl-pro-feature-desc">
+            <?php echo esc_html($field['description']); ?>
+        </div>
     <?php endif; ?>
-</fieldset>
+</div>

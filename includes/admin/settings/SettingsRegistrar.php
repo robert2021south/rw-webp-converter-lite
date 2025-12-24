@@ -76,7 +76,7 @@ class SettingsRegistrar {
 
         /**
          * =============================
-         * Data & Cleanup（新 section）
+         * Data & Cleanup
          * =============================
          */
         add_settings_section(

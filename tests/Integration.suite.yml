@@ -18,7 +18,7 @@ modules:
         dsn: 'mysql:host=mysql;port=3306;dbname=wordpress'   # db 是 MySQL 容器名
         user: 'wpuser'                                 # 数据库用户名
         password: 'wppass'                             # 数据库密码
-        url: 'http://nginx/'                           # 容器内访问 URL
+        url: 'http://nginx.local/'                           # 容器内访问 URL
         dump: ''
         populate: false
         cleanup: true

@@ -3,6 +3,7 @@
 namespace RobertWP\WebPConverterLite\Admin\Services;
 
 use RobertWP\WebPConverterLite\Traits\Singleton;
+use RobertWP\WebPConverterLite\Utils\Helper;
 
 /**
  * WebPConverter: 单一职责：把一个文件转换为 webp（并返回转换信息）
@@ -66,7 +67,7 @@ class WebPConverter {
             'webp_url'      => $webp_url,
             'original_size' => $orig_size,
             'webp_size'     => $webp_size,
-            'saved'         => max($orig_size - $webp_size, 0),
+            'saved'         => $orig_size - $webp_size,
             'time'          => time(),
         ];
     }
@@ -77,7 +78,6 @@ class WebPConverter {
      */
     public function after_edit_metadata($metadata, $attachment_id)
     {
-        // 判断是否为编辑后的文件（带 -e123456）
         if (!preg_match('/-e\d+\.(jpg|jpeg|png)$/i', basename($metadata['file']))) {
             return $metadata;
         }
@@ -88,9 +88,30 @@ class WebPConverter {
             return $metadata;
         }
 
-        // 强制转换 WebP
-        AutoOptimizer::get_instance()->convert_single_file($file_path, $attachment_id);
-        return $metadata; // 一定要返回!!!
+        // 强制转换 WebP，调用纯转换器
+        $converter = WebPConverter::get_instance();
+        $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $file_path, 1);
+        $result = $converter->convert_file_to_webp($file_path, $webp_path, (int) Helper::get_settings()['webp_quality']);
+
+        if ($result) {
+            update_post_meta($attachment_id, '_rwwcl_converted', 1);
+
+            // 记录 RecentConversions
+            $record = [
+                'id'            => $attachment_id,
+                'file'          => basename($result['original_path']),
+                'original_url'  => $result['original_url'],
+                'webp_url'      => $result['webp_url'],
+                'original_size' => $result['original_size'],
+                'webp_size'     => $result['webp_size'],
+                'saved'         => $result['saved'],
+                'time'          => time(),
+                'webp_path'     => $result['webp_path'] ?? '',
+            ];
+            RecentConversions::get_instance()->add_record($record);
+        }
+
+        return $metadata;
     }
 
 

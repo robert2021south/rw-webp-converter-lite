@@ -1,0 +1,102 @@
+<?php
+namespace tests\Acceptance;
+
+use Tests\Support\AcceptanceTester;
+
+/**
+ * Happy Path:
+ * 管理员上传一张 JPEG 图片
+ * → AutoOptimizer 自动生成 WebP
+ */
+class AutoOptimizeUploadHappyPathCest
+{
+
+    public function _before(AcceptanceTester $I): void
+    {
+        // 登录管理员
+        $I->loginAsAdmin();
+        $I->amOnAdminPage('index.php');
+        $I->see('Dashboard');
+
+        $attachments = $I->grabColumnFromDatabase('wp_posts', 'ID', ['post_type' => 'attachment']);
+        foreach ($attachments as $id) {
+            wp_delete_attachment($id, true);
+        }
+
+    }
+
+    public function _after(AcceptanceTester $I): void
+    {
+    }
+
+    /**
+     * Happy Path:
+     * 管理员在「媒体 → 添加」页面上传 JPEG
+     * → AutoOptimizer 自动生成 WebP
+     */
+    public function upload_image_generates_webp(AcceptanceTester $I): void
+    {
+        // ---------- 1. 登录后台 ----------
+        //$I->loginAsAdmin();
+
+        // ---------- 2. 确保插件设置 ----------
+        $I->haveOptionInDatabase('rwwcl_settings', [
+            'auto_optimize'   => 1,
+            'overwrite_webp'  => 1,
+            'keep_original'   => 1,
+            'skip_small'      => 0,
+            'webp_quality'    => 80,
+        ]);
+
+        // ---------- 3. 打开媒体上传页面 ----------
+        $I->amOnAdminPage('media-new.php');
+        $I->waitForText('Drop files to upload', 15);
+
+        // ---------- 4. 上传文件 ----------
+        // 上传前记录数据库最大 ID
+        //$maxIdBefore = (int) $I->grabFromDatabase('wp_posts', 'MAX(ID)', ['post_type' => 'attachment']);
+
+        //$testImage = codecept_data_dir('images/Weixin-Image_2025-08-13_125222_631.jpg');
+        $testImage = 'images/Image_2025-08-13_125222_631.jpg';
+
+        // WordPress 媒体上传 input
+        $I->attachFile('input[type="file"]', $testImage);
+
+        // ---------- 5. 等待上传完成 ----------
+        // 上传成功后会出现“编辑”链接
+        $I->waitForElement('.media-item', 30);
+        $I->waitForElement('.edit-attachment', 30);
+
+        // ---------- 6. 获取最新 attachment ID ----------
+        $attachmentId = (int) $I->grabFromDatabase('wp_posts', 'ID', ['post_type' => 'attachment',], 'ORDER BY ID DESC');
+        //$attachmentId = (int) $I->grabFromDatabase('wp_posts', 'ID', ['post_type' => 'attachment', 'ID>' => $maxIdBefore]);
+
+        // ---------- 7. 断言 WebP 文件存在 ----------
+        // 注意：E2E 允许直接调用 WP 函数（wpbrowser 注入）
+        //$uploadDir   = wp_upload_dir();
+        $original    = get_attached_file($attachmentId);codecept_debug('#######################');codecept_debug($original);codecept_debug('################');
+        $webpPath   = preg_replace('/\.(jpe?g|png)$/i', '.webp', $original);
+
+        $I->assertFileExists($webpPath, 'WebP file should be generated automatically after upload');
+
+        // ---------- 8.（可选）验证最近转换 UI ----------
+        $I->amOnAdminPage('tools.php?page=rwwcl-main&tab=status'); // 你的插件主页面 slug
+        $I->waitForText('Recent Conversions', 15);
+
+        // 表格存在
+        $I->seeElement('.rwwcl-status-table');
+
+        // 至少一条转换记录
+        $I->seeElement('.rwwcl-status-table tbody tr');
+
+        // WebP 文件已生成（核心断言）
+        $I->seeElement(
+            '.rwwcl-status-table tbody tr a[href$=".webp"]'
+        );
+
+        // 文件名显示正确（非必须，但可加）
+        $I->see('Image_2025-08-13_125222_631', '.rwwcl-status-table tbody tr span');
+
+
+    }
+}

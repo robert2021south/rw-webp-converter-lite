@@ -84,52 +84,49 @@ class AutoOptimizer {
     private function process_conversion_for_attachment(int $attachment_id, string $source_path): false|array
     {
 
-        //获取配置信息
+        //Get configuration
         $settings = Helper::get_settings();
         $overwrite = !empty($settings['overwrite_webp']);
         $keep_original = !empty($settings['keep_original']);
         $quality = (int) $settings['webp_quality'];
         $skip_threshold = (int) $settings['skip_small'];
 
-        //If Skip small image or not
+        //1. If Skip small image or not
         if ($this->should_skip_image($source_path, $skip_threshold)) {
             error_log("Skip small image: $source_path");
             return false;
         }
 
-        // WebP 文件路径
+        // WebP file path
         $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $source_path, 1);
 
-        //------------判断是否是编辑生成的新主文件
+        //2. 判断是否是编辑生成的新主文件
         $is_new_master_file = preg_match('/^(.*?)-e\d+\.(jpg|jpeg|png)$/i', basename($source_path), $matches) === 1;
         if ($is_new_master_file) {
             $this->cleanup_old_webps_for_edited_image($source_path, $matches);
         }
 
-        error_log('$webp_path='.$webp_path);
-        error_log('$is_new_master_file='.$is_new_master_file);
-
-        // 如果已经存在 webp 且 不需要覆盖，则跳过
+        //3. 如果已经存在 webp 且 不需要覆盖，则跳过
         if (file_exists($webp_path) && !$overwrite) {
             return false;
         }
 
-        // 调用转换器
+        //4. Call WebPConverter
         $converter = WebPConverter::get_instance();
         $result = $converter->convert_file_to_webp($source_path, $webp_path, $quality);
         if (!$result) {
             return false;
         }
 
-        // 不保留原图则删除（注意：这里遵循旧逻辑 —— Helper::maybe_delete_original 的第二个参数是 keep_original）
+        //5. 不保留原图则删除（注意：这里遵循旧逻辑 —— Helper::maybe_delete_original 的第二个参数是 keep_original）
         if (!$keep_original) {
             $this->delete_original_attachment_file( $attachment_id);
         }
 
-        // 更新 meta
+        //6. Update meta
         update_post_meta($attachment_id, '_rwwcl_converted', 1);
 
-        // 记录最近转换（RecentConversions）
+        //7. 记录最近转换（RecentConversions）
         $record = [
             'id'            => $attachment_id,
             'file'          => basename($result['file']),
@@ -137,7 +134,7 @@ class AutoOptimizer {
             'webp_url'      => $result['webp_url'],
             'original_size' => $result['original_size'],
             'webp_size'     => $result['webp_size'],
-            'saved'         => max($result['original_size'] - $result['webp_size'], 0),
+            'saved'         => $result['original_size'] - $result['webp_size'],
             'time'          => time(),
             'webp_path'     => $result['webp_path'],
         ];

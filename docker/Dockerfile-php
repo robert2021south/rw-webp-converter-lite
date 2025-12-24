@@ -1,24 +1,58 @@
-#FROM wordpress:php8.2-fpm
+# =========================
+# WordPress PHP-FPM Image
+# =========================
+
 ARG PHP_VERSION=8.2
 FROM wordpress:php${PHP_VERSION}-fpm
 
-# 安装构建依赖与常用扩展（gd, mbstring, zip, intl, pdo_mysql ...）
+# =========================
+# System & build dependencies
+# =========================
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
       libzip-dev zip \
       libpng-dev libjpeg-dev libfreetype6-dev \
       libonig-dev libxml2-dev libicu-dev \
-      git unzip \
-  && docker-php-ext-configure gd --with-freetype --with-jpeg \
+      git unzip curl \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg  --with-webp \
   && docker-php-ext-install -j"$(nproc)" \
-      mysqli pdo pdo_mysql mbstring exif pcntl bcmath gd zip intl opcache \
+      mysqli \
+      pdo \
+      pdo_mysql \
+      mbstring \
+      exif \
+      pcntl \
+      bcmath \
+      gd \
+      zip \
+      intl \
+      opcache \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# 确保权限（容器内 www-data 拥有）
+# =========================
+# PHP configuration (TEST FRIENDLY)
+# =========================
+# 放在 conf.d 里，确保优先级高
+COPY php/conf.d/99-testing.ini /usr/local/etc/php/conf.d/99-testing.ini
+
+# =========================
+# Permissions
+# =========================
+# 确保 WordPress 目录属于 www-data
 RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
-# 安装 Composer（用于 Codeception）
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# =========================
+# Composer (for Codeception / tooling)
+# =========================
+RUN curl -sS https://getcomposer.org/installer \
+    | php -- --install-dir=/usr/local/bin --filename=composer
+
+# =========================
+# Useful defaults
+# =========================
+ENV PHP_MEMORY_LIMIT=256M
+ENV PHP_UPLOAD_MAX_FILESIZE=32M
+ENV PHP_POST_MAX_SIZE=32M

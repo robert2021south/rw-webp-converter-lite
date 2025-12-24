@@ -108,66 +108,50 @@ class SettingsRenderer {
 
     public static function get_pro_fields(): array
     {
-        return [
-            [
-                'label'       => __('WebP Priority (Pro)', 'rw-webp-converter-lite'),
-                'type'        => 'select',
-                'value'       => 'Default',
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
-            ],
 
+        return  [
             [
-                'label'       => __('Replace Media Library Thumbnails (Pro)', 'rw-webp-converter-lite'),
+                'label'       => 'Smart PNG/JPEG Optimization',
                 'type'        => 'checkbox',
-                'value'       => 0,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'description' => 'Apply different compression strategies for JPEG and PNG images to maintain quality and transparency',
             ],
             [
-                'label'       => __('Replace Images in Post Content (Pro)', 'rw-webp-converter-lite'),
+                'label'       => 'WebP & AVIF Formats',
                 'type'        => 'checkbox',
-                'value'       => 0,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'description' => 'Optimize images in modern formats for smaller size and wider browser compatibility',
             ],
             [
-                'label'       => __('AVIF Support (Pro)', 'rw-webp-converter-lite'),
+                'label'       => 'Retina & Responsive Optimization',
                 'type'        => 'checkbox',
-                'value'       => 0,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'description' => 'Automatically generate multi-size images and integrate with srcset/picture for high-DPI and responsive devices',
             ],
             [
-                'label'       => __('Delete Original Images (Pro)', 'rw-webp-converter-lite'),
+                'label'       => 'Preserve EXIF Metadata',
                 'type'        => 'checkbox',
-                'value'       => 0,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'description' => 'Keep camera and copyright metadata for professional photography sites',
             ],
             [
-                'label'       => __('Delete Original Images (Pro)', 'rw-webp-converter-lite'),
+                'label'       => 'Conversion History & Advanced Logs',
                 'type'        => 'checkbox',
-                'value'       => 0,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'description' => 'Store full conversion records and provide advanced error reporting',
             ],
-
             [
-                'label'       => __('Batch Size (Pro)', 'rw-webp-converter-lite'),
-                'type'        => 'number',
-                'value'       => 50,
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'label'       => 'CDN / External Storage Compatibility',
+                'type'        => 'checkbox',
+                'description' => 'Serve images via CDN or external storage for faster loading on high-traffic sites',
             ],
-
             [
-                'label'       => __('Frontend Display (Pro)', 'rw-webp-converter-lite'),
-                'type'        => 'select',
-                'value'       => 'Default',
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'label'       => 'White-label Mode',
+                'type'        => 'checkbox',
+                'description' => 'Remove plugin branding from admin pages and front-end output',
             ],
-
             [
-                'label'       => __('Custom Hooks (Pro)', 'rw-webp-converter-lite'),
-                'type'        => 'textarea',
-                'value'       => '',
-                'description' => __('Available in Pro version.', 'rw-webp-converter-lite'),
+                'label'       => 'Priority Support & Early Access',
+                'type'        => 'checkbox',
+                'description' => 'Get priority assistance and early access to new features',
             ],
         ];
+
     }
 
 }
