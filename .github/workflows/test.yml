@@ -1,4 +1,4 @@
-name: RW PostViewStats Lite Codeception Matrix Tests (docker-compose)
+name: RW WebP Converter Lite Matrix Tests
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         php_version: [8.2]
-        wp_version: [6.8]
+        wp_version: [6.9]
         mysql_version: [8.0]
 
     env:
@@ -82,6 +82,7 @@ jobs:
       - name: 8. Install WordPress && Activate plugin
         run: |
           docker exec wp_fpm bash -lc "\
+            wp core download --path=/var/www/html --version=6.8 --allow-root --force
             wp core install \
               --url='http://nginx' \
               --title='Test Site' \
@@ -113,35 +114,8 @@ jobs:
           '
       - name: Debug login redirect
         run: |
-          docker exec wp_selenium bash -lc "\
-            curl -I -L http://nginx/wp-login.php || true; \
-            echo '-----'; \
-          "
-          docker exec wp_fpm wp option get siteurl --allow-root --path=/var/www/html
-          docker exec wp_fpm wp option get home --allow-root --path=/var/www/html
+          docker exec wp_fpm wp core version --allow-root --path=/var/www/html
           docker exec wp_selenium curl -v -d "log=admin&pwd=pBlaWDphJvFab5Jbi3KR9q6s&wp-submit=Log+In&redirect_to=http://nginx/wp-admin/&testcookie=1" http://nginx/wp-login.php
-
-      - name: Debug selenium access nginx
-        run: |
-          docker exec wp_selenium bash -lc "\
-            echo '=== hosts ==='; \
-            cat /etc/hosts; \
-            echo '=== curl ==='; \
-            curl -I http://nginx/wp-login.php || true; \
-          "
-      - name: Debug WPBrowser env
-        run: |
-          env | sort | grep -E 'WP_|CODECEPT'
-
-      - name: Debug nginx config
-        run: |
-          docker exec wp_nginx nginx -T | grep server_name
-
-      - name: Debug cookies
-        run: |
-          docker exec wp_selenium bash -lc "\
-          curl -v http://nginx/wp-login.php 2>&1 | grep -i set-cookie || true \
-          "
 
       # 运行 Acceptance 测试
       - name: 11. Run Acceptance Tests
