@@ -23,7 +23,7 @@ class BulkConverter
             check_ajax_referer('rwwcl_bulk_nonce', 'nonce');
         }
 
-        $batch = (defined('WP_ENV') && WP_ENV === 'testing') ? -1 : 1;
+        $batch = 20;
 
         $images = $this->get_unconverted_images($batch);
 
@@ -37,6 +37,18 @@ class BulkConverter
 
         $settings = Helper::get_settings();
         $converted_records = $this->process_batch($images, $settings);
+
+        //二次检查，前端 & 测试逻辑统一
+        $remaining = $this->get_unconverted_images(1);
+
+        if (empty($remaining)) {
+            Helper::send_json_success([
+                'finished'  => true,
+                'progress'  => 100,
+                'converted' => count($converted_records),
+                'recent'    => $converted_records,
+            ]);
+        }
 
         // 更新进度
         $progress = $this->increment_progress(count($converted_records));
@@ -206,7 +218,7 @@ class BulkConverter
     /**
      * 重置进度
      */
-    private function reset_progress(): void
+    public function reset_progress(): void
     {
         delete_transient(self::PROGRESS_KEY);
         delete_transient(self::TOTAL_KEY);
@@ -220,11 +232,16 @@ class BulkConverter
         $q = new \WP_Query([
             'post_type'      => 'attachment',
             'post_status'    => 'inherit',
-            'post_mime_type' => ['image/jpeg', 'image/png'],
+            'post_mime_type' => ['image/jpeg','image/jpg', 'image/png'],
             'posts_per_page' => $limit,
             'meta_query'     => [
+                'relation' => 'AND',
                 [
                     'key'     => '_rwwcl_converted',
+                    'compare' => 'NOT EXISTS',
+                ],
+                [
+                    'key'     => '_rwwcl_skipped_small',
                     'compare' => 'NOT EXISTS',
                 ],
             ]
