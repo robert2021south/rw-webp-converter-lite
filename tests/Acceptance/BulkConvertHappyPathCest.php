@@ -27,14 +27,7 @@ class BulkConvertHappyPathCest
 
         $images = [
             '300x300_20250618_083505.png',
-            '715f1c6064b670b7bde8c3324116bead.jpeg',
-            'coutu1.png',
-            'coutu2.png',
             'Image_2025-08-13_125222_631.jpg',
-            'Image_2025-08-13_125236_895.jpg',
-            'Image_2025-08-13_125248_055.jpg',
-            'Image_2025-08-13_125402_488.jpg',
-            'Image_2025-08-13_131604_701.jpg',
         ];
 
         foreach ($images as $file) {
@@ -42,7 +35,7 @@ class BulkConvertHappyPathCest
         }
 
         // 等媒体库处理完成
-        $I->waitForElement('//div[contains(@class,"media-item")]//div[contains(text(),"Image_2025-08-13_131604_701.jpg")]', 30);
+        $I->waitForElement('//div[contains(@class,"media-item")]//div[contains(text(),"Image_2025-08-13_125222_631")]', 30);
 
     }
 

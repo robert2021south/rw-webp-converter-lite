@@ -44,7 +44,7 @@ class AutoOptimizeUploadHappyPathCest
             'auto_optimize'   => 1,
             'overwrite_webp'  => 1,
             'keep_original'   => 1,
-            'skip_small'      => 0,
+            'skip_small'      => 300,
             'webp_quality'    => 80,
         ]);
 
@@ -74,7 +74,7 @@ class AutoOptimizeUploadHappyPathCest
         // ---------- 7. 断言 WebP 文件存在 ----------
         // 注意：E2E 允许直接调用 WP 函数（wpbrowser 注入）
         //$uploadDir   = wp_upload_dir();
-        $original    = get_attached_file($attachmentId);codecept_debug('#######################');codecept_debug($original);codecept_debug('################');
+        $original    = get_attached_file($attachmentId);
         $webpPath   = preg_replace('/\.(jpe?g|png)$/i', '.webp', $original);
 
         $I->assertFileExists($webpPath, 'WebP file should be generated automatically after upload');
