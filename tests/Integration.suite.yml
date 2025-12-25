@@ -19,7 +19,6 @@ modules:
         user: 'wpuser'                                 # 数据库用户名
         password: 'wppass'                             # 数据库密码
         url: 'http://nginx.local/'                           # 容器内访问 URL
-        dump: ''
         populate: false
         cleanup: true
         tablePrefix: 'wp_'
@@ -30,7 +29,6 @@ modules:
         dbUser: 'wpuser'
         dbPassword: 'wppass'
         tablePrefix: 'wp_'
-        domain: 'wp_nginx'                               # 容器内访问域名
         adminUsername: 'admin'
         adminPassword: 'pBlaWDphJvFab5Jbi3KR9q6s'
         adminEmail: 'robert2021south@gmail.com'

@@ -112,6 +112,13 @@ jobs:
             ./vendor/bin/codecept run Integration
           '
 
+      - name: Debug WordPress URLs
+        run: |
+          docker exec wp_fpm bash -lc "\
+            wp option get siteurl --allow-root --path=/var/www/html && \
+            wp option get home --allow-root --path=/var/www/html \
+          "
+
       # 运行 Acceptance 测试
       - name: 11. Run Acceptance Tests
         run: |
