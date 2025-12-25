@@ -4,9 +4,12 @@ namespace Tests\Integration;
 use RobertWP\WebPConverterLite\Admin\Services\RecentConversions;
 use Tests\Support\IntegrationTester;
 
-
 class RecentConversionsCest
 {
+    public function _before(IntegrationTester $I): void
+    {
+        RecentConversions::get_instance()->clear();
+    }
     public function add_and_remove_records(IntegrationTester $I): void
     {
         $recent = RecentConversions::get_instance();

@@ -32,7 +32,7 @@ class BulkConverterCest
 //            'coutu2.png',
             'Shakespeare1920x1080.png',
             '300x300_20250618_083505.png',
-//            'Hawkins-energy-level.jpg',
+            'Hawkins-energy-level.jpg',
 //            'Image_2025-08-13_125222_631.jpg',
 //            'Image_2025-08-13_125236_895.jpg',
 //            'Image_2025-08-13_125248_055.jpg',
@@ -52,7 +52,7 @@ class BulkConverterCest
 
             $destFile = $upload_dir['path'] . '/' . $image;
             copy($sourceFile, $destFile);
-error_log('copying '.$image);
+
             $ids[] = wp_insert_attachment([
                 'post_mime_type' => wp_check_filetype($destFile)['type'],
                 'post_status'    => 'inherit',

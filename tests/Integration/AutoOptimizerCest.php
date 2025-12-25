@@ -20,7 +20,7 @@ class AutoOptimizerCest
             'webp_quality'   => 80,
             'keep_original'  => 1,
             'overwrite_webp' => 1,
-            'skip_small'     => 0,
+            'skip_small'     => 300,
         ]);
 
         delete_transient('rwwcl_last_converted');
@@ -110,7 +110,7 @@ class AutoOptimizerCest
      */
     protected function uploadAndConvertImage(IntegrationTester $I): array
     {
-        $source = codecept_data_dir('images/Image_2025-08-13_125222_631.jpg');
+        $source = codecept_data_dir('images/Hawkins-energy-level.jpg');
         $uploadDir = wp_upload_dir();
 
         if (!is_dir($uploadDir['path'])) {
