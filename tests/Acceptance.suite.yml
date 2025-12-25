@@ -21,7 +21,7 @@ modules:
         dsn: 'mysql:host=dummy;dbname=dummy'
         user: 'dummy'
         password: 'dummy'
-        url: 'http://nginx.local/'
+        url: 'http://nginx.local'
         tablePrefix: 'wp_'
         populate: true
         cleanup: true
@@ -40,12 +40,12 @@ modules:
         dbUser: 'wpuser'
         dbPassword: 'wppass'
         tablePrefix: 'wp_'
-        domain: 'nginx'
+        domain: 'nginx.local'
         adminEmail: 'robert2021south@gmail.com'
         title: 'Test Blog'
         loadOnly: true
       WPWebDriver:
-        url: 'http://nginx.local/'
+        url: 'http://nginx.local'
         adminPath: '/wp-admin'
         adminUsername: 'admin'
         adminPassword: 'pBlaWDphJvFab5Jbi3KR9q6s'
