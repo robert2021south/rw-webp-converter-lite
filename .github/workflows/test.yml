@@ -124,6 +124,13 @@ jobs:
             curl -I http://nginx/wp-login.php || true; \
             curl -I http://nginx.local/wp-login.php || true \
           "
+      - name: Debug login redirect
+        run: |
+          docker exec wp_selenium bash -lc "\
+            curl -I -L http://nginx/wp-login.php || true; \
+            echo '-----'; \
+            curl -I -L http://nginx.local/wp-login.php || true \
+          "
 
       # 运行 Acceptance 测试
       - name: 11. Run Acceptance Tests
