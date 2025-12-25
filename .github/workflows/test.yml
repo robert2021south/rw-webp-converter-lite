@@ -83,7 +83,7 @@ jobs:
         run: |
           docker exec wp_fpm bash -lc "\
             wp core install \
-              --url='http://nginx/' \
+              --url='http://nginx.local/' \
               --title='Test Site' \
               --admin_user='$WP_ADMIN_USER' \
               --admin_password='$WP_ADMIN_PASS' \
