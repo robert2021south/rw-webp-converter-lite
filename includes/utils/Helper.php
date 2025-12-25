@@ -49,7 +49,7 @@ class Helper
         $rate = ($original_size - $optimized_size) / $original_size * 100;
 
         // 防止 -0%
-        if (abs($rate) < 0.05) {
+        if (abs($rate) < 0.1) {
             $rate = 0;
         }
 
