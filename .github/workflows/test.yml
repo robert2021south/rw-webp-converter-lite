@@ -117,6 +117,10 @@ jobs:
             curl -I -L http://nginx/wp-login.php || true; \
             echo '-----'; \
           "
+          docker exec wp_fpm wp option get siteurl --allow-root --path=/var/www/html
+          docker exec wp_fpm wp option get home --allow-root --path=/var/www/html
+          docker exec wp_selenium curl -v -d "log=admin&pwd=pBlaWDphJvFab5Jbi3KR9q6s&wp-submit=Log+In&redirect_to=http://nginx/wp-admin/&testcookie=1" http://nginx/wp-login.php
+
       - name: Debug selenium access nginx
         run: |
           docker exec wp_selenium bash -lc "\
