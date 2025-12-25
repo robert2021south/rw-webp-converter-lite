@@ -65,6 +65,9 @@ modules:
               - "--disable-gpu"
               - "--disable-extensions"
               - "--disable-software-rasterizer"
+              - "--enable-features=NetworkService,NetworkServiceInProcess"
+              - "--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure"
+
             prefs:
               download.default_directory: '/var/www/html/wp-content/plugins/rw-webp-converter-lite/tests/_output'
               download.prompt_for_download: false
