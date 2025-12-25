@@ -116,19 +116,14 @@ jobs:
           docker exec wp_selenium bash -lc "\
             curl -I -L http://nginx/wp-login.php || true; \
             echo '-----'; \
-            curl -I -L http://nginx.local/wp-login.php || true \
           "
-      - name: Debug selenium access nginx.local
+      - name: Debug selenium access nginx
         run: |
           docker exec wp_selenium bash -lc "\
             echo '=== hosts ==='; \
             cat /etc/hosts; \
-            echo '=== ping ==='; \
-            ping -c 1 nginx || true; \
-            ping -c 1 nginx.local || true; \
             echo '=== curl ==='; \
             curl -I http://nginx/wp-login.php || true; \
-            curl -I http://nginx.local/wp-login.php || true \
           "
       - name: Debug WPBrowser env
         run: |
@@ -141,7 +136,7 @@ jobs:
       - name: Debug cookies
         run: |
           docker exec wp_selenium bash -lc "\
-          curl -v http://nginx.local/wp-login.php 2>&1 | grep -i set-cookie || true \
+          curl -v http://nginx/wp-login.php 2>&1 | grep -i set-cookie || true \
           "
 
       # 运行 Acceptance 测试
