@@ -95,16 +95,23 @@ jobs:
           docker exec wp_fpm bash -lc '\
             wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
           '
+          docker exec wp_fpm bash -lc '\
+            mkdir -p /var/www/html/wp-content/uploads
+            chown -R www-data:www-data /var/www/html/wp-content/uploads
+            chmod -R 755 /var/www/html/wp-content/uploads
+          '
 
       # 运行 Unit 测试
       - name: 9. Run Unit Tests
         run: |
-          docker exec wp_fpm bash -lc '\
-            ls -l /var/www/html/wp-content && \
-            ls -l /var/www/html/wp-content/uploads && \
-            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
+          docker exec wp_fpm bash -lc "
+            ls -l /var/www/html/wp-content
+            ls -l /var/www/html/wp-content/uploads
+            ls -l /var/www/html/wp-content/uploads/2025
+            ls -l /var/www/html/wp-content/uploads/2025/12
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite
             ./vendor/bin/codecept run Unit
-          '
+          "
 
       # 运行 Integration 测试
       - name: 10. Run Integration Tests
