@@ -14,6 +14,7 @@ modules:
         - WPLoader
         - WPFilesystem
         - WPWebDriver
+        - WPCLI
         - Asserts
         - \Tests\Support\Helper\Acceptance
     config:
@@ -74,3 +75,6 @@ modules:
               plugins.always_open_pdf_externally: true
         debug: true
         verbose: true
+      WPCLI:
+        path: /var/www/html
+        binary: wp
