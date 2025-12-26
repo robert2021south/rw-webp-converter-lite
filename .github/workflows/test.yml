@@ -2,9 +2,9 @@ name: RW WebP Converter Lite Matrix Tests
 
 on:
   push:
-    branches: [ ci ]
+    branches: [ main ]
   pull_request:
-    branches: [ ci ]
+    branches: [ main ]
 
 jobs:
   test:
@@ -48,6 +48,7 @@ jobs:
           echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> docker/.env
           echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> docker/.env
 
+      # 编译并启动所有Docker容器
       - name: 4. Start Docker Compose (Matrix)
         run: |
           cd docker
@@ -94,20 +95,6 @@ jobs:
             wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
           '
 
-      - name: Debug list admin user
-        run: |
-          docker exec wp_fpm bash -lc "\
-            wp user list \
-            --fields=ID,user_login,user_email,user_pass,roles \
-            --allow-root \
-            --path=/var/www/html
-          "
-          
-          docker exec wp_mysql bash -lc "\
-            mysql -u wpuser -pwppass wordpress \
-            -e \"SELECT ID,user_login,user_pass FROM wp_users;\"
-          "
-
       # 运行 Unit 测试
       - name: 9. Run Unit Tests
         run: |
@@ -125,7 +112,7 @@ jobs:
           '
 
       # 运行 Acceptance 测试
-      - name: 12. Run Acceptance Tests
+      - name: 11. Run Acceptance Tests
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
