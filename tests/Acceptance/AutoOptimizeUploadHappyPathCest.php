@@ -50,11 +50,14 @@ class AutoOptimizeUploadHappyPathCest
         // 上传前记录数据库最大 ID
         //$maxIdBefore = (int) $I->grabFromDatabase('wp_posts', 'MAX(ID)', ['post_type' => 'attachment']);
 
-        //$testImage = codecept_data_dir('images/Weixin-Image_2025-08-13_125222_631.jpg');
+        $testImage = codecept_data_dir('images/Weixin-Image_2025-08-13_125222_631.jpg');
+        codecept_debug($testImage);
         $testImage = 'images/Image_2025-08-13_125222_631.jpg';
 
         // WordPress 媒体上传 input
-        $I->attachFile('input[type="file"]', $testImage);
+        $I->waitForElementVisible('#async-upload', 20);
+        $I->attachFile('#async-upload', $testImage);
+        //$I->attachFile('input[type="file"]', $testImage);
 
         // ---------- 5. 等待上传完成 ----------
         // 上传成功后会出现“编辑”链接
@@ -73,7 +76,7 @@ class AutoOptimizeUploadHappyPathCest
 
         $I->assertFileExists($webpPath, 'WebP file should be generated automatically after upload');
 
-        // ---------- 8.（可选）验证最近转换 UI ----------
+        // ---------- 8.验证最近转换 UI ----------
         $I->amOnAdminPage('tools.php?page=rwwcl-main&tab=status'); // 你的插件主页面 slug
         $I->waitForText('Recent Conversions', 15);
 
