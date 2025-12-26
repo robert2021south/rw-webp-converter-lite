@@ -15,6 +15,16 @@ class AutoOptimizeUploadHappyPathCest
     {
         // 登录管理员
         $I->loginAsAdmin();
+
+        // 确保插件设置
+        $I->haveOptionInDatabase('rwwcl_settings', [
+            'auto_optimize'   => 1,
+            'overwrite_webp'  => 1,
+            'keep_original'   => 1,
+            'skip_small'      => 300,
+            'webp_quality'    => 80,
+        ]);
+
         $I->amOnAdminPage('index.php');
         $I->see('Dashboard');
 
@@ -25,10 +35,6 @@ class AutoOptimizeUploadHappyPathCest
 
     }
 
-    public function _after(AcceptanceTester $I): void
-    {
-    }
-
     /**
      * Happy Path:
      * 管理员在「媒体 → 添加」页面上传 JPEG
@@ -36,18 +42,6 @@ class AutoOptimizeUploadHappyPathCest
      */
     public function upload_image_generates_webp(AcceptanceTester $I): void
     {
-        // ---------- 1. 登录后台 ----------
-        //$I->loginAsAdmin();
-
-        // ---------- 2. 确保插件设置 ----------
-        $I->haveOptionInDatabase('rwwcl_settings', [
-            'auto_optimize'   => 1,
-            'overwrite_webp'  => 1,
-            'keep_original'   => 1,
-            'skip_small'      => 300,
-            'webp_quality'    => 80,
-        ]);
-
         // ---------- 3. 打开媒体上传页面 ----------
         $I->amOnAdminPage('media-new.php');
         $I->waitForText('Drop files to upload', 15);

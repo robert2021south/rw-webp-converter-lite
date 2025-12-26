@@ -18,7 +18,7 @@ class BulkConvertHappyPathCest
             'auto_optimize'   => 0,
             'overwrite_webp'  => 1,
             'keep_original'   => 1,
-            'skip_small'      => 0,
+            'skip_small'      => 300,
             'webp_quality'    => 80,
         ]);
 
@@ -27,7 +27,9 @@ class BulkConvertHappyPathCest
 
         $images = [
             '300x300_20250618_083505.png',
+            'Hawkins-energy-level.jpg',
             'Image_2025-08-13_125222_631.jpg',
+            'Shakespeare1920x1080.png'
         ];
 
         foreach ($images as $file) {
@@ -68,7 +70,6 @@ class BulkConvertHappyPathCest
             'var btn = document.querySelector("#rwwcl-start-bulk"); return btn && btn.disabled === false;',
             300
         );
-        //$I->waitForJs('var btn = document.querySelector("#rwwcl-start-bulk"); return btn && !btn.disabled;', 300);
 
         $I->seeElement('.rwwcl-progress-text');
         $I->see('Completed', '.rwwcl-progress-text');
@@ -77,7 +78,7 @@ class BulkConvertHappyPathCest
         $I->amOnAdminPage('tools.php?page=rwwcl-main&tab=status');
 
         // 6. 断言至少有一条图片被转换
-        $I->see('300x300_20250618_083505', '.rwwcl-status-table tbody tr span');
+        $I->see('Image_2025-08-13_125222_631', '.rwwcl-status-table tbody tr span');
 
         // 7. 断言 WebP 链接存在
         $I->see('WebP', '.rwwcl-status-table');
