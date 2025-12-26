@@ -2,9 +2,9 @@ name: RW WebP Converter Lite Matrix Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ ci ]
   pull_request:
-    branches: [ main ]
+    branches: [ ci ]
 
 jobs:
   test:
