@@ -64,23 +64,24 @@ jobs:
       # 在容器内安装插件依赖
       - name: 6. Install plugin dependencies
         run: |
-          docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
+          docker exec wp_fpm bash -lc "
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite
             composer install --no-interaction --prefer-dist --optimize-autoloader;
-          '
+          "
 
       # 安装 WP-CLI
       - name: 7. Install WP-CLI inside wp_fpm container
         run: |
-          docker exec wp_fpm bash -c '
-            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&
-            chmod +x wp-cli.phar &&
+          docker exec wp_fpm bash -c "
+            curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+            chmod +x wp-cli.phar
             mv wp-cli.phar /usr/local/bin/wp
-          '
+          "
 
       # 安装 WordPress && 激活插件
       - name: 8. Install WordPress && Activate plugin
         run: |
+          # 安装 WordPress
           docker exec wp_fpm bash -lc "\
             wp core install \
               --url='http://nginx' \
@@ -92,23 +93,23 @@ jobs:
               --allow-root \
               --path=/var/www/html
           "
-          docker exec wp_fpm bash -lc '\
+          
+          # 激活插件
+          docker exec wp_fpm bash -lc "
             wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
-          '
-          docker exec wp_fpm bash -lc '\
+          "
+          
+          # 创建 uploads 目录并修复权限
+          docker exec wp_fpm bash -lc "
             mkdir -p /var/www/html/wp-content/uploads
             chown -R www-data:www-data /var/www/html/wp-content/uploads
             chmod -R 755 /var/www/html/wp-content/uploads
-          '
+          "
 
       # 运行 Unit 测试
       - name: 9. Run Unit Tests
         run: |
           docker exec wp_fpm bash -lc "
-            ls -l /var/www/html/wp-content
-            ls -l /var/www/html/wp-content/uploads
-            ls -l /var/www/html/wp-content/uploads/2025
-            ls -l /var/www/html/wp-content/uploads/2025/12
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite
             ./vendor/bin/codecept run Unit
           "
@@ -116,10 +117,10 @@ jobs:
       # 运行 Integration 测试
       - name: 10. Run Integration Tests
         run: |
-          docker exec wp_fpm bash -lc '\
-            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
+          docker exec wp_fpm bash -lc "
+            cd /var/www/html/wp-content/plugins/rw-webp-converter-lite
             ./vendor/bin/codecept run Integration
-          '
+          "
 
       # 运行 Acceptance 测试
       - name: 11. Run Acceptance Tests
