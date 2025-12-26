@@ -53,16 +53,9 @@ jobs:
           cd docker
           docker compose build --build-arg PHP_VERSION=${{ matrix.php_version }}
           docker compose up -d
-          docker ps
-
-      # 等待 WordPress/PHP-FPM/MySQL 就绪
-      - name: 5. Wait for services
-        run: |
-          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
-          sleep 10
 
       # 在容器内安装插件依赖
-      - name: 6. Install plugin dependencies
+      - name: 5. Install plugin dependencies
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
@@ -70,7 +63,7 @@ jobs:
           '
 
       # 安装 WP-CLI
-      - name: 7. Install WP-CLI inside wp_fpm container
+      - name: 6. Install WP-CLI inside wp_fpm container
         run: |
           docker exec wp_fpm bash -c '
             curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&
@@ -79,10 +72,9 @@ jobs:
           '
 
       # 安装 WordPress && 激活插件
-      - name: 8. Install WordPress && Activate plugin
+      - name: 7. Install WordPress && Activate plugin
         run: |
           docker exec wp_fpm bash -lc "\
-            wp core download --path=/var/www/html --version=6.8 --allow-root --force
             wp core install \
               --url='http://nginx' \
               --title='Test Site' \
@@ -97,8 +89,22 @@ jobs:
             wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
           '
 
+      - name: Debug list admin user
+        run: |
+          docker exec wp_fpm bash -lc "\
+            wp user list \
+            --fields=ID,user_login,user_email,user_pass,roles \
+            --allow-root \
+            --path=/var/www/html
+          "
+          
+          docker exec mysql bash -lc "\
+            mysql -u wpuser -pwppass wordpress \
+            -e \"SELECT ID,user_login,user_pass FROM wp_users;\"
+          "
+
       # 运行 Unit 测试
-      - name: 9. Run Unit Tests
+      - name: 8. Run Unit Tests
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
@@ -106,28 +112,18 @@ jobs:
           '
 
       # 运行 Integration 测试
-      - name: 10. Run Integration Tests
+      - name: 9. Run Integration Tests
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             ./vendor/bin/codecept run Integration
           '
-      - name: Debug login redirect
-        run: |
-          docker exec wp_fpm wp core version --allow-root --path=/var/www/html
-          docker exec wp_selenium curl -v -d "log=admin&pwd=pBlaWDphJvFab5Jbi3KR9q6s&wp-submit=Log+In&redirect_to=http://nginx/wp-admin/&testcookie=1" http://nginx/wp-login.php
 
       # 运行 Acceptance 测试
-      - name: 11. Run Acceptance Tests
+      - name: 10. Run Acceptance Tests
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             TEST_SELENIUM_HOST=wp_selenium TEST_SELENIUM_PORT=4444 \
             ./vendor/bin/codecept run Acceptance
           '
-      # 清理
-      - name: 12. Cleanup
-        if: always()
-        run: |
-          cd docker
-          docker compose down -v
