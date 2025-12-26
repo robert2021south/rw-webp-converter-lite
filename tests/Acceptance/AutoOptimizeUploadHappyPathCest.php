@@ -42,35 +42,24 @@ class AutoOptimizeUploadHappyPathCest
      */
     public function upload_image_generates_webp(AcceptanceTester $I): void
     {
-        // ---------- 3. 打开媒体上传页面 ----------
+        // ---------- 1. 打开媒体上传页面 ----------
         $I->amOnAdminPage('media-new.php');
         $I->waitForText('Drop files to upload', 15);
 
-        // ---------- 4. 上传文件 ----------
-        // 上传前记录数据库最大 ID
-        //$maxIdBefore = (int) $I->grabFromDatabase('wp_posts', 'MAX(ID)', ['post_type' => 'attachment']);
-
-        $testImage = codecept_data_dir('images/Image_2025-08-13_125222_631.jpg');
-        codecept_debug($testImage);
-        codecept_debug($testImage);
-        codecept_debug($testImage);
-        //$testImage = 'images/Image_2025-08-13_125222_631.jpg';
-
+        // ---------- 2. 上传文件 ----------
         // WordPress 媒体上传 input
-        $I->waitForElementVisible('#async-upload', 20);
-        $I->attachFile('#async-upload', $testImage);
-        //$I->attachFile('input[type="file"]', $testImage);
+        $testImage = 'images/Image_2025-08-13_125222_631.jpg';
+        $I->attachFile('input[type="file"]', $testImage);
 
-        // ---------- 5. 等待上传完成 ----------
+        // ---------- 3. 等待上传完成 ----------
         // 上传成功后会出现“编辑”链接
         $I->waitForElement('.media-item', 30);
         $I->waitForElement('.edit-attachment', 30);
 
-        // ---------- 6. 获取最新 attachment ID ----------
+        // ---------- 4. 获取最新 attachment ID ----------
         $attachmentId = (int) $I->grabFromDatabase('wp_posts', 'ID', ['post_type' => 'attachment',], 'ORDER BY ID DESC');
-        //$attachmentId = (int) $I->grabFromDatabase('wp_posts', 'ID', ['post_type' => 'attachment', 'ID>' => $maxIdBefore]);
 
-        // ---------- 7. 断言 WebP 文件存在 ----------
+        // ---------- 5. 断言 WebP 文件存在 ----------
         // 注意：E2E 允许直接调用 WP 函数（wpbrowser 注入）
         //$uploadDir   = wp_upload_dir();
         $original    = get_attached_file($attachmentId);
@@ -78,8 +67,8 @@ class AutoOptimizeUploadHappyPathCest
 
         $I->assertFileExists($webpPath, 'WebP file should be generated automatically after upload');
 
-        // ---------- 8.验证最近转换 UI ----------
-        $I->amOnAdminPage('tools.php?page=rwwcl-main&tab=status'); // 你的插件主页面 slug
+        // ---------- 6.验证最近转换 UI ----------
+        $I->amOnAdminPage('tools.php?page=rwwcl-main'); // 你的插件主页面 slug
         $I->waitForText('Recent Conversions', 15);
 
         // 表格存在
@@ -96,6 +85,6 @@ class AutoOptimizeUploadHappyPathCest
         // 文件名显示正确（非必须，但可加）
         $I->see('Image_2025-08-13_125222_631', '.rwwcl-status-table tbody tr span');
 
-
     }
+
 }

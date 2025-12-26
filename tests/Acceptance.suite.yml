@@ -21,7 +21,7 @@ modules:
         dsn: 'mysql:host=dummy;dbname=dummy'
         user: 'dummy'
         password: 'dummy'
-        url: 'http://nginx/'
+        url: 'http://dummy'
         tablePrefix: 'wp_'
         populate: true
         cleanup: true
@@ -45,7 +45,7 @@ modules:
         title: 'Test Blog'
         loadOnly: true
       WPWebDriver:
-        url: 'http://nginx.local/'
+        url: 'http://nginx'
         adminPath: '/wp-admin'
         adminUsername: 'admin'
         adminPassword: 'pBlaWDphJvFab5Jbi3KR9q6s'
@@ -65,6 +65,7 @@ modules:
               - "--disable-gpu"
               - "--disable-extensions"
               - "--disable-software-rasterizer"
+
             prefs:
               download.default_directory: '/var/www/html/wp-content/plugins/rw-webp-converter-lite/tests/_output'
               download.prompt_for_download: false
