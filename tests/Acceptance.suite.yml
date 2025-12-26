@@ -21,7 +21,7 @@ modules:
         dsn: 'mysql:host=dummy;dbname=dummy'
         user: 'dummy'
         password: 'dummy'
-        url: 'http://nginx'
+        url: 'http://dummy'
         tablePrefix: 'wp_'
         populate: true
         cleanup: true
