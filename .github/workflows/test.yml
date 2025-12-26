@@ -13,9 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_version: [8.2]
-        wp_version: [6.9]
-        mysql_version: [8.0]
+        php_version: [8.2, 8.3, 8.4]
+        wp_version: [6.6, 6.8, 6.9]
+        mysql_version: [5.7, 8.0]
 
     env:
       WP_ADMIN_USER: ${{ secrets.WP_ADMIN_USER }}
