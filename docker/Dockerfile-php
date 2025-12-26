@@ -38,6 +38,11 @@ COPY php/conf.d/99-testing.ini /usr/local/etc/php/conf.d/99-testing.ini
 # 确保 WordPress 目录属于 www-data
 RUN chown -R www-data:www-data /var/www/html
 
+# 预建 uploads 目录，保证权限正确
+RUN mkdir -p /var/www/html/wp-content/uploads \
+    && chown -R www-data:www-data /var/www/html/wp-content/uploads \
+    && chmod -R 755 /var/www/html/wp-content/uploads
+
 WORKDIR /var/www/html
 
 # =========================
