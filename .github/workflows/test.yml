@@ -55,18 +55,19 @@ jobs:
           docker compose build --build-arg PHP_VERSION=${{ matrix.php_version }}
           docker compose up -d
 
+      # 等待 WordPress/PHP-FPM/MySQL 就绪
+      - name: 5. Wait for services
+        run: |
+          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
+          sleep 10
+
       # 在容器内安装插件依赖
-      - name: 5. Install plugin dependencies
+      - name: 6. Install plugin dependencies
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             composer install --no-interaction --prefer-dist --optimize-autoloader;
           '
-      # 等待 WordPress/PHP-FPM/MySQL 就绪
-      - name: 6. Wait for services
-        run: |
-          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
-          sleep 10
 
       # 安装 WP-CLI
       - name: 7. Install WP-CLI inside wp_fpm container
@@ -99,6 +100,8 @@ jobs:
       - name: 9. Run Unit Tests
         run: |
           docker exec wp_fpm bash -lc '\
+            ls -l /var/www/html/wp-content && \
+            ls -l /var/www/html/wp-content/uploads && \
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             ./vendor/bin/codecept run Unit
           '
