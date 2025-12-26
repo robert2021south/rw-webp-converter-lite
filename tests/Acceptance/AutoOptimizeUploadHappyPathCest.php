@@ -54,11 +54,7 @@ class AutoOptimizeUploadHappyPathCest
         // 给 JS 一点时间（仅用于调试）
         $I->wait(2);
 
-        // 打印页面源码（CI 调试）
-        file_put_contents(
-            codecept_output_dir('media-new-debug.html'),
-            $I->grabPageSource()
-        );
+        codecept_debug($I->grabPageSource());
 
         // ---------- 3. 等待上传完成 ----------
         // 上传成功后会出现“编辑”链接
