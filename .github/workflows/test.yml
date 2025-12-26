@@ -95,11 +95,6 @@ jobs:
             wp plugin activate rw-webp-converter-lite --allow-root --path=/var/www/html
           '
 
-      - name: Fix uploads permissions
-        run: |
-          chown -R www-data:www-data wp-content/uploads
-          chmod -R 755 wp-content/uploads
-
       # 运行 Unit 测试
       - name: 9. Run Unit Tests
         run: |
