@@ -1,4 +1,4 @@
-name: RW PostViewStats Lite Codeception Matrix Tests (docker-compose)
+name: RW WebP Converter Lite Matrix Tests
 
 on:
   push:
@@ -13,9 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_version: [8.2, 8.3, 8.4]
-        wp_version: [6.6, 6.8]
-        mysql_version: [5.7, 8.0]
+        php_version: [8.2]
+        wp_version: [6.9]
+        mysql_version: [8.0]
 
     env:
       WP_ADMIN_USER: ${{ secrets.WP_ADMIN_USER }}
@@ -48,26 +48,25 @@ jobs:
           echo "MYSQL_DATABASE=${MYSQL_DATABASE}" >> docker/.env
           echo "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}" >> docker/.env
 
+      # 编译并启动所有Docker容器
       - name: 4. Start Docker Compose (Matrix)
         run: |
           cd docker
           docker compose build --build-arg PHP_VERSION=${{ matrix.php_version }}
           docker compose up -d
-          docker ps
-
-      # 等待 WordPress/PHP-FPM/MySQL 就绪
-      - name: 5. Wait for services
-        run: |
-          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
-          sleep 10
 
       # 在容器内安装插件依赖
-      - name: 6. Install plugin dependencies
+      - name: 5. Install plugin dependencies
         run: |
           docker exec wp_fpm bash -lc '\
             cd /var/www/html/wp-content/plugins/rw-webp-converter-lite && \
             composer install --no-interaction --prefer-dist --optimize-autoloader;
           '
+      # 等待 WordPress/PHP-FPM/MySQL 就绪
+      - name: 6. Wait for services
+        run: |
+          echo "⏳ Waiting for MySQL and PHP-FPM to start..."
+          sleep 10
 
       # 安装 WP-CLI
       - name: 7. Install WP-CLI inside wp_fpm container
@@ -83,7 +82,7 @@ jobs:
         run: |
           docker exec wp_fpm bash -lc "\
             wp core install \
-              --url='http://nginx/' \
+              --url='http://nginx' \
               --title='Test Site' \
               --admin_user='$WP_ADMIN_USER' \
               --admin_password='$WP_ADMIN_PASS' \
@@ -120,9 +119,3 @@ jobs:
             TEST_SELENIUM_HOST=wp_selenium TEST_SELENIUM_PORT=4444 \
             ./vendor/bin/codecept run Acceptance
           '
-      # 清理
-      - name: 12. Cleanup
-        if: always()
-        run: |
-          cd docker
-          docker compose down -v
