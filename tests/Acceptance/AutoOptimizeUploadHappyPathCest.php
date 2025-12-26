@@ -50,9 +50,11 @@ class AutoOptimizeUploadHappyPathCest
         // 上传前记录数据库最大 ID
         //$maxIdBefore = (int) $I->grabFromDatabase('wp_posts', 'MAX(ID)', ['post_type' => 'attachment']);
 
-        $testImage = codecept_data_dir('images/Weixin-Image_2025-08-13_125222_631.jpg');
+        $testImage = codecept_data_dir('images/Image_2025-08-13_125222_631.jpg');
         codecept_debug($testImage);
-        $testImage = 'images/Image_2025-08-13_125222_631.jpg';
+        codecept_debug($testImage);
+        codecept_debug($testImage);
+        //$testImage = 'images/Image_2025-08-13_125222_631.jpg';
 
         // WordPress 媒体上传 input
         $I->waitForElementVisible('#async-upload', 20);
