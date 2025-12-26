@@ -103,7 +103,7 @@ jobs:
             --path=/var/www/html
           "
           
-          docker exec mysql bash -lc "\
+          docker exec wp_mysql bash -lc "\
             mysql -u wpuser -pwppass wordpress \
             -e \"SELECT ID,user_login,user_pass FROM wp_users;\"
           "
