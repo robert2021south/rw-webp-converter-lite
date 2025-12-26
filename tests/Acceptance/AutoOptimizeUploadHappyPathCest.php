@@ -52,9 +52,11 @@ class AutoOptimizeUploadHappyPathCest
         $I->attachFile('input[type="file"]', $testImage);
 
         // 给 JS 一点时间（仅用于调试）
-        $I->wait(2);
+        $I->wait(10);
 
-        codecept_debug($I->grabPageSource());
+        //codecept_debug($I->grabPageSource());
+
+        $I->dontSee('has failed to upload');
 
         // ---------- 3. 等待上传完成 ----------
         // 上传成功后会出现“编辑”链接
