@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) exit;
                 <span><?php echo esc_html__('Enabled in PRO', 'rw-webp-converter-lite'); ?></span>
             </div>
         <?php elseif ($field['type'] === 'select'): ?>
-            <select disabled style="width:100%;">
+            <select disabled>
                 <option><?php echo esc_html__('Multiple options available', 'rw-webp-converter-lite'); ?></option>
             </select>
         <?php elseif ($field['type'] === 'number'): ?>
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) exit;
                 <input type="number" disabled value="50">
             </div>
         <?php else: ?>
-            <input type="text" disabled value="<?php echo esc_attr__('Available in PRO', 'rw-webp-converter-lite'); ?>" style="width:100%;">
+            <input type="text" disabled value="<?php echo esc_attr__('Available in PRO', 'rw-webp-converter-lite'); ?>">
         <?php endif; ?>
     </div>
 

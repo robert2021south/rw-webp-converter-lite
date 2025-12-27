@@ -1,117 +1,142 @@
 /* ====================
-   通用样式
+   CSS Variables
+   ==================== */
+:root {
+    --rwwcl-primary: #2271b1;
+    --rwwcl-primary-dark: #135e96;
+    --rwwcl-success: #00a32a;
+    --rwwcl-error: #d63638;
+    --rwwcl-warning: #f0c33c;
+    --rwwcl-pro-color: #ffb900;
+    --rwwcl-pro-gradient: linear-gradient(90deg, #ffb900, #ff9900);
+    --rwwcl-text-primary: #1d2327;
+    --rwwcl-text-secondary: #50575e;
+    --rwwcl-text-muted: #646970;
+    --rwwcl-text-disabled: #8c8f94;
+    --rwwcl-border-light: #c3c4c7;
+    --rwwcl-border-medium: #ccd0d4;
+    --rwwcl-border-dark: #8c8f94;
+    --rwwcl-bg-light: #f6f7f7;
+    --rwwcl-bg-card: #f9f9f9;
+    --rwwcl-bg-hover: #f0f7ff;
+    --rwwcl-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --rwwcl-shadow-medium: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ====================
+   Common Styles
    ==================== */
 
-/* 主容器 */
 .rwwcl-admin-wrap {
     max-width: 1200px;
     margin: 20px;
 }
 
-/* 选项卡样式 */
 .rwwcl-tab-wrapper {
     margin: 20px 0 25px;
-    border-bottom: 1px solid #ccd0d4;
+    border-bottom: 1px solid var(--rwwcl-border-medium);
 }
 
 .rwwcl-tab-wrapper .nav-tab {
     margin-bottom: -1px;
     background: #f1f1f1;
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--rwwcl-border-medium);
     border-bottom: none;
     padding: 8px 20px;
     font-size: 14px;
     text-decoration: none;
-    color: #50575e;
+    color: var(--rwwcl-text-secondary);
 }
 
 .rwwcl-tab-wrapper .nav-tab:hover {
     background: #f9f9f9;
-    color: #135e96;
+    color: var(--rwwcl-primary-dark);
 }
 
 .rwwcl-tab-wrapper .nav-tab-active {
     background: #fff;
-    color: #1d2327;
+    color: var(--rwwcl-text-primary);
     border-bottom-color: #fff;
 }
 
 .rwwcl-tab-content {
     background: #fff;
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--rwwcl-border-medium);
     border-top: none;
     padding: 20px 30px;
     border-radius: 0 0 4px 4px;
 }
 
-/* 卡片样式 - 用于overview页面 */
-.rwwcl-cards,
-.rwwcl-status-cards {
+.rwwcl-tab-panel {
+}
+
+/* ====================
+   Overview Page Styles
+   ==================== */
+
+.rwwcl-overview {
+    max-width: 1200px;
+}
+
+.rwwcl-overview .rwwcl-cards,
+.rwwcl-overview .rwwcl-status-cards {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
 }
 
-.rwwcl-card {
+.rwwcl-overview .rwwcl-card {
     background: #fff;
-    border: 1px solid #c3c4c7;
+    border: 1px solid var(--rwwcl-border-light);
     border-radius: 4px;
     padding: 20px;
     flex: 1;
     min-width: 200px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--rwwcl-shadow-light);
     transition: all 0.2s ease;
 }
 
-.rwwcl-card:hover {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-color: #8c8f94;
+.rwwcl-overview .rwwcl-card:hover {
+    box-shadow: var(--rwwcl-shadow-medium);
+    border-color: var(--rwwcl-pro-color);
+    transform: translateY(-2px);
 }
 
-.rwwcl-card h3,
-.rwwcl-card h4 {
+.rwwcl-overview .rwwcl-card h3,
+.rwwcl-overview .rwwcl-card h4 {
     margin-top: 0;
-    color: #1d2327;
+    color: var(--rwwcl-text-primary);
     padding-bottom: 8px;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.rwwcl-card h3 {
+.rwwcl-overview .rwwcl-card h3 {
     font-size: 18px;
     margin-bottom: 12px;
 }
 
-.rwwcl-card h4 {
+.rwwcl-overview .rwwcl-card h4 {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: #50575e;
+    color: var(--rwwcl-text-secondary);
 }
 
-.rwwcl-card p {
+.rwwcl-overview .rwwcl-card p {
     margin: 8px 0 0;
-    color: #646970;
+    color: var(--rwwcl-text-muted);
     line-height: 1.5;
 }
 
-.rwwcl-card strong {
+.rwwcl-overview .rwwcl-card strong {
     font-size: 24px;
-    color: #2271b1;
+    color: var(--rwwcl-primary);
     font-weight: 600;
 }
 
-/* 状态卡片容器 - overview页面专用 */
-.rwwcl-status-cards {
-    margin-top: 30px;
-}
-
-/* ====================
-   Overview页面专用样式
-   ==================== */
-
-/* 批量转换按钮区域 */
-.rwwcl-bulk-convert {
+/* Bulk Convert */
+.rwwcl-overview .rwwcl-bulk-convert {
     background: #f8f9fa;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
@@ -119,14 +144,13 @@
     margin-top: 30px;
 }
 
-.rwwcl-bulk-convert h3 {
+.rwwcl-overview .rwwcl-bulk-convert h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #1d2327;
+    color: var(--rwwcl-text-primary);
 }
 
-/* 按钮样式 */
-#rwwcl-start-bulk {
+.rwwcl-overview #rwwcl-start-bulk {
     padding: 8px 20px;
     font-size: 14px;
     font-weight: 600;
@@ -134,40 +158,38 @@
     min-height: 36px;
 }
 
-#rwwcl-start-bulk:disabled {
+.rwwcl-overview #rwwcl-start-bulk:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* 提示文字 */
-.rwwcl-auto-hint {
+.rwwcl-overview .rwwcl-auto-hint {
+    margin-top:10px;
     font-size: 13px;
     line-height: 1.5;
-    color: #646970;
+    color: var(--rwwcl-text-muted);
 }
 
-.rwwcl-auto-hint strong {
-    color: #d63638;
+.rwwcl-overview .rwwcl-auto-hint strong {
+    color: var(--rwwcl-error);
 }
 
-/* 进度条区域 */
-.rwwcl-bulk-progress {
+.rwwcl-overview .rwwcl-bulk-progress {
     background: #fff;
-    border: 1px solid #c3c4c7;
+    border: 1px solid var(--rwwcl-border-light);
     border-radius: 4px;
     padding: 20px;
     margin-top: 20px;
 }
 
-.rwwcl-progress-heading {
+.rwwcl-overview .rwwcl-progress-heading {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #1d2327;
+    color: var(--rwwcl-text-primary);
     font-size: 14px;
 }
 
-/* 外层进度条容器 */
-.rwwcl-progress-wrapper {
+.rwwcl-overview .rwwcl-progress-wrapper {
     width: 100%;
     background: #eee;
     border-radius: 4px;
@@ -176,181 +198,124 @@
     overflow: hidden;
 }
 
-/* 内层动态变化的进度条 */
-.rwwcl-progress-bar-inner {
+.rwwcl-overview .rwwcl-progress-bar-inner {
     width: 0%;
     height: 100%;
-    background: #0073aa; /* WP Primary Blue */
+    background: var(--rwwcl-primary-dark);
     transition: width 0.3s ease;
 }
 
-/* 百分比文字 */
-.rwwcl-progress-text {
+.rwwcl-overview rwwcl-progress-text {
     font-weight: bold;
     margin-top: 5px;
-    color: #2271b1;
+    color: var(--rwwcl-primary);
     font-size: 14px;
 }
 
-/* 最近转换表格 */
-.rwwcl-status-table {
+/* Recent Conversions */
+
+.rwwcl-overview .rwwcl-status-table {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
 }
 
-.rwwcl-status-table thead th {
-    background: #f6f7f7;
-    border-bottom: 2px solid #c3c4c7;
+.rwwcl-overview .rwwcl-status-table thead th {
+    background: var(--rwwcl-bg-light);
+    border-bottom: 2px solid var(--rwwcl-border-light);
     padding: 12px;
     text-align: left;
     font-weight: 600;
-    color: #1d2327;
+    color: var(--rwwcl-text-primary);
 }
 
-.rwwcl-status-table tbody td {
+.rwwcl-overview .rwwcl-status-table tbody td {
     padding: 12px;
     border-bottom: 1px solid #f0f0f0;
     vertical-align: middle;
 }
 
-.rwwcl-status-table tbody tr:hover {
-    background: #f9f9f9;
+.rwwcl-overview .rwwcl-status-table tbody tr:hover {
+    background: var(--rwwcl-bg-card);
 }
 
-/* 已删除文件的样式 */
-.rwwcl-status-table .rwwcl-deleted {
+.rwwcl-overview .rwwcl-status-table .rwwcl-deleted {
     color: #999;
     font-style: italic;
 }
 
-.rwwcl-status-table .rwwcl-deleted a {
+.rwwcl-overview .rwwcl-status-table .rwwcl-deleted a {
     pointer-events: none;
     cursor: default;
     color: #999;
 }
 
 /* ====================
-   Settings页面专用样式
+   Settings Page Styles
    ==================== */
-/* ====================
-   Lite设置区域
-   ==================== */
+.rwwcl-settings {
+    max-width: 1200px;
+}
 
-.rwwcl-lite-settings-section {
+.rwwcl-settings .rwwcl-lite-settings-section {
     background: #fff;
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--rwwcl-border-medium);
     border-radius: 4px;
     padding: 25px;
     margin-bottom: 30px;
 }
 
-.rwwcl-lite-settings-section h3 {
+.rwwcl-settings .rwwcl-lite-settings-section h3 {
     margin-top: 0;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #f0f0f0;
+    color:#1d2327;
 }
 
-/* ====================
-   PRO功能展示区域
-   ==================== */
-
-.rwwcl-pro-settings-section {
+.rwwcl-settings .rwwcl-pro-settings-section {
     background: #fff;
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--rwwcl-border-medium);
     border-radius: 4px;
     padding: 25px;
     position: relative;
 }
 
-.rwwcl-pro-settings-section .pro-badge {
-    background:#ffb900;
-    color:#000;
-    padding:2px 8px;
-    border-radius:3px;
-    font-size:12px;
-    margin-right:8px;
-}
-
-.rwwcl-pro-settings-section h3 {
+.rwwcl-settings .rwwcl-pro-settings-section h3 {
     margin-top: 0;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
 }
 
-.rwwcl-pro-features-grid {
+.rwwcl-settings .rwwcl-pro-settings-section .pro-badge {
+    margin-right: 8px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    background:#ffb900;
+    color:#000;
+}
+
+.rwwcl-settings .rwwcl-pro-features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
 }
 
-.rwwcl-pro-feature-card {
-    background: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.rwwcl-pro-feature-card:hover {
-    border-color: #ffb900;
-    box-shadow: 0 2px 8px rgba(255, 185, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-.rwwcl-pro-feature-card:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ffb900, #ff9900);
-    border-radius: 6px 6px 0 0;
-}
-
-.rwwcl-pro-feature-header h4 {
-    margin: 0 0 15px 0;
-    color: #1d2327;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.rwwcl-pro-feature-preview input,
-.rwwcl-pro-feature-preview select,
-.rwwcl-pro-checkbox-preview input {
-    cursor: not-allowed !important;
-    background-color: #f6f7f7 !important;
-    border-color: #dcdcde !important;
-    color: #8c8f94 !important;
-    opacity: 0.7;
-}
-
-.rwwcl-pro-checkbox-preview {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.rwwcl-pro-feature-desc {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #646970;
-    line-height: 1.5;
-    font-style: italic;
-}
-
-/* 升级按钮区域 */
-.rwwcl-pro-upgrade-cta {
+.rwwcl-settings .rwwcl-pro-upgrade-cta {
     position: relative;
     overflow: hidden;
+    text-align:center;
+    margin:30px 0;
+    padding:25px;
+    background:linear-gradient(135deg, #f8f9fa 0%, #f0f6fc 100%);
+    border-radius:8px;
+    border:2px dashed #72aee6;
 }
 
-.rwwcl-pro-upgrade-cta:before {
+.rwwcl-settings .rwwcl-pro-upgrade-cta:before {
     content: '⭐';
     position: absolute;
     top: -15px;
@@ -360,102 +325,81 @@
     transform: rotate(15deg);
 }
 
-/* ====================
-   响应式设计
-   ==================== */
-
-@media screen and (max-width: 768px) {
-    .rwwcl-pro-features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .rwwcl-lite-settings-section,
-    .rwwcl-pro-settings-section {
-        padding: 20px;
-    }
+.rwwcl-settings .rwwcl-pro-upgrade-cta h4 {
+    margin-top:0;
+    color:#1d2327;
 }
-/* Pro字段样式 */
-.rwwcl-settings table.form-table tr.pro-field {
+
+.rwwcl-settings .rwwcl-pro-upgrade-cta .p1 {
+    color:#646970;
+    max-width:600px;
+    margin:10px auto 20px;
+}
+
+.rwwcl-settings .rwwcl-pro-upgrade-cta .p2 {
+    margin:15px 0 0;
+    font-size:12px;
+    color:#8c8f94;
+}
+
+.rwwcl-settings .rwwcl-pro-feature-card {
+    background: var(--rwwcl-bg-card);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.rwwcl-settings .rwwcl-pro-feature-card:hover {
+    border-color: #ffb900;
+    box-shadow: 0 2px 8px rgba(255, 185, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.rwwcl-settings .rwwcl-pro-feature-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--rwwcl-pro-gradient);
+    border-radius: 6px 6px 0 0;
+}
+
+.rwwcl-settings .rwwcl-pro-feature-header h4 {
+    margin: 0 0 15px 0;
+    color: var(--rwwcl-text-primary);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.rwwcl-settings .rwwcl-pro-feature-preview input,
+.rwwcl-pro-feature-preview select {
+    cursor: not-allowed !important;
+    background-color: var(--rwwcl-bg-light) !important;
+    border-color: #dcdcde !important;
+    color: var(--rwwcl-text-disabled) !important;
     opacity: 0.7;
-    background: #f9f9f9;
 }
 
-.rwwcl-settings table.form-table tr.pro-field:hover {
-    opacity: 0.9;
+.rwwcl-settings .rwwcl-pro-checkbox-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* 提交按钮 */
-.rwwcl-settings .submit {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
+.rwwcl-settings .rwwcl-pro-feature-desc {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--rwwcl-text-muted);
+    line-height: 1.5;
+    font-style: italic;
 }
 
 /* ====================
-   响应式设计
-   ==================== */
-
-@media screen and (max-width: 768px) {
-    .rwwcl-cards,
-    .rwwcl-status-cards {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .rwwcl-card {
-        min-width: 100%;
-    }
-
-    .rwwcl-settings .form-table th,
-    .rwwcl-settings .form-table td {
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-    }
-
-    .rwwcl-settings .form-table th {
-        padding-bottom: 5px;
-    }
-
-    .rwwcl-status-table {
-        display: block;
-        overflow-x: auto;
-    }
-}
-
-/* 动画效果 */
-@keyframes rwwcl-pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
-
-.rwwcl-loading {
-    animation: rwwcl-pulse 1.5s infinite;
-}
-
-/* 成功/错误消息 */
-.rwwcl-notice {
-    padding: 12px 15px;
-    margin: 15px 0;
-    border-left: 4px solid #00a32a;
-    background: #edfaef;
-    border-radius: 4px;
-}
-
-.rwwcl-notice.error {
-    border-left-color: #d63638;
-    background: #fcf0f1;
-}
-
-.rwwcl-notice.warning {
-    border-left-color: #f0c33c;
-    background: #fef8ee;
-}
-
-
-/* ====================
-   About页面专用样式
+   About Page Styles
    ==================== */
 
 .rwwcl-about {
@@ -481,7 +425,7 @@
 }
 
 .rwwcl-about .feature-item {
-    background: #f9f9f9;
+    background: var(--rwwcl-bg-card);
     border-radius: 8px;
     padding: 20px;
     border-left: 4px solid #3498db;
@@ -508,7 +452,7 @@
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    background: #f0f7ff;
+    background: var(--rwwcl-bg-hover);
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 15px;
@@ -658,7 +602,43 @@
     height: 18px;
 }
 
-@media (max-width: 768px) {
+/* Responsive adjustments for all pages */
+@media screen and (max-width: 768px) {
+    .rwwcl-pro-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rwwcl-lite-settings-section,
+    .rwwcl-pro-settings-section {
+        padding: 20px;
+    }
+
+    .rwwcl-cards,
+    .rwwcl-status-cards {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .rwwcl-settings .form-table th,
+    .rwwcl-settings .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .rwwcl-settings .form-table th {
+        padding-bottom: 5px;
+    }
+
+    .rwwcl-pro-feature-card {
+        width:58%;
+    }
+
+    .rwwcl-status-table {
+        display: block;
+        overflow-x: auto;
+    }
+
     .rwwcl-about .pro-features {
         columns: 1;
     }
@@ -677,153 +657,4 @@
         gap: 15px;
         align-items: center;
     }
-}
-
-/* ====================
-   PRO字段样式
-   ==================== */
-
-/* ====================
-   简洁版PRO字段样式
-   ==================== */
-
-.rwwcl-pro-field-wrapper {
-    position: relative;
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-}
-
-.rwwcl-pro-field-wrapper:hover {
-    opacity: 1;
-}
-
-/* PRO徽章 */
-.rwwcl-pro-badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ffb900;
-    color: #000;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    z-index: 1;
-}
-
-/* PRO字段中的输入框 */
-.rwwcl-pro-checkbox input[type="checkbox"],
-.rwwcl-pro-number-field input[type="number"],
-.rwwcl-pro-select-field select,
-.rwwcl-pro-textarea-field textarea,
-.rwwcl-pro-text-field input[type="text"] {
-    cursor: not-allowed !important;
-    background-color: #f6f7f7 !important;
-    border-color: #dcdcde !important;
-    color: #8c8f94 !important;
-    opacity: 0.7;
-}
-
-/* Select下拉箭头 */
-.rwwcl-pro-select-field select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238c8f94'%3E%3Cpath d='M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
-    padding-right: 35px;
-}
-
-/* PRO字段标签 */
-.rwwcl-pro-checkbox span,
-.rwwcl-pro-number-field label,
-.rwwcl-pro-select-field label,
-.rwwcl-pro-textarea-field label,
-.rwwcl-pro-text-field label {
-    color: #646970;
-    font-weight: 500;
-}
-
-/* PRO字段描述 */
-.rwwcl-pro-field-wrapper .description {
-    color: #8c8f94;
-    font-style: italic;
-}
-
-/* ====================
-   分组版样式
-   ==================== */
-
-/* PRO功能区域提示 */
-.rwwcl-pro-section-notice {
-    background: #f8f9fa;
-    border-left: 4px solid #ffb900;
-    border-radius: 0 4px 4px 0;
-    padding: 20px;
-    margin: 30px 0;
-}
-
-.rwwcl-pro-section-notice h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #1d2327;
-}
-
-.rwwcl-pro-section-notice ul {
-    margin: 0 0 15px 20px;
-    color: #646970;
-}
-
-.rwwcl-pro-section-notice li {
-    margin-bottom: 5px;
-}
-
-/* PRO功能表格 */
-.rwwcl-pro-features-table {
-    margin-top: 20px;
-}
-
-.rwwcl-pro-feature {
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.rwwcl-pro-feature:hover {
-    opacity: 1;
-    background: #f9f9f9;
-}
-
-.rwwcl-pro-feature th {
-    position: relative;
-}
-
-.rwwcl-pro-tag {
-    background: #ffb900;
-    color: #000;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-/* 简洁字段容器 */
-.rwwcl-pro-field-simple {
-    opacity: 0.7;
-}
-
-.rwwcl-pro-field-simple .rwwcl-pro-text {
-    color: #8c8f94;
-    font-style: italic;
-}
-
-.rwwcl-pro-field-simple input,
-.rwwcl-pro-field-simple select,
-.rwwcl-pro-field-simple textarea {
-    cursor: not-allowed !important;
-    background-color: #f6f7f7 !important;
-    border-color: #dcdcde !important;
-    color: #8c8f94 !important;
 }
