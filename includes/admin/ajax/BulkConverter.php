@@ -15,7 +15,7 @@ class BulkConverter
 
     /**
      * hook callback
-     * AJAX 批处理入口
+     * AJAX Batch Processing Entry Point
      */
     public function handle_request(): void
     {
@@ -38,7 +38,7 @@ class BulkConverter
         $settings = Helper::get_settings();
         $converted_records = $this->process_batch($images, $settings);
 
-        //二次检查，前端 & 测试逻辑统一
+        // Double-checking, unifying frontend & testing logic
         $remaining = $this->get_unconverted_images(1);
 
         if (empty($remaining)) {
@@ -50,10 +50,10 @@ class BulkConverter
             ]);
         }
 
-        // 更新进度
+        // Updating progress
         $progress = $this->increment_progress(count($converted_records));
 
-        // 初始化或获取 total
+        // Initializing or obtaining total
         $total = $this->ensure_total_count($progress);
 
         $percent = $this->calculate_percent($progress, $total);
@@ -67,7 +67,7 @@ class BulkConverter
     }
 
     /**
-     * 批量处理图片
+     * Batch processing images
      */
     private function process_batch(array $attachment_ids, array $settings): array
     {
@@ -83,7 +83,7 @@ class BulkConverter
                 continue;
             }
 
-            // 判断是否跳过小图
+            // Determining whether to skip small images
             if ($skip_threshold > 0) {
                 $size = getimagesize($file_path);
                 if ($size) {
@@ -97,27 +97,27 @@ class BulkConverter
 
             $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $file_path, 1);
 
-            // 文件存在且不覆盖
+            // File exists and do not overwrite
             if (file_exists($webp_path) && !$overwrite) {
                 update_post_meta($id, '_rwwcl_converted', 1);
                 $results[] = $this->build_existing_record($id, $file_path, $webp_path);
                 continue;
             }
 
-            // 调用纯转换器 WebPConverter
+            // Invoking pure converter WebPConverter
             $converter = WebPConverter::get_instance();
             $result = $converter->convert_file_to_webp($file_path, $webp_path, $quality);
 
             if ($result) {
-                // 如果不保留原图则删除
+                // Deleting original image if not retained
                 if (!$keep_original && file_exists($file_path)) {
                     wp_delete_file($file_path);
                 }
 
-                // 更新 meta
+                // update meta
                 update_post_meta($id, '_rwwcl_converted', 1);
 
-                // 统一记录 RecentConversions
+                // Unifying records in RecentConversions
                 $record = $this->format_conversion_result($id, $result);
                 RecentConversions::get_instance()->add_record($record);
 
@@ -129,7 +129,7 @@ class BulkConverter
     }
 
     /**
-     * 针对“文件存在但不覆盖”的情况创建记录
+     * Creating records for cases where “file exists but not overwritten”
      */
     private function build_existing_record(int $id, string $file_path, string $webp_path): array
     {
@@ -152,7 +152,7 @@ class BulkConverter
     }
 
     /**
-     * 将 AutoOptimizer::convert_single_file() 的返回格式整理成批处理统一格式
+     * Aligning the return format of AutoOptimizer::convert_single_file() with the unified batch processing format
      */
     private function format_conversion_result(int $id, array $result): array
     {
@@ -170,18 +170,7 @@ class BulkConverter
     }
 
     /**
-     * 批量写入 recent records（统一结构）
-     */
-//    private function store_recent_records(array $records): void
-//    {
-//        $recent = RecentConversions::get_instance();
-//        foreach ($records as $r) {
-//            $recent->add_record($r);
-//        }
-//    }
-
-    /**
-     * 计算批处理进度
+     * Calculating batch processing progress
      */
     private function increment_progress(int $count): int
     {
@@ -192,13 +181,13 @@ class BulkConverter
     }
 
     /**
-     * 首次批处理时记录 total 总数
+     * Recording total count during the first batch run
      */
     private function ensure_total_count(int $progress): int
     {
         $total = get_transient(self::TOTAL_KEY);
         if (!$total) {
-            // -1 表示不分页 → 获取所有未转换的
+            // -1 indicates no pagination → fetch all unconverted images
             $remaining = $this->get_unconverted_images(-1);
             $total = count($remaining) + $progress;
             set_transient(self::TOTAL_KEY, $total, DAY_IN_SECONDS);
@@ -207,7 +196,7 @@ class BulkConverter
     }
 
     /**
-     * 百分比计算
+     * Percentage calculation
      */
     private function calculate_percent(int $progress, int $total): int
     {
@@ -216,7 +205,7 @@ class BulkConverter
     }
 
     /**
-     * 重置进度
+     * Resetting progress
      */
     public function reset_progress(): void
     {
@@ -225,7 +214,7 @@ class BulkConverter
     }
 
     /**
-     * 查询所有“未转换的 JPEG/PNG”
+     * Querying all “unconverted JPEG/PNG images”
      */
     private function get_unconverted_images(int $limit): array
     {
@@ -252,7 +241,7 @@ class BulkConverter
 
     public function get_queue(): array
     {
-        // -1 表示获取所有未转换图片
+        // -1 indicates fetching all unconverted images
         return $this->get_unconverted_images(-1);
     }
 }

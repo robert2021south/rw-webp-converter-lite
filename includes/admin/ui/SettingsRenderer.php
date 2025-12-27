@@ -7,9 +7,6 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class SettingsRenderer {
 
-    // -----------------------------
-    // Lite 核心设置
-    // -----------------------------
     public static function render_general_section_description(): void
     {
         echo '<p class="description">'
@@ -103,7 +100,7 @@ class SettingsRenderer {
     }
 
     // -----------------------------
-    // Pro 功能统一渲染
+    // Pro features unified rendering
     // -----------------------------
 
     public static function get_pro_fields(): array

@@ -9,7 +9,7 @@ class Statistics
     use Singleton;
 
     /**
-     * 统一替换扩展名为 .webp
+     * Uniformly replace the file extension with .webp
      */
     private function to_webp(string $path): string
     {
@@ -17,7 +17,7 @@ class Statistics
     }
 
     /**
-     * 全局统计
+     * Global statistics
      */
     public function get_global_stats(): array
     {
@@ -65,7 +65,7 @@ class Statistics
 
 
     /**
-     * 图片统计列表
+     * Image statistics list
      */
     public function get_converted_images(int $limit = 50, int $offset = 0): array
     {
@@ -91,7 +91,7 @@ class Statistics
 
 
     /**
-     * 某图片是否已转换
+     * Check if an image has been converted
      */
     public function is_converted(int $id): bool
     {
@@ -101,7 +101,7 @@ class Statistics
 
 
     /**
-     * 某图片统计信息
+     * Statistical information for a specific image
      */
     public function get_image_stats(int $id): array
     {
@@ -129,7 +129,7 @@ class Statistics
 
 
     /**
-     * WebP 路径
+     * WebP file path
      */
     public function get_webp_path(int $id): string
     {
@@ -149,7 +149,7 @@ class Statistics
 
 
     /**
-     * 获取全部图片
+     * Retrieve all images
      */
     private function get_all_image_attachments(int $limit = -1, int $offset = 0): array
     {
@@ -165,7 +165,7 @@ class Statistics
 
 
     /**
-     * 重新计算已转换数量和节省空间
+     * Recalculate the number of converted images and space saved
      */
     public function recalculate(): void
     {
