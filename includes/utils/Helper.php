@@ -8,7 +8,7 @@ class Helper
 {
 
     /**
-     * 获取 RW WebP Converter Lite 所有设置，带默认值
+     * Retrieve all settings for RW WebP Converter Lite with default values
      */
     public static function get_settings(): array
     {
@@ -28,13 +28,13 @@ class Helper
     /**
      * Format image compression result.
      *
-     * 压缩率 = (original - optimized) / original
-     * 正值 = 压缩成功
-     * 负值 = 体积变大
+     * Compression rate = (original - optimized) / original
+     * Positive value = compression successful
+     * Negative value = increased file size
      *
-     * @param int $original_size 原始大小（字节）
-     * @param int $optimized_size 优化后大小（字节）
-     * @param int $precision 百分比小数位，默认 1
+     * @param int $original_size Original size (in bytes)
+     * @param int $optimized_size Optimized size (in bytes)
+     * @param int $precision Decimal places for percentage, default 1
      *
      * @return string Escaped text, safe for HTML output
      */
@@ -48,7 +48,7 @@ class Helper
         $diff_bytes = abs($original_size - $optimized_size);
         $rate = ($original_size - $optimized_size) / $original_size * 100;
 
-        // 防止 -0%
+        // Prevent showing -0%
         if (abs($rate) < 0.1) {
             $rate = 0;
         }

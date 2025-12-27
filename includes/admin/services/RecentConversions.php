@@ -4,7 +4,7 @@ namespace RobertWP\WebPConverterLite\Admin\Services;
 use RobertWP\WebPConverterLite\Traits\Singleton;
 
 /**
- * RecentConversions: 管理最近转换记录的 transient
+ * RecentConversions: Manages recently converted records via transient
  */
 class RecentConversions {
     use Singleton;
@@ -16,13 +16,13 @@ class RecentConversions {
     public function add_record(array $record): void {
         $records = get_transient($this->transient_key) ?: [];
 
-        // 将最新记录插入最前
+        // Insert the latest record at the beginning
         array_unshift($records, $record);
 
-        // 保留最近 20 条
+        // Keep the most recent 20 records
         $records = array_slice($records, 0, $this->max_records);
 
-        // 刷新 transient
+        // Refresh the transient
         set_transient($this->transient_key, $records, $this->ttl);
     }
 
@@ -38,11 +38,11 @@ class RecentConversions {
             if (!isset($r['id']) || intval($r['id']) !== $attachment_id) {
                 $new[] = $r;
             } else {
-                // 删除文件（record 可能包含 webp_path）
+                // Delete file (the record may contain webp_path)
                 if (!empty($r['webp_path']) && file_exists($r['webp_path'])) {
                     wp_delete_file($r['webp_path']);
                 }
-                // 删除同名尺寸的 webp（base-*.webp）
+                // Delete webp files of matching sizes (base-.webp)
                 if (!empty($r['webp_path'])) {
                     $base = pathinfo($r['webp_path'], PATHINFO_FILENAME);
                     $dir  = dirname($r['webp_path']);
@@ -69,11 +69,11 @@ class RecentConversions {
 
         foreach ($records as $r) {
             if (!empty($r['webp_path']) && $r['webp_path'] === $webp_path) {
-                // 删除文件
+                // Delete file
                 if (file_exists($r['webp_path'])) {
                     wp_delete_file($r['webp_path']);
                 }
-                // 删除同名尺寸的 webp（base-*.webp）
+                // Delete webp files of matching sizes (base-.webp)
                 $base = pathinfo($r['webp_path'], PATHINFO_FILENAME);
                 $dir  = dirname($r['webp_path']);
                 $glob = glob($dir . '/' . $base . '-*.webp');
@@ -82,7 +82,7 @@ class RecentConversions {
                         wp_delete_file($f);
                     }
                 }
-                // 不加入 $new，相当于删除这条记录
+                // Not adding to $new, equivalent to removing this record
             } else {
                 $new[] = $r;
             }

@@ -5,7 +5,7 @@ class VersionChecker{
 
     public static function check(): void
     {
-        // 防止被其他插件或异常环境调用
+        // Prevent being called by other plugins or in abnormal environments
         if ( ! defined('RWWCL_PLUGIN_VERSION') ) {
             return;
         }

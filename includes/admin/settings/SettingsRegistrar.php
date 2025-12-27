@@ -10,7 +10,7 @@ class SettingsRegistrar {
     const RWWCL_SETTINGS_OPTION = 'rwwcl_settings';
 
     public function register_settings(): void {
-        // 注册设置组
+        // Register Settings Group
         register_setting(
             'rwwcl_settings_group',
             self::RWWCL_SETTINGS_OPTION,
@@ -19,10 +19,9 @@ class SettingsRegistrar {
 
         /**
          * =============================
-         * General Settings（Lite）
+         * Register Settings
          * =============================
          */
-        // 注册设置 section
         add_settings_section(
             'rwwcl_general_section',
             __('General Settings', 'rw-webp-converter-lite'),
@@ -31,7 +30,7 @@ class SettingsRegistrar {
         );
 
         // -----------------------------
-        // 字段注册（Lite版核心设置）
+        // Register Field
         // -----------------------------
 
         add_settings_field(

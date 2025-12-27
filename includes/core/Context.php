@@ -9,17 +9,17 @@ class Context
 
         if (is_admin()) {
             $page = sanitize_text_field(wp_unslash($_GET['page'] ?? ''));
-            // 1. 检查是否在后台文章/页面/自定义类型列表页
+            // 1. Check if on admin post/page/custom type list page
             if ($pagenow === 'edit.php') {
                 return true;
             }
-            // 2. 检查插件专属页面（如 ?page=rwwcl...）
+            // 2. Check for plugin-specific pages (e.g., ?page=rwwcl...)
             if (str_starts_with($page, 'rwwcl')) {
                 return true;
             }
         }
 
-        // 3. 检查插件专属 AJAX/REST 操作
+        // 3. Check for plugin-specific AJAX/REST operations
         $action = sanitize_text_field(wp_unslash( $_REQUEST['action'] ?? '' ));
         if (str_starts_with($action, 'rwwcl_')) {
             return true;

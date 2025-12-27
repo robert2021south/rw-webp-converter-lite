@@ -15,8 +15,8 @@ class HooksRegistrar {
 
     public static function register(): void
     {
-        self::register_core_hooks();    // 核心功能，如版本检查、激活等
-        self::register_admin_hooks();    // 管理后台钩子
+        self::register_core_hooks();    // Core functionality, such as version checking, activation, etc.
+        self::register_admin_hooks();    // Admin backend hooks
     }
 
     private static function register_core_hooks(): void

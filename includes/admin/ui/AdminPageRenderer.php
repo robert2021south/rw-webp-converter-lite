@@ -11,17 +11,17 @@ class AdminPageRenderer
      */
     public static function render_main_page(): void
     {
-        // 当前选中的 tab
+        // Currently selected tab
         $active_tab = wp_unslash($_GET['tab'] ?? 'overview');
 
-        // 所有 tab 键和标签
+        // All tab keys and labels
         $tabs = [
             'overview' => __( 'Overview', 'rw-webp-converter-lite' ),
             'settings' => __( 'Settings', 'rw-webp-converter-lite' ),
             'about'    => __( 'About', 'rw-webp-converter-lite' ),
         ];
 
-        // 为每个 tab 生成完整 URL
+        // Generate full URL for each tab
         $tab_urls = [];
         foreach ($tabs as $key => $label) {
             $tab_urls[$key] = add_query_arg(
@@ -33,12 +33,12 @@ class AdminPageRenderer
             );
         }
 
-        // 确保 active_tab 在允许的 tab 里
+        // Ensure active_tab is among allowed tabs
         if (!isset($tabs[$active_tab])) {
             $active_tab = 'overview';
         }
 
-        // 可选：额外数据传给模板
+        // Pass additional data to the template
         $view_data = [
             'active_tab' => $active_tab,
             'tabs'       => $tabs,

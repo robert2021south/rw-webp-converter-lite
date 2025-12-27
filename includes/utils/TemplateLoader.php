@@ -25,11 +25,11 @@ class TemplateLoader
     }
 
     /**
-     * 加载模板
+     * Load Template
      *
-     * @param string $template_name 模板名（不带路径，如 'export-settings'）
-     * @param array $args 传给模板的数据（可选）
-     * @param string $module 所属模块名（如 'export'，可选）
+     * @param string $template_name Template name (without path, e.g. 'export-settings')
+     * @param array $args Data passed to the template
+     * @param string $module Module name it belongs to (e.g. 'export', optional)
      */
     public static function load(string $template_name, array $args = [], string $module = ''): void
     {
@@ -43,7 +43,7 @@ class TemplateLoader
     }
 
     /**
-     * 返回模板的实际路径（优先模块内部，再查全局模板目录）
+     * Returns the actual path of the template (prioritizes internal module templates, then checks global template directories)
      *
      * @param string $template_name
      * @param string $module
@@ -53,7 +53,7 @@ class TemplateLoader
     {
         $filename = $template_name . '.php';
 
-        // 1. 模块私有模板
+        // 1. Module-private template
         if ($module) {
             $module_path = self::$plugin_base_path . 'includes/modules/' . $module . '/templates/' . $filename;
             if (file_exists($module_path)) {
@@ -61,13 +61,13 @@ class TemplateLoader
             }
         }
 
-        // 2. Admin 页面模板
+        // 2. Admin page template
         $admin_path = self::$plugin_base_path . 'includes/admin/views/' . $filename;
         if (file_exists($admin_path)) {
             return $admin_path;
         }
 
-        // 3. 全局模板目录
+        // 3. Global template directory
         $normalized = str_replace(['..', '//'], '', $template_name);
         $global_path = self::$plugin_base_path . 'includes/templates/' . $normalized . '.php';
         if (file_exists($global_path)) {
