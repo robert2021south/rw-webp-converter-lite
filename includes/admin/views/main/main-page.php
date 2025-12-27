@@ -45,7 +45,7 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
                 $tab_data['recent_records'] = $recent_records;
                 break;
             case 'settings':
-                // 准备表单相关的参数
+                // Prepare form-related parameters
                 $form_args = [
                     'settings_group' => 'rwwcl_settings_group',
                     'option_name'    => SettingsRegistrar::RWWCL_SETTINGS_OPTION,

@@ -7,12 +7,12 @@ class CallbackWrapper {
     public static function plugin_context_only(callable $callback): callable {
         $key = self::generate_callback_key($callback);
 
-        // 如果已缓存，则返回
+        // If already cached, return
         if (isset(self::$callbackCache[$key])) {
             return self::$callbackCache[$key];
         }
 
-        // 否则封装并缓存
+        // Otherwise, encapsulate and cache
         self::$callbackCache[$key] = function (...$args) use ($callback) {
             if (!Context::is_plugin_context()) {
                 return is_array($args[0] ?? null) ? $args[0] : [];

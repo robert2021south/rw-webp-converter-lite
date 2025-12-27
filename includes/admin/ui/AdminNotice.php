@@ -24,7 +24,7 @@ class AdminNotice {
 
         $notices = self::get_notice_definitions();
 
-        // 查找对应消息
+        // Find the corresponding message
         $notice_key = "{$context}:{$key}"; // 例：settings:success
         $default_key = "common:{$key}";
 

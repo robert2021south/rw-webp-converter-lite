@@ -6,16 +6,16 @@ use RobertWP\WebPConverterLite\Traits\Singleton;
 use RobertWP\WebPConverterLite\Utils\Helper;
 
 /**
- * WebPConverter: 单一职责：把一个文件转换为 webp（并返回转换信息）
+ * WebPConverter: Single responsibility: convert a file to webp (and return conversion information)
  */
 class WebPConverter {
     use Singleton;
 
     /**
-     * 将 $input_path 转成 WebP 保存到 $output_path（覆盖/不覆盖由调用方决定）。
-     * 返回转换后的信息数组（与旧的 convert() 接口类似），失败返回 false。
+     * Convert $input_path to WebP and save to $output_path (overwrite or not is decided by the caller).
+     * Return conversion information array (similar to the old convert() interface), return false on failure.
      *
-     * 注意：本方法不做 attachment 相关的 meta 更新或 transient 操作。
+     * Note: This method does not perform attachment-related meta updates or transient operations.
      *
      * @param string $input_path
      * @param string $output_path
@@ -40,10 +40,10 @@ class WebPConverter {
 
         $orig_size = @filesize($input_path);
 
-        // set_quality 支持 int
+        // set_quality supports int
         $editor->set_quality($quality);
 
-        // 保存到目标路径（注意：目标目录需要可写）
+        // Save to the target path (Note: The target directory must be writable)
         $result = $editor->save($output_path, 'image/webp');
 
         if (is_wp_error($result)) {
@@ -52,7 +52,7 @@ class WebPConverter {
 
         $webp_size = @filesize($output_path);
 
-        // 生成基于上传目录的 URL 对应
+        // Generate the corresponding URL based on the upload directory
         $upload_dir = wp_upload_dir();
         $webp_url  = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $output_path);
         $orig_url  = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $input_path);
@@ -72,7 +72,7 @@ class WebPConverter {
 
     /**
      * hook callback
-     * 上传图片和修改图片后点击“更新”按钮后都会调用本方法。
+     * This method will be called both after uploading images and after clicking the "Update" button when modifying images.
      */
     public function after_edit_metadata($metadata, $attachment_id)
     {
@@ -86,7 +86,7 @@ class WebPConverter {
             return $metadata;
         }
 
-        // 强制转换 WebP，调用纯转换器
+        // Force convert WebP, invoke the pure converter
         $converter = WebPConverter::get_instance();
         $webp_path = preg_replace('/\.(jpe?g|png)$/i', '.webp', $file_path, 1);
         $result = $converter->convert_file_to_webp($file_path, $webp_path, (int) Helper::get_settings()['webp_quality']);
@@ -94,7 +94,7 @@ class WebPConverter {
         if ($result) {
             update_post_meta($attachment_id, '_rwwcl_converted', 1);
 
-            // 记录 RecentConversions
+            // Record RecentConversions
             $record = [
                 'id'            => $attachment_id,
                 'file'          => basename($result['original_path']),

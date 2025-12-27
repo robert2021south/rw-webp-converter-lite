@@ -3,21 +3,21 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     exit;
 }
 
-// 插件核心 option
+// Plugin core option
 $rwwcl_settings_option = 'rwwcl_settings';
 $rwwcl_version_option  = 'rwwcl_version';
 
-// 读取设置
+// Read settings
 $rwwcl_settings = get_option( $rwwcl_settings_option, [] );
 
-// 是否允许卸载时清理数据（建议你未来加一个设置项）
+// Allow data cleanup on uninstallation (recommended: add a setting option in the future)
 $rwwcl_delete_data = ! empty( $rwwcl_settings['delete_data_on_uninstall'] );
 
-// 1️⃣ 删除插件 options
+// 1️⃣ Delete plugin options
 delete_option( $rwwcl_settings_option );
 delete_option( $rwwcl_version_option );
 
-// 2️⃣ 删除插件 transients
+// 2️⃣ Delete plugin transients
 $rwwcl_transients = [
     'rwwcl_last_converted',
     'rwwcl_bulk_progress',
@@ -28,7 +28,7 @@ foreach ( $rwwcl_transients as $transient ) {
     delete_transient( $transient );
 }
 
-// 3️⃣ 删除 postmeta（仅在用户允许时）
+// 3️⃣ Delete postmeta (only if allowed by the user)
 if ( $rwwcl_delete_data ) {
     global $wpdb;
 
