@@ -10,9 +10,6 @@ $rwwcl_version_option  = 'rwwcl_version';
 // Read settings
 $rwwcl_settings = get_option( $rwwcl_settings_option, [] );
 
-// Allow data cleanup on uninstallation (recommended: add a setting option in the future)
-$rwwcl_delete_data = ! empty( $rwwcl_settings['delete_data_on_uninstall'] );
-
 // 1️⃣ Delete plugin options
 delete_option( $rwwcl_settings_option );
 delete_option( $rwwcl_version_option );
@@ -28,10 +25,10 @@ foreach ( $rwwcl_transients as $transient ) {
     delete_transient( $transient );
 }
 
-// 3️⃣ Delete postmeta (only if allowed by the user)
+// 3️⃣ Delete postmeta
+$rwwcl_delete_data = ! empty( $rwwcl_settings['delete_data_on_uninstall'] );
 if ( $rwwcl_delete_data ) {
     global $wpdb;
-
     $wpdb->query(
         $wpdb->prepare(
             "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
