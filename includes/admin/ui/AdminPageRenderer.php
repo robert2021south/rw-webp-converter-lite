@@ -12,7 +12,7 @@ class AdminPageRenderer
     public static function render_main_page(): void
     {
         // 当前选中的 tab
-        $active_tab = $_GET['tab'] ?? 'overview';
+        $active_tab = wp_unslash($_GET['tab'] ?? 'overview');
 
         // 所有 tab 键和标签
         $tabs = [

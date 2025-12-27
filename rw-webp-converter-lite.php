@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: RW WebP Converter Lite
- * Description:
- * Version: 1.0.2
+ * Description: RW WebP Converter Lite is a lightweight WordPress plugin that converts JPG and PNG images to WebP format in bulk and automatically converts newly uploaded images, helping improve website performance. Automatic conversion can be toggled on or off in the settings.
+ * Version: 1.0.0
  * Author: RobertWP (Robert South)
  * Author URI: https://robertwp.com
  * License: GPLv3 or later

@@ -40,7 +40,7 @@ class RecentConversions {
             } else {
                 // 删除文件（record 可能包含 webp_path）
                 if (!empty($r['webp_path']) && file_exists($r['webp_path'])) {
-                    @unlink($r['webp_path']);
+                    wp_delete_file($r['webp_path']);
                 }
                 // 删除同名尺寸的 webp（base-*.webp）
                 if (!empty($r['webp_path'])) {
@@ -49,7 +49,7 @@ class RecentConversions {
                     $glob = glob($dir . '/' . $base . '-*.webp');
                     if ($glob) {
                         foreach ($glob as $f) {
-                            @unlink($f);
+                            wp_delete_file($f);
                         }
                     }
                 }
@@ -71,7 +71,7 @@ class RecentConversions {
             if (!empty($r['webp_path']) && $r['webp_path'] === $webp_path) {
                 // 删除文件
                 if (file_exists($r['webp_path'])) {
-                    @unlink($r['webp_path']);
+                    wp_delete_file($r['webp_path']);
                 }
                 // 删除同名尺寸的 webp（base-*.webp）
                 $base = pathinfo($r['webp_path'], PATHINFO_FILENAME);
@@ -79,7 +79,7 @@ class RecentConversions {
                 $glob = glob($dir . '/' . $base . '-*.webp');
                 if ($glob) {
                     foreach ($glob as $f) {
-                        @unlink($f);
+                        wp_delete_file($f);
                     }
                 }
                 // 不加入 $new，相当于删除这条记录

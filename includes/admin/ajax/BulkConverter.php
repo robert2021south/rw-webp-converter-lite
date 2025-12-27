@@ -111,7 +111,7 @@ class BulkConverter
             if ($result) {
                 // 如果不保留原图则删除
                 if (!$keep_original && file_exists($file_path)) {
-                    @unlink($file_path);
+                    wp_delete_file($file_path);
                 }
 
                 // 更新 meta
