@@ -7,9 +7,9 @@ if (!defined('ABSPATH')) exit;
 ?>
 <label>
 <select name="<?php echo esc_attr($name); ?>">
-    <?php foreach ($options as $opt): ?>
-        <option value="<?php echo esc_attr($opt); ?>" <?php selected($value, $opt); ?>>
-            <?php echo esc_html($opt); ?>
+    <?php foreach ($options as $rwwcl_opt): ?>
+        <option value="<?php echo esc_attr($rwwcl_opt); ?>" <?php selected($value, $rwwcl_opt); ?>>
+            <?php echo esc_html($rwwcl_opt); ?>
         </option>
     <?php endforeach; ?>
 </select>

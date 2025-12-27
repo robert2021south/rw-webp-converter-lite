@@ -35,7 +35,6 @@ class WebPConverter {
 
         $editor = wp_get_image_editor($input_path);
         if (is_wp_error($editor)) {
-            error_log('WebPConverter: wp_get_image_editor failed for ' . $input_path);
             return false;
         }
 
@@ -48,7 +47,6 @@ class WebPConverter {
         $result = $editor->save($output_path, 'image/webp');
 
         if (is_wp_error($result)) {
-            error_log('WebPConverter: save failed for ' . $output_path . ' - ' . $result->get_error_message());
             return false;
         }
 

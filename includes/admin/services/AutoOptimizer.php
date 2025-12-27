@@ -18,7 +18,6 @@ class AutoOptimizer {
      */
     public function handle_deleted_attachment(int $attachment_id): void
     {
-        error_log("AutoOptimizer::handle_deleted_attachment called for $attachment_id");
         RecentConversions::get_instance()->remove_records_for_attachment($attachment_id);
 
         // 重新计算统计（保持旧行为）
@@ -93,7 +92,6 @@ class AutoOptimizer {
 
         //1. If Skip small image or not
         if ($this->should_skip_image($source_path, $skip_threshold)) {
-            error_log("Skip small image: $source_path");
             return false;
         }
 
@@ -155,8 +153,7 @@ class AutoOptimizer {
 
         foreach ($old_webps as $webp) {
             if ($webp !== $new_webp && file_exists($webp)) {
-                @unlink($webp);
-                error_log('unlink old webp=' . $webp);
+                wp_delete_file($webp);
 
                 // 同步 Recent Conversions
                 RecentConversions::get_instance()->remove_record_by_webp_path($webp);
@@ -195,8 +192,7 @@ class AutoOptimizer {
     {
         $file = get_attached_file($attachment_id);
         if ($file && file_exists($file)) {
-            @unlink($file);
-            error_log('AutoOptimizer: unlink original file: ' . $file);
+            wp_delete_file($file);
         }
     }
 

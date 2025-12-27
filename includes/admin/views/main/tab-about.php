@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) exit;
 
     <div class="about-header">
         <h2><?php echo esc_html__('About', 'rw-webp-converter-lite'); ?></h2>
-        <p class="version"><?php echo esc_html__('Version', 'rw-webp-converter-lite'); ?> <?php echo RWWCL_PLUGIN_VERSION; ?></p>
+        <p class="version"><?php echo esc_html__('Version', 'rw-webp-converter-lite'); ?> <?php echo esc_html(RWWCL_PLUGIN_VERSION); ?></p>
     </div>
 
     <div class="about-intro">
@@ -187,7 +187,7 @@ if (!defined('ABSPATH')) exit;
 
     <div class="about-footer">
         <p class="copyright">
-            &copy; <?php echo date('Y'); ?> RW WebP Converter.
+            &copy; <?php echo esc_html(gmdate('Y')); ?> RW WebP Converter.
             <?php echo esc_html__('Made with', 'rw-webp-converter-lite'); ?>
             <span class="dashicons dashicons-heart" style="color:#e74c3c;"></span>
             <?php echo esc_html__('for the WordPress community.', 'rw-webp-converter-lite'); ?>

@@ -1,8 +1,7 @@
 <?php
+if (!defined('ABSPATH')) exit;
 
 use RobertWP\WebPConverterLite\Utils\Helper;
-
-if (!defined('ABSPATH')) exit;
 
 /**
  * @var array  $stats
@@ -10,19 +9,19 @@ if (!defined('ABSPATH')) exit;
  */
 
 
-$button_text = __('Start Bulk Conversion', 'rw-webp-converter-lite');
-$button_disabled = false;
+$rwwcl_button_text = __('Start Bulk Conversion', 'rw-webp-converter-lite');
+$rwwcl_button_disabled = false;
 
 if ($stats['total_images'] === 0) {
-    $button_text = __('No Images Found', 'rw-webp-converter-lite');
-    $button_disabled = true;
+    $rwwcl_button_text = __('No Images Found', 'rw-webp-converter-lite');
+    $rwwcl_button_disabled = true;
 
 } elseif ($stats['remaining_images'] === 0) {
-    $button_text = __('✓ All Images Converted', 'rw-webp-converter-lite');
-    $button_disabled = true;
+    $rwwcl_button_text = __('✓ All Images Converted', 'rw-webp-converter-lite');
+    $rwwcl_button_disabled = true;
 
 } elseif ($stats['converted_images'] > 0) {
-    $button_text = __('Continue Bulk Conversion', 'rw-webp-converter-lite');
+    $rwwcl_button_text = __('Continue Bulk Conversion', 'rw-webp-converter-lite');
 }
 
 ?>
@@ -43,7 +42,7 @@ if ($stats['total_images'] === 0) {
 
     <!-- 2. Statistics -->
 
-    <div class="rwwcl-status-cards" style="margin-top:30px; display:flex; gap:20px;">
+    <div class="rwwcl-status-cards">
         <div class="rwwcl-card">
             <h4><?php echo esc_html__('Total Images', 'rw-webp-converter-lite'); ?></h4>
             <p><strong><?php echo esc_html($stats['total_images']); ?></strong></p>
@@ -66,7 +65,7 @@ if ($stats['total_images'] === 0) {
         </div>
         <div class="rwwcl-card">
             <h4><?php echo esc_html__('Total Space Saved', 'rw-webp-converter-lite'); ?></h4>
-            <p><strong><?php echo size_format($stats['space_saved'],2); ?></strong></p>
+            <p><strong><?php echo esc_html(size_format($stats['space_saved'],2)); ?></strong></p>
         </div>
     </div>
 
@@ -77,9 +76,9 @@ if ($stats['total_images'] === 0) {
         <button
                 id="rwwcl-start-bulk"
                 class="button button-primary"
-            <?php disabled($button_disabled); ?>
+            <?php disabled($rwwcl_button_disabled); ?>
         >
-            <?php echo esc_html($button_text); ?>
+            <?php echo esc_html($rwwcl_button_text); ?>
         </button>
 
         <p class="rwwcl-auto-hint" style="margin-top:10px; color:#666; font-size:13px;">
@@ -141,7 +140,7 @@ if ($stats['total_images'] === 0) {
                     <td ><?php echo esc_html(size_format($rec['original_size'],2)); ?></td>
                     <td>
                         <?php if (!empty($rec['webp_url'])): ?>
-                            <a href="<?php echo esc_url($rec['webp_url']); ?>" target="_blank"><?php echo size_format($rec['webp_size'],2); ?></a>
+                            <a href="<?php echo esc_url($rec['webp_url']); ?>" target="_blank"><?php echo esc_html(size_format($rec['webp_size'],2)); ?></a>
                         <?php else: ?>
                             <?php echo esc_html(size_format($rec['webp_size'],2)); ?>
                         <?php endif; ?>
