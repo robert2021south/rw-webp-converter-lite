@@ -70,7 +70,7 @@ if ($stats['total_images'] === 0) {
     </div>
 
     <!-- 3. Bulk Convert -->
-    <div class="rwwcl-bulk-convert" style="margin-top:30px;">
+    <div class="rwwcl-bulk-convert">
         <h3><?php echo esc_html__('Bulk Convert', 'rw-webp-converter-lite'); ?></h3>
 
         <button
@@ -81,7 +81,7 @@ if ($stats['total_images'] === 0) {
             <?php echo esc_html($rwwcl_button_text); ?>
         </button>
 
-        <p class="rwwcl-auto-hint" style="margin-top:10px; color:#666; font-size:13px;">
+        <p class="rwwcl-auto-hint">
             <strong><?php echo esc_html__( 'Note:', 'rw-webp-converter-lite' ); ?></strong>
              <?php echo esc_html__(
                 'New images will be automatically converted after upload. You can change this in Settings.',
