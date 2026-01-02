@@ -105,50 +105,19 @@ class SettingsRenderer {
 
     public static function get_pro_fields(): array
     {
-
-        return  [
+        return [
             [
-                'label'       => 'Smart PNG/JPEG Optimization',
+                'label'       => 'Automatic URL Replacement',
                 'type'        => 'checkbox',
-                'description' => 'Apply different compression strategies for JPEG and PNG images to maintain quality and transparency',
+                'description' => 'The Lite version does not replace existing image URLs or modify database records.',
             ],
             [
-                'label'       => 'WebP & AVIF Formats',
+                'label'       => 'Front-end Image Delivery Optimization',
                 'type'        => 'checkbox',
-                'description' => 'Optimize images in modern formats for smaller size and wider browser compatibility',
-            ],
-            [
-                'label'       => 'Retina & Responsive Optimization',
-                'type'        => 'checkbox',
-                'description' => 'Automatically generate multi-size images and integrate with srcset/picture for high-DPI and responsive devices',
-            ],
-            [
-                'label'       => 'Preserve EXIF Metadata',
-                'type'        => 'checkbox',
-                'description' => 'Keep camera and copyright metadata for professional photography sites',
-            ],
-            [
-                'label'       => 'Conversion History & Advanced Logs',
-                'type'        => 'checkbox',
-                'description' => 'Store full conversion records and provide advanced error reporting',
-            ],
-            [
-                'label'       => 'CDN / External Storage Compatibility',
-                'type'        => 'checkbox',
-                'description' => 'Serve images via CDN or external storage for faster loading on high-traffic sites',
-            ],
-            [
-                'label'       => 'White-label Mode',
-                'type'        => 'checkbox',
-                'description' => 'Remove plugin branding from admin pages and front-end output',
-            ],
-            [
-                'label'       => 'Priority Support & Early Access',
-                'type'        => 'checkbox',
-                'description' => 'Get priority assistance and early access to new features',
+                'description' => 'Advanced front-end image handling is intentionally excluded to ensure predictable behavior.',
             ],
         ];
-
     }
+
 
 }
