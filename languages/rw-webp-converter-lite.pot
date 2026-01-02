@@ -1,15 +1,15 @@
-# Copyright (C) 2025 RobertWP (Robert South)
+# Copyright (C) 2026 RobertWP
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: RW WebP Converter Lite 1.0.0\n"
+"Project-Id-Version: RW WebP Converter Lite 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rw-webp-converter-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-27T10:42:45+00:00\n"
+"POT-Creation-Date: 2026-01-02T11:20:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: rw-webp-converter-lite\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: rw-webp-converter-lite.php
-msgid "RobertWP (Robert South)"
+msgid "RobertWP"
 msgstr ""
 
 #. Author URI of the plugin
@@ -44,35 +44,35 @@ msgstr ""
 msgid "RW WebP Converter"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:28
+#: includes/admin/settings/SettingsRegistrar.php:27
 msgid "General Settings"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:39
+#: includes/admin/settings/SettingsRegistrar.php:38
 msgid "Auto Optimize Uploads"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:47
+#: includes/admin/settings/SettingsRegistrar.php:46
 msgid "WebP Quality"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:55
+#: includes/admin/settings/SettingsRegistrar.php:54
 msgid "Keep Original Images"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:63
+#: includes/admin/settings/SettingsRegistrar.php:62
 msgid "Overwrite Existing WebP"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:71
+#: includes/admin/settings/SettingsRegistrar.php:70
 msgid "Skip Small Images"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:84
+#: includes/admin/settings/SettingsRegistrar.php:83
 msgid "Data & Cleanup"
 msgstr ""
 
-#: includes/admin/settings/SettingsRegistrar.php:91
+#: includes/admin/settings/SettingsRegistrar.php:90
 msgid "Delete Data on Uninstall"
 msgstr ""
 
@@ -132,39 +132,39 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:16
+#: includes/admin/ui/SettingsRenderer.php:13
 msgid "Configure the core behavior of the plugin. These settings control automatic optimization, WebP quality, and how images are handled."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:30
+#: includes/admin/ui/SettingsRenderer.php:27
 msgid "Automatically optimize images on upload (Lite)"
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:42
+#: includes/admin/ui/SettingsRenderer.php:39
 msgid "Set the quality of generated WebP images (higher = better quality, larger size)."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:53
+#: includes/admin/ui/SettingsRenderer.php:50
 msgid "Keep the original images after WebP conversion."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:64
+#: includes/admin/ui/SettingsRenderer.php:61
 msgid "Overwrite existing WebP files if they exist."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:75
+#: includes/admin/ui/SettingsRenderer.php:72
 msgid "Skip images smaller than this pixel size (longest edge). Set 0 to convert all images."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:85
+#: includes/admin/ui/SettingsRenderer.php:82
 msgid "These settings control how plugin data is handled when uninstalling. Use with caution."
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:100
+#: includes/admin/ui/SettingsRenderer.php:97
 msgid "Delete all plugin data on uninstall"
 msgstr ""
 
-#: includes/admin/ui/SettingsRenderer.php:101
+#: includes/admin/ui/SettingsRenderer.php:98
 msgid "If enabled, all settings, WebP conversion records, and transients will be removed when the plugin is uninstalled."
 msgstr ""
 
@@ -281,74 +281,58 @@ msgid "Send Feedback"
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:114
-msgid "Upgrade to Pro"
+msgid "Advanced & Future Capabilities"
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:118
-msgid "Unlock advanced image optimization features designed for performance-focused and professional WordPress sites."
+msgid "This section outlines the design principles and current limitations of the Lite version, as well as the types of advanced scenarios it intentionally does not cover."
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:124
-msgid "Smart optimization strategies for JPEG and PNG images"
+msgid "Generates WebP files alongside original images"
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:129
-msgid "WebP and AVIF format support"
+msgid "Designed for cautious and manual workflows"
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:134
-msgid "Retina and responsive image (srcset) optimization"
+msgid "Does not replace existing image URLs"
 msgstr ""
 
 #: includes/admin/views/main/tab-about.php:139
-msgid "Optional EXIF data preservation for photography websites"
+msgid "No database modifications"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:144
-msgid "Complete conversion history and advanced logging"
-msgstr ""
-
-#: includes/admin/views/main/tab-about.php:149
-msgid "CDN and external storage compatibility"
-msgstr ""
-
-#: includes/admin/views/main/tab-about.php:154
-msgid "White-label mode (remove plugin branding)"
-msgstr ""
-
-#: includes/admin/views/main/tab-about.php:159
-msgid "Priority support and early access to new features"
-msgstr ""
-
-#: includes/admin/views/main/tab-about.php:166
+#: includes/admin/views/main/tab-about.php:147
 msgid "Built for developers, agencies, and high-traffic websites."
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:175
-msgid "Learn More About Pro Version"
+#: includes/admin/views/main/tab-about.php:156
+msgid "Learn more on the plugin website"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:180
+#: includes/admin/views/main/tab-about.php:161
 msgid "Opens in a new window"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:191
+#: includes/admin/views/main/tab-about.php:172
 msgid "Made with"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:193
+#: includes/admin/views/main/tab-about.php:174
 msgid "for the WordPress community."
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:199
+#: includes/admin/views/main/tab-about.php:180
 msgid "WordPress.org"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:203
+#: includes/admin/views/main/tab-about.php:184
 msgid "GitHub"
 msgstr ""
 
-#: includes/admin/views/main/tab-about.php:207
+#: includes/admin/views/main/tab-about.php:188
 msgid "Privacy Policy"
 msgstr ""
 
@@ -373,119 +357,118 @@ msgid "Welcome to RW WebP Converter Lite, by RobertWP."
 msgstr ""
 
 #: includes/admin/views/main/tab-overview.php:38
-msgid "Quick Start"
+msgid "Important:"
 msgstr ""
 
 #: includes/admin/views/main/tab-overview.php:39
+msgid "This plugin only generates WebP files. It does NOT replace image URLs in the database, nor affect the display of existing images."
+msgstr ""
+
+#: includes/admin/views/main/tab-overview.php:45
+msgid "Quick Start"
+msgstr ""
+
+#: includes/admin/views/main/tab-overview.php:46
 msgid "Click the button below to bulk convert your JPEG/PNG images to WebP format."
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:47
+#: includes/admin/views/main/tab-overview.php:54
 msgid "Total Images"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:51
+#: includes/admin/views/main/tab-overview.php:58
 msgid "Converted Images"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:55
+#: includes/admin/views/main/tab-overview.php:62
 msgid "Remaining Images"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:59
+#: includes/admin/views/main/tab-overview.php:66
 msgid "Skipped Images"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:63
+#: includes/admin/views/main/tab-overview.php:70
 msgid "Conversion Rate"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:67
+#: includes/admin/views/main/tab-overview.php:74
 msgid "Total Space Saved"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:74
+#: includes/admin/views/main/tab-overview.php:81
 msgid "Bulk Convert"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:85
+#: includes/admin/views/main/tab-overview.php:92
 msgid "Note:"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:86
+#: includes/admin/views/main/tab-overview.php:93
 msgid "New images will be automatically converted after upload. You can change this in Settings."
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:94
+#: includes/admin/views/main/tab-overview.php:101
 msgid "Processing… Please wait."
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:104
+#: includes/admin/views/main/tab-overview.php:111
 msgid "Recent Conversions"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:107
+#: includes/admin/views/main/tab-overview.php:114
 msgid "No recent conversion records found."
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:112
+#: includes/admin/views/main/tab-overview.php:119
 msgid "File"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:113
+#: includes/admin/views/main/tab-overview.php:120
 msgid "Original Size"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:114
+#: includes/admin/views/main/tab-overview.php:121
 msgid "WebP Size"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:115
+#: includes/admin/views/main/tab-overview.php:122
 msgid "Size Change"
 msgstr ""
 
-#: includes/admin/views/main/tab-overview.php:116
+#: includes/admin/views/main/tab-overview.php:123
 msgid "Time"
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:19
+#: includes/admin/views/main/tab-settings.php:18
 msgid "Basic Settings"
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:36
-msgid "Advanced Features"
+#: includes/admin/views/main/tab-settings.php:33
+msgid "Features Not Included in Lite"
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:49
-msgid "Ready for more?"
+#: includes/admin/views/main/tab-settings.php:48
+msgid "Learn more about RW WebP Converter Lite?"
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:52
-msgid "Upgrade to PRO for advanced optimization, CDN integration, bulk operations, and priority support."
+#: includes/admin/views/main/tab-settings.php:51
+msgid "See what this plugin does, what it doesn't do, and how future extensions may help advanced use cases."
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:58
-msgid "Upgrade to PRO"
+#: includes/admin/views/main/tab-settings.php:57
+msgid "View Plugin Details"
 msgstr ""
 
-#: includes/admin/views/main/tab-settings.php:61
-msgid "30-day money-back guarantee"
-msgstr ""
-
-#: includes/admin/views/settings/fields/pro.php:13
-msgid "Enabled in PRO"
-msgstr ""
-
-#: includes/admin/views/settings/fields/pro.php:17
-msgid "Multiple options available"
-msgstr ""
-
-#: includes/admin/views/settings/fields/pro.php:24
-msgid "Available in PRO"
+#: includes/admin/views/settings/fields/pro.php:15
+#: includes/admin/views/settings/fields/pro.php:22
+#: includes/admin/views/settings/fields/pro.php:28
+#: includes/admin/views/settings/fields/pro.php:32
+msgid "Not available in the Lite version"
 msgstr ""
 
 #: includes/core/EnvironmentChecker.php:35
 msgid ""
-"<p><strong>RW WebP Converter Lite:</strong> Your server does not support WebP conversion.</p>\r\n"
+"<p><strong>RW WebP Converter Lite:</strong> Your server does not support WebP conversion.</p>\n"
 "                 <p>You need <code>Imagick</code> (with WebP support) or <code>GD</code> (compiled with WebP support).</p>"
 msgstr ""
