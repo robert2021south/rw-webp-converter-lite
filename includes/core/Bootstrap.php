@@ -23,7 +23,7 @@ class Bootstrap {
         update_option(RWWCL_VERSION_OPTION, RWWCL_PLUGIN_VERSION);
 
         $defaults = [
-            'auto_optimize'            => 1,
+            'auto_optimize'            => 0,
             'webp_quality'             => 80,
             'keep_original'            => 1,
             'overwrite_webp'           => 0,

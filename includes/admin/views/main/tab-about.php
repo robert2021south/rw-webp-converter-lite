@@ -111,53 +111,34 @@ if (!defined('ABSPATH')) exit;
         <div class="pro-banner">
             <h3>
                 <span class="dashicons dashicons-star-filled"></span>
-                <?php echo esc_html__('Upgrade to Pro', 'rw-webp-converter-lite'); ?>
+                <?php echo esc_html__('Advanced & Future Capabilities', 'rw-webp-converter-lite'); ?>
             </h3>
 
             <p>
-                <?php echo esc_html__('Unlock advanced image optimization features designed for performance-focused and professional WordPress sites.', 'rw-webp-converter-lite'); ?>
+                <?php echo esc_html__('This section outlines the design principles and current limitations of the Lite version, as well as the types of advanced scenarios it intentionally does not cover.', 'rw-webp-converter-lite'); ?>
             </p>
 
             <ul class="pro-features">
                 <li>
                     <span class="dashicons dashicons-images-alt2"></span>
-                    <?php echo esc_html__('Smart optimization strategies for JPEG and PNG images', 'rw-webp-converter-lite'); ?>
+                    <?php echo esc_html__('Generates WebP files alongside original images', 'rw-webp-converter-lite'); ?>
                 </li>
 
                 <li>
-                    <span class="dashicons dashicons-format-image"></span>
-                    <?php echo esc_html__('WebP and AVIF format support', 'rw-webp-converter-lite'); ?>
+                    <span class="dashicons dashicons-info-outline"></span>
+                    <?php echo esc_html__('Designed for cautious and manual workflows', 'rw-webp-converter-lite'); ?>
                 </li>
 
                 <li>
-                    <span class="dashicons dashicons-smartphone"></span>
-                    <?php echo esc_html__('Retina and responsive image (srcset) optimization', 'rw-webp-converter-lite'); ?>
-                </li>
-
-                <li>
-                    <span class="dashicons dashicons-camera"></span>
-                    <?php echo esc_html__('Optional EXIF data preservation for photography websites', 'rw-webp-converter-lite'); ?>
+                    <span class="dashicons dashicons-admin-links"></span>
+                    <?php echo esc_html__('Does not replace existing image URLs', 'rw-webp-converter-lite'); ?>
                 </li>
 
                 <li>
                     <span class="dashicons dashicons-database"></span>
-                    <?php echo esc_html__('Complete conversion history and advanced logging', 'rw-webp-converter-lite'); ?>
+                    <?php echo esc_html__('No database modifications', 'rw-webp-converter-lite'); ?>
                 </li>
 
-                <li>
-                    <span class="dashicons dashicons-networking"></span>
-                    <?php echo esc_html__('CDN and external storage compatibility', 'rw-webp-converter-lite'); ?>
-                </li>
-
-                <li>
-                    <span class="dashicons dashicons-shield"></span>
-                    <?php echo esc_html__('White-label mode (remove plugin branding)', 'rw-webp-converter-lite'); ?>
-                </li>
-
-                <li>
-                    <span class="dashicons dashicons-sos"></span>
-                    <?php echo esc_html__('Priority support and early access to new features', 'rw-webp-converter-lite'); ?>
-                </li>
             </ul>
 
             <div class="pro-cta">
@@ -167,12 +148,12 @@ if (!defined('ABSPATH')) exit;
                     </strong>
                 </p>
 
-                <a href="https://robertwp.com/rw-webp-converter-pro/"
+                <a href="https://robertwp.com/rw-webp-converter-lite/"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="button button-primary">
                     <span class="dashicons dashicons-external"></span>
-                    <?php echo esc_html__('Learn More About Pro Version', 'rw-webp-converter-lite'); ?>
+                    <?php echo esc_html__('Learn more on the plugin website', 'rw-webp-converter-lite'); ?>
                 </a>
 
                 <p class="pro-note">

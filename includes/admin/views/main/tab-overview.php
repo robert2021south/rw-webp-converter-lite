@@ -33,6 +33,13 @@ if ($stats['total_images'] === 0) {
 
     <p><?php echo esc_html__('Welcome to RW WebP Converter Lite, by RobertWP.', 'rw-webp-converter-lite'); ?></p>
 
+    <div class="notice notice-info" style="margin: 15px 0; padding: 10px 15px; border-left: 4px solid #72aee6;">
+        <p style="margin: 0;">
+            <strong><?php echo esc_html__('Important:', 'rw-webp-converter-lite'); ?></strong>
+            <?php echo esc_html__('This plugin only generates WebP files. It does NOT replace image URLs in the database, nor affect the display of existing images.', 'rw-webp-converter-lite'); ?>
+        </p>
+    </div>
+
     <div class="rwwcl-cards">
         <div class="rwwcl-card">
             <h3><?php echo esc_html__('Quick Start', 'rw-webp-converter-lite'); ?></h3>
