@@ -69,7 +69,9 @@ class SettingsRenderer {
         TemplateLoader::load('settings/fields/number', [
             'name'        => SettingsRegistrar::RWWCL_SETTINGS_OPTION.'[skip_small]',
             'value'       => $settings['skip_small'] ?? 0,
-            'description'=> __('Skip images smaller than this pixel size (longest edge). Set 0 to convert all images.', 'rw-webp-converter-lite'),
+            'min'         => 0,
+            'max'         => 10000,
+            'description'=> __('Skip images smaller than this pixel size (longest edge). Set 0 to convert all images. Recommended range: 0–10000.', 'rw-webp-converter-lite'),
         ]);
     }
 

@@ -5,7 +5,7 @@ Donate link: http://ko-fi.com/robertsouth
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Language: en_US
@@ -16,23 +16,22 @@ Update URI: https://wordpress.org/plugins/rw-webp-converter-lite/
 A lightweight WordPress plugin that converts JPG and PNG images to WebP format in bulk and automatically converts newly uploaded images.
 
 == Description ==
-**RW Web Converter Lite** is a lightweight and easy-to-use WordPress plugin that helps you optimize images by converting JPG and PNG files into the modern WebP format.
+**RW WebP Converter Lite** is a lightweight and easy-to-use WordPress plugin that helps you optimize images by converting JPG and PNG files into the modern WebP format.
 
 The plugin allows you to bulk convert existing images in the media library and automatically convert newly uploaded images to WebP. By reducing image file size while maintaining quality, RW WebP Converter Lite helps improve website loading speed and overall performance.
 
 All features are optional and can be configured from the plugin settings page.
 
-**🆓 Lite Version Features**:
+**Features**:
 * Bulk convert existing JPG and PNG images in the media library to WebP
 * Automatically convert newly uploaded images to WebP
 * Enable or disable automatic conversion via settings
 * Lightweight and fast, with no unnecessary features
 * Compatible with the WordPress media library
 
-
 **Documentation**:
-[Full Documentation](https://docs.robertwp.com/rw-webp-converter-pro/) - Includes both free and pro version guides.
-Includes usage instructions for both Lite and Pro versions.
+[Plugin Documentation](https://docs.robertwp.com/rw-webp-converter-lite/)
+Includes setup and usage instructions for this plugin.
 
 == Installation ==
 
@@ -51,8 +50,8 @@ Yes. Automatic image conversion can be enabled or disabled from the plugin setti
 = Does this plugin support existing images? =
 Yes. You can bulk convert existing JPG and PNG images in the media library.
 
-= Does the Lite version have limitations? =
-The Lite version includes core WebP conversion features. Additional advanced features may be available in the Pro version.
+= Is this plugin lightweight? =
+Yes. The plugin is designed to be lightweight and focuses only on WebP image conversion without unnecessary features.
 
 == Screenshots ==
 
@@ -62,10 +61,17 @@ The Lite version includes core WebP conversion features. Additional advanced fea
 
 == Changelog ==
 
+= 1.0.2 =
+* Improved input validation and output handling.
+* Updated plugin documentation for consistency.
+
+= 1.0.1 =
+* Removed Pro-related texts, logos, and references.
+
 = 1.0.0 =
 * Initial release
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release.
+= 1.0.2 =
+Minor internal improvements and documentation updates. Safe to update.

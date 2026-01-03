@@ -96,14 +96,33 @@ class SettingsRegistrar {
 
     public function sanitize($input): array
     {
-        return [
-            'auto_optimize'           => !empty($input['auto_optimize']) ? 1 : 0,
-            'webp_quality'            => isset($input['webp_quality']) ? (int) $input['webp_quality'] : 0,
-            'keep_original'           => !empty($input['keep_original']) ? 1 : 0,
-            'overwrite_webp'          => !empty($input['overwrite_webp']) ? 1 : 0,
-            'skip_small'              => isset($input['skip_small']) ? (int) $input['skip_small'] : 0,
-            'delete_data_on_uninstall'=> !empty($input['delete_data_on_uninstall']) ? 1 : 0,
-        ];
+        $output = [];
+
+        // Booleans / checkboxes
+        $output['auto_optimize'] = !empty($input['auto_optimize']) ? 1 : 0;
+        $output['keep_original'] = !empty($input['keep_original']) ? 1 : 0;
+        $output['overwrite_webp'] = !empty($input['overwrite_webp']) ? 1 : 0;
+        $output['delete_data_on_uninstall'] = !empty($input['delete_data_on_uninstall']) ? 1 : 0;
+
+        // webp_quality: expected range 0–100
+        if (isset($input['webp_quality'])) {
+            $quality = absint($input['webp_quality']);
+            $quality = max(0, min(100, $quality));
+        } else {
+            $quality = 80; // fallback default
+        }
+        $output['webp_quality'] = $quality;
+
+        // skip_small: minimum file size in KB (>= 0)
+        if (isset($input['skip_small'])) {
+            $skip_small = absint($input['skip_small']);
+            $skip_small = min($skip_small, 10000); // optional upper bound
+        } else {
+            $skip_small = 0;
+        }
+        $output['skip_small'] = $skip_small;
+
+        return $output;
     }
 
 }
