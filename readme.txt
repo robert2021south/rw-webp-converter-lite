@@ -5,7 +5,7 @@ Donate link: http://ko-fi.com/robertsouth
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Language: en_US
@@ -39,6 +39,20 @@ Includes setup and usage instructions for this plugin.
 2. Activate the plugin through the **Plugins** menu in WordPress
 3. Go to **Tools → RW WebP Converter Lite** to configure settings
 
+== Source Code ==
+
+This plugin includes minified JavaScript and CSS files for performance
+and distribution purposes.
+
+The original, human-readable source code for these files is publicly
+available and maintained on GitHub:
+
+https://github.com/robert2021south/rw-webp-converter-lite
+
+The following files are minified in the plugin package:
+- assets/js/rwwcl-admin-bulk.min.js
+- assets/css/rwwcl-admin-style.min.css
+
 == Frequently Asked Questions ==
 
 = Does this plugin replace my original images? =
@@ -61,6 +75,9 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Changelog ==
 
+= 1.0.3 =
+* Updated documentation to include public source code reference.
+
 = 1.0.2 =
 * Improved input validation and output handling.
 * Updated plugin documentation for consistency.
@@ -73,5 +90,5 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Upgrade Notice ==
 
-= 1.0.2 =
-Minor internal improvements and documentation updates. Safe to update.
+= 1.0.3 =
+* Updated documentation to include public source code reference.
