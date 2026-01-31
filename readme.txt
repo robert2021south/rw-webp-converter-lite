@@ -51,7 +51,10 @@ https://github.com/robert2021south/rw-webp-converter-lite
 
 The following files are minified in the plugin package:
 - assets/js/rwwcl-admin-bulk.min.js
+- assets/js/rwwcl-admin-deactivate.min.js
 - assets/css/rwwcl-admin-style.min.css
+- assets/css/rwwcl-admin-deactivate-modal.min.css
+
 
 == Frequently Asked Questions ==
 
