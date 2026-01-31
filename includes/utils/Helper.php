@@ -71,6 +71,11 @@ class Helper
 
     public static function send_json_success(array $data): void
     {
+        if (defined('WP_ENV') && WP_ENV === 'testing') {
+            echo json_encode(['success' => true, 'data' => $data,]);
+            throw new TerminateException('Execution terminated');
+        }
+
         wp_send_json_success($data);
     }
 

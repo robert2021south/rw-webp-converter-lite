@@ -11,6 +11,12 @@ class BulkConverterCest
 {
     public function _before(IntegrationTester $I): void
     {
+        add_filter('wp_die_ajax_handler', function () {
+            return function ($message = '', $title = '', $args = []) {
+                throw new \RuntimeException('ajax_exit');
+            };
+        });
+
         update_option('rwwcl_settings', [
             'auto_optimize'            => 0,
             'webp_quality'             => 80,

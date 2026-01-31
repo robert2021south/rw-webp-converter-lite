@@ -29,8 +29,6 @@ class DeactivateFeedbackHandler {
             'site_url'       => get_site_url(),
         ];
 
-        error_log(var_export($payload,true));
-
         $this->async_feedback($payload);
 
         // Response immediately
@@ -40,12 +38,11 @@ class DeactivateFeedbackHandler {
     private function async_feedback(array $payload): void {
         add_action('shutdown', function() use ($payload) {
             ignore_user_abort(true);
-            set_time_limit(0);
 
             $token_response = wp_remote_post(self::TOKEN_URL, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body'    => wp_json_encode(['site_url' => get_site_url()]),
-                'timeout' => 5, // 改为 5 秒，更稳
+                'timeout' => 5, // Change it to 5 seconds, which is more stable.
             ]);
 
             $body = json_decode(wp_remote_retrieve_body($token_response), true);
