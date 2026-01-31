@@ -1,0 +1,132 @@
+/* Overlay */
+.rwwcl-webp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content */
+.rwwcl-webp-modal-content {
+    position: relative;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    line-height: 1.5;
+    color: #1d2327;
+}
+
+/* Close button */
+.rwwcl-webp-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #50575e;
+}
+
+.rwwcl-webp-modal-close:hover {
+    color: #1d2327;
+}
+
+/* Options */
+.rwwcl-webp-modal-options {
+    margin: 16px 0 20px;
+}
+
+.rwwcl-webp-modal-options label {
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.rwwcl-webp-modal-options input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Actions */
+.rwwcl-webp-modal-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Primary button */
+.rwwcl-primary {
+    background: #2271b1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+
+.rwwcl-primary:hover {
+    background: #135e96;
+}
+
+.rwwcl-primary:active {
+    background: #0a4b78;
+}
+
+/* Secondary button */
+.rwwcl-secondary {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.rwwcl-secondary:hover {
+    color: #3c434a;
+    text-decoration: underline;
+}
+
+/* Reason detail textarea */
+.rwwcl-webp-reason-detail {
+    margin-top: 12px;
+}
+
+.rwwcl-webp-reason-text {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #c3c4c7;
+}
+
+.rwwcl-webp-reason-text:focus {
+    border-color: #2271b1;
+    outline: none;
+}
+
+/* Privacy note */
+.rwwcl-webp-privacy-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #b22222; /* Red eye-catching */
+    line-height: 1.4;
+    background: #fff0f0; /* Slight hint on reddish background */
+    padding: 4px 8px;
+    border-radius: 3px;
+}

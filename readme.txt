@@ -92,3 +92,8 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 = 1.0.3 =
 * Updated documentation to include public source code reference.
+
+== Privacy ==
+This plugin may collect anonymous feedback when a user chooses to provide a reason during plugin deactivation.
+Providing feedback is optional and can be skipped.
+The feedback is submitted only at the time of deactivation to our remote server and does not include personal data, site URLs, or any user-identifiable information.
