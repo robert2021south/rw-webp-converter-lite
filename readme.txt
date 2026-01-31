@@ -5,7 +5,7 @@ Donate link: http://ko-fi.com/robertsouth
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Language: en_US
@@ -75,6 +75,12 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Changelog ==
 
+= 1.1.0 =
+* Added a feedback survey modal when users deactivate the plugin.
+  - Collects reasons for deactivation and optional details.
+  - Asynchronously sends feedback to remote server without blocking user action.
+  - Includes improved UI/UX with polite prompts, responsive modal, and privacy notice.
+
 = 1.0.3 =
 * Updated documentation to include public source code reference.
 
@@ -90,8 +96,10 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-* Updated documentation to include public source code reference.
+= 1.1.0 =
+* When deactivating the plugin, users will now see a feedback survey.
+  Please note that this survey collects only non-sensitive plugin usage feedback and sends it asynchronously to help improve the plugin.
+  No personal information is stored locally.
 
 == Privacy ==
 This plugin may collect anonymous feedback when a user chooses to provide a reason during plugin deactivation.
