@@ -90,7 +90,7 @@ if (!defined('ABSPATH')) exit;
                 <div>
                     <h4><?php echo esc_html__('Documentation', 'rw-webp-converter-lite'); ?></h4>
                     <p><?php echo esc_html__('Check our documentation for detailed usage instructions', 'rw-webp-converter-lite'); ?></p>
-                    <a href="http://docs.robertwp.com/rw-webp-converter-pro/" target="_blank" class="button button-secondary"><?php echo esc_html__('View Docs', 'rw-webp-converter-lite'); ?></a>
+                    <a href="http://docs.robertwp.com/rw-webp-converter-lite/en/#/" target="_blank" class="button button-secondary"><?php echo esc_html__('View Docs', 'rw-webp-converter-lite'); ?></a>
                 </div>
             </div>
 
