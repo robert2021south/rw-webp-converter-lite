@@ -14,8 +14,8 @@ class DeactivateFeedbackHandler {
     public function handle_request(): void {
         check_ajax_referer('rwwcl_deactivate_feedback_nonce', 'nonce');
 
-        $reason   = sanitize_text_field($_POST['reason'] ?? '');
-        $reason_detail = sanitize_text_field($_POST['reason_detail'] ?? '');
+        $reason   = sanitize_text_field(wp_unslash($_POST['reason'] ?? ''));
+        $reason_detail = sanitize_text_field(wp_unslash($_POST['reason_detail'] ?? ''));
 
         //fire-and-forget
         $payload = [
