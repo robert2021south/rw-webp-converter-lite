@@ -3,6 +3,7 @@ namespace RobertWP\WebPConverterLite\Core;
 
 use RobertWP\WebPConverterLite\Admin\Ajax\BulkConverter;
 use RobertWP\WebPConverterLite\Admin\Ajax\DeactivateFeedbackHandler;
+use RobertWP\WebPConverterLite\Admin\Ajax\FeedbackHandler;
 use RobertWP\WebPConverterLite\Admin\Menu;
 use RobertWP\WebPConverterLite\Admin\Services\AutoOptimizer;
 use RobertWP\WebPConverterLite\Admin\Services\WebPConverter;
@@ -38,6 +39,7 @@ class HooksRegistrar {
         $bc = BulkConverter::get_instance();
         $wc = WebPConverter::get_instance();
         $df = DeactivateFeedbackHandler::get_instance();
+        $fb = FeedbackHandler::get_instance();
 
         // admin_menu
         add_action('admin_menu', [$menu, 'add_settings_menu']);
@@ -51,6 +53,7 @@ class HooksRegistrar {
         //wp_ajax_
         add_action('wp_ajax_rwwcl_bulk_convert', self::cb([$bc, 'handle_request']));
         add_action('wp_ajax_rwwcl_deactivate_feedback', [$df, 'handle_request']);
+        add_action('wp_ajax_rwwcl_send_feedback', [$fb, 'handle_feedback_submission']);
 
         //delete
         add_action('delete_attachment', [$ao, 'handle_deleted_attachment']);

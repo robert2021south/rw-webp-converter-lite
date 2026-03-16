@@ -503,6 +503,198 @@
     flex-shrink: 0;
 }
 
+/* star styles - with proper prefixes */
+.rwwcl-about .rwwcl-wp-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    unicode-bidi: bidi-override;
+    direction: ltr;
+    margin: 10px 0;
+}
+
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star {
+    font-family: 'dashicons' !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin: 0 2px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    position: relative !important;
+    color: #ffb900 !important;
+    font-size: 0 !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    direction: ltr !important;
+}
+
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star::before {
+    font-family: 'dashicons' !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-indent: 0 !important;
+    content: "\f154" !important; /* dashicons-star-empty */
+}
+
+/* JS 控制的悬停效果 */
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star.rwwcl-hover::before {
+    content: "\f155" !important; /* dashicons-star-filled */
+}
+
+/* 选中状态 */
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star.rwwcl-selected::before {
+    content: "\f155" !important;
+}
+
+/* 半星状态 */
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star.rwwcl-half::before,
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star.rwwcl-half-selected::before {
+    content: "\f459" !important; /* dashicons-star-half */
+}
+
+.rwwcl-about .rwwcl-wp-rating .rwwcl-star:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* feedback form styles */
+.rwwcl-about-feedback {
+    margin: 40px 0;
+    padding: 30px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+}
+
+.rwwcl-about-feedback h3 {
+    margin-top: 0;
+    color: #23282d;
+}
+
+.rwwcl-about-feedback hr {
+    margin: 0 0 20px 0;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+.rwwcl-about-feedback .form-group {
+    margin-bottom: 20px;
+}
+
+.rwwcl-about-feedback label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.rwwcl-about-feedback select,
+.rwwcl-about-feedback textarea,
+.rwwcl-about-feedback input[type="email"] {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.rwwcl-about-feedback textarea {
+    resize: vertical;
+}
+
+.rwwcl-about-feedback .description {
+    color: #666;
+    font-style: italic;
+    margin: 5px 0 0 0;
+}
+
+.rwwcl-about-feedback .button-primary {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    padding: 10px 20px;
+    height: auto;
+}
+
+.rwwcl-about-feedback .button-primary:hover {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+/* Toast notification CSS */
+.rwwcl-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 1;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.5s ease-out, transform 0.3s ease-out;
+}
+
+.rwwcl-toast.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+}
+
+.rwwcl-toast-success {
+    background-color: rgba(46, 204, 113, 0.9);
+}
+
+.rwwcl-toast-error {
+    background-color: rgba(231, 76, 60, 0.9);
+}
+
+.rwwcl-toast-warning {
+    background-color: rgba(241, 196, 15, 0.9);
+}
+
+.rwwcl-btn-loading {
+    position: relative;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.rwwcl-btn-loading .rwwcl-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: rwwcl-spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes rwwcl-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Dashicons 版本的 spinner（可选） */
+.rwwcl-btn-loading .dashicons {
+    animation: rwwcl-spin 2s linear infinite;
+}
+.rwwcl-btn-loading .dashicons-update {
+    animation: rwwcl-spin 2s linear infinite;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+/**/
 .rwwcl-about .pro-banner {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;

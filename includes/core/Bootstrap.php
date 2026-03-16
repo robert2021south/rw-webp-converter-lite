@@ -1,7 +1,9 @@
 <?php
 namespace RobertWP\WebPConverterLite\Core;
 
+use Random\RandomException;
 use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
+use RobertWP\WebPConverterLite\Utils\Helper;
 use RobertWP\WebPConverterLite\Utils\TemplateLoader;
 
 class Bootstrap {
@@ -19,6 +21,9 @@ class Bootstrap {
         self::$initialized = true;
     }
 
+    /**
+     * @throws RandomException
+     */
     public static function activate(): void {
         update_option(RWWCL_VERSION_OPTION, RWWCL_PLUGIN_VERSION);
 
@@ -35,6 +40,8 @@ class Bootstrap {
         $data = wp_parse_args($existing, $defaults);
 
         update_option( SettingsRegistrar::RWWCL_SETTINGS_OPTION, $data );
+
+        Helper::get_site_uuid();
     }
 
     public static function deactivate(): void {
@@ -44,6 +51,5 @@ class Bootstrap {
     public static function uninstall(): void {
 
     }
-
 
 }

@@ -1,6 +1,7 @@
 <?php
 namespace RobertWP\WebPConverterLite\Utils;
 
+use Random\RandomException;
 use RobertWP\WebPConverterLite\Admin\Settings\SettingsRegistrar;
 class TerminateException extends \RuntimeException {}
 
@@ -77,6 +78,49 @@ class Helper
         }
 
         wp_send_json_success($data);
+    }
+
+    /**
+     * Get or generate site UUID
+     *
+     * @return string
+     * @throws RandomException
+     */
+    public static function get_site_uuid(): string
+    {
+        $option_name = 'rwwcl_site_uuid';
+        $uuid = get_option($option_name);
+
+        if (empty($uuid)) {
+            $uuid = self::generate_uuid_v4();
+            update_option($option_name, $uuid, true);
+
+            // 可选：记录日志便于调试
+            //error_log('Display Server Info: New site UUID generated');
+        }
+        return $uuid;
+
+    }
+
+    /* ===================== Private Method ======================*/
+
+    /**
+     * Generate a valid UUID v4
+     *
+     * @return string
+     * @throws RandomException
+     */
+    private static function generate_uuid_v4(): string
+    {
+        $data = random_bytes(16);
+
+        // Set version to 0100 (UUID v4)
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        // Set variant to 10xx (RFC 4122)
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+        // Format as UUID
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
 }
