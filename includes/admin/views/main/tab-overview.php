@@ -124,36 +124,36 @@ if ($stats['total_images'] === 0) {
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($recent_records as $rec): ?>
+            <?php foreach ($recent_records as $rwwcl_rec): ?>
                 <tr>
                     <td>
                             <?php
-                            $thumb_url = '';
-                            if (!empty($rec['id']) && get_post_status($rec['id'])) {
-                                $thumb = wp_get_attachment_image_src($rec['id'], 'thumbnail');
-                                $thumb_url = $thumb ? $thumb[0] : '';
+                            $rwwcl_thumb_url = '';
+                            if (!empty($rwwcl_rec['id']) && get_post_status($rwwcl_rec['id'])) {
+                                $rwwcl_thumb = wp_get_attachment_image_src($rwwcl_rec['id'], 'thumbnail');
+                                $rwwcl_thumb_url = $rwwcl_thumb ? $rwwcl_thumb[0] : '';
                             }
                             ?>
-                            <a href="<?php echo esc_url($rec['original_url']); ?>" target="_blank" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
-                                <?php if ($thumb_url): ?>
-                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="" style="width:40px;height:40px;margin-right:8px;object-fit:cover;border:1px solid #ccc;">
-                                    <span><?php echo esc_html($rec['file']); ?></span>
+                            <a href="<?php echo esc_url($rwwcl_rec['original_url']); ?>" target="_blank" style="display:flex; align-items:center; text-decoration:none; color:inherit;">
+                                <?php if ($rwwcl_thumb_url): ?>
+                                    <img src="<?php echo esc_url($rwwcl_thumb_url); ?>" alt="" style="width:40px;height:40px;margin-right:8px;object-fit:cover;border:1px solid #ccc;">
+                                    <span><?php echo esc_html($rwwcl_rec['file']); ?></span>
                                 <?php else: ?>
                                     <span style="display:inline-block;width:40px;height:40px;background:#eee;margin-right:8px;border:1px solid #ccc;"></span>
-                                    <span style="text-decoration:line-through;color:#999;"><?php echo esc_html($rec['file']); ?></span>
+                                    <span style="text-decoration:line-through;color:#999;"><?php echo esc_html($rwwcl_rec['file']); ?></span>
                                 <?php endif; ?>
                             </a>
                     </td>
-                    <td ><?php echo esc_html(size_format($rec['original_size'],2)); ?></td>
+                    <td ><?php echo esc_html(size_format($rwwcl_rec['original_size'],2)); ?></td>
                     <td>
-                        <?php if (!empty($rec['webp_url'])): ?>
-                            <a href="<?php echo esc_url($rec['webp_url']); ?>" target="_blank"><?php echo esc_html(size_format($rec['webp_size'],2)); ?></a>
+                        <?php if (!empty($rwwcl_rec['webp_url'])): ?>
+                            <a href="<?php echo esc_url($rwwcl_rec['webp_url']); ?>" target="_blank"><?php echo esc_html(size_format($rwwcl_rec['webp_size'],2)); ?></a>
                         <?php else: ?>
-                            <?php echo esc_html(size_format($rec['webp_size'],2)); ?>
+                            <?php echo esc_html(size_format($rwwcl_rec['webp_size'],2)); ?>
                         <?php endif; ?>
                     </td>
-                    <td><?php echo esc_html(Helper::image_compression_text($rec['original_size'],$rec['webp_size'])); ?></td>
-                    <td><?php echo esc_html(human_time_diff($rec['time'], time()) . ' ago'); ?></td>
+                    <td><?php echo esc_html(Helper::image_compression_text($rwwcl_rec['original_size'],$rwwcl_rec['webp_size'])); ?></td>
+                    <td><?php echo esc_html(human_time_diff($rwwcl_rec['time'], time()) . ' ago'); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

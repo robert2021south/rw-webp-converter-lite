@@ -12,7 +12,7 @@ class AdminPageRenderer
     public static function render_main_page(): void
     {
         // Currently selected tab
-        $active_tab = wp_unslash($_GET['tab'] ?? 'overview');
+        $active_tab = sanitize_text_field(wp_unslash($_GET['tab'] ?? 'overview'));
 
         // All tab keys and labels
         $tabs = [

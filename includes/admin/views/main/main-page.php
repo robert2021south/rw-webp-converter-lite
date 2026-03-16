@@ -18,12 +18,12 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
     <?php settings_errors();?>
     <h2 class="nav-tab-wrapper rwwcl-tab-wrapper">
 
-        <?php foreach ($tabs as $tab_key => $tab_label):
-            $is_active = $active_tab === $tab_key ? ' nav-tab-active' : '';
+        <?php foreach ($tabs as $rwwcl_tab_key => $rwwcl_tab_label):
+            $rwwcl_is_active = $active_tab === $rwwcl_tab_key ? ' nav-tab-active' : '';
             ?>
-            <a href="<?php echo esc_url($tab_urls[$tab_key]); ?>"
-               class="nav-tab<?php echo esc_attr($is_active); ?>">
-                <?php echo esc_html($tab_label); ?>
+            <a href="<?php echo esc_url($tab_urls[$rwwcl_tab_key]); ?>"
+               class="nav-tab<?php echo esc_attr($rwwcl_is_active); ?>">
+                <?php echo esc_html($rwwcl_tab_label); ?>
             </a>
         <?php endforeach; ?>
 
@@ -33,36 +33,36 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
         <?php
 
         //
-        $stats = Statistics::get_instance()->get_global_stats();
-        $stats['remaining_images'] = max(0, $stats['total_images'] - $stats['converted_images']);
+        $rwwcl_stats = Statistics::get_instance()->get_global_stats();
+        $rwwcl_stats['remaining_images'] = max(0, $rwwcl_stats['total_images'] - $rwwcl_stats['converted_images']);
 
         //
-        $recent_records = get_transient('rwwcl_last_converted') ?: [];
+        $rwwcl_recent_records = get_transient('rwwcl_last_converted') ?: [];
 
         switch ($active_tab) {
             case 'overview':
-                $tab_data['stats'] = $stats;
-                $tab_data['recent_records'] = $recent_records;
+                $rwwcl_tab_data['stats'] = $rwwcl_stats;
+                $rwwcl_tab_data['recent_records'] = $rwwcl_recent_records;
                 break;
             case 'settings':
                 // Prepare form-related parameters
-                $form_args = [
+                $rwwcl_form_args = [
                     'settings_group' => 'rwwcl_settings_group',
                     'option_name'    => SettingsRegistrar::RWWCL_SETTINGS_OPTION,
                     'submit_label'   => __('Save Changes', 'rw-webp-converter-lite'),
                 ];
-                $pro_fields    = SettingsRenderer::get_pro_fields();
+                $rwwcl_pro_fields    = SettingsRenderer::get_pro_fields();
 
                 //
-                $tab_data['form_args'] = $form_args;
-                $tab_data['pro_fields'] = $pro_fields;
+                $rwwcl_tab_data['form_args'] = $rwwcl_form_args;
+                $rwwcl_tab_data['pro_fields'] = $rwwcl_pro_fields;
                 break;
             default:
-                $tab_data = [];
+                $rwwcl_tab_data = [];
                 break;
         }
         // load template
-        TemplateLoader::load("main/tab-{$active_tab}", $tab_data);
+        TemplateLoader::load("main/tab-{$active_tab}", $rwwcl_tab_data);
         ?>
     </div>
 </div>
