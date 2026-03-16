@@ -5,13 +5,13 @@ Donate link: http://ko-fi.com/robertsouth
 Requires at least: 6.6
 Tested up to: 6.9
 Requires PHP: 8.2
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Language: en_US
 Languages Folder: /languages
 Text Domain: rw-webp-converter-lite
-Update URI: https://wordpress.org/plugins/rw-webp-converter-lite/
+Update URI: https://wordpress.org/rw-webp-converter-lite/
 
 A lightweight WordPress plugin that converts JPG and PNG images to WebP format in bulk and automatically converts newly uploaded images.
 
@@ -52,6 +52,7 @@ https://github.com/robert2021south/rw-webp-converter-lite
 The following files are minified in the plugin package:
 - assets/js/rwwcl-admin-bulk.min.js
 - assets/js/rwwcl-admin-deactivate.min.js
+- assets/js/rwwcl-admin-feedback.min.js
 - assets/css/rwwcl-admin-style.min.css
 - assets/css/rwwcl-admin-deactivate-modal.min.css
 
@@ -78,6 +79,12 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Changelog ==
 
+= 1.2.0 =
+* Added feedback form in settings page
+* Implemented star rating system with half-star support
+* Added option to leave feedback with email (optional)
+* Enhanced user experience with toast notifications
+
 = 1.1.0 =
 * Added a feedback survey modal when users deactivate the plugin.
   - Collects reasons for deactivation and optional details.
@@ -99,12 +106,21 @@ Yes. The plugin is designed to be lightweight and focuses only on WebP image con
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-* When deactivating the plugin, users will now see a feedback survey.
-  Please note that this survey collects only non-sensitive plugin usage feedback and sends it asynchronously to help improve the plugin.
-  No personal information is stored locally.
+= 1.2.0 =
+* Added feedback form in settings page
+* Implemented star rating system with half-star support
+* Added option to leave feedback with email (optional)
+* Enhanced user experience with toast notifications
 
 == Privacy ==
-This plugin may collect anonymous feedback when a user chooses to provide a reason during plugin deactivation.
-Providing feedback is optional and can be skipped.
-The feedback is submitted only at the time of deactivation to our remote server and does not include personal data, site URLs, or any user-identifiable information.
+This plugin respects your privacy. Any data collected (such as optional feedback or deactivation reasons) is handled transparently and securely.
+
+**Feedback Data:** When you use the feedback form in the About tab, we collect your rating, feedback message, and optionally your email address. This helps us understand user needs and improve the plugin.
+**Deactivation Data:** When you uninstall the plugin, you may optionally provide a reason for leaving. This helps us identify areas for improvement.
+
+All data, including any optional email address, is transmitted securely (via TLS/HTTPS) and retained only as long as necessary. For example, feedback data is retained for a maximum of 12 months to help us improve the plugin.
+
+We do not collect any personal data, site URLs, or user-identifiable information without your explicit consent. Email addresses are only collected when voluntarily provided and are never used for marketing.
+
+For complete details on what data is collected, how it is stored (including hashing and encryption for email addresses), the legal basis under GDPR/CCPA, and your rights, please read our full privacy policy:
+https://robertwp.com/privacy-policy

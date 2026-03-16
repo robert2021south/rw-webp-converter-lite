@@ -106,6 +106,65 @@ if (!defined('ABSPATH')) exit;
             </div>
         </div>
     </div>
+    <div class="rwwcl-about-feedback">
+        <h3><?php echo esc_html__('Quick Feedback', 'rw-webp-converter-lite'); ?></h3>
+        <p><?php echo esc_html__('For suggestions, feature requests, or quick feedback, use this form:', 'rw-webp-converter-lite'); ?></p>
+
+        <form id="rwwcl_feedback_form">
+            <?php wp_nonce_field('rwwcl_feedback_nonce', 'rwwcl_feedback_nonce'); ?>
+
+            <div class="form-group">
+                <label><?php echo esc_html__('Rating', 'rw-webp-converter-lite'); ?></label>
+                <div class="rwwcl-wp-rating" id="rwwcl-rating-container">  <!-- 修改这里 -->
+                    <button class="rwwcl-star" data-value="5" aria-label="5 stars" type="button"></button>  <!-- 修改这里 -->
+                    <button class="rwwcl-star" data-value="4" aria-label="4 stars" type="button"></button>
+                    <button class="rwwcl-star" data-value="3" aria-label="3 stars" type="button"></button>
+                    <button class="rwwcl-star" data-value="2" aria-label="2 stars" type="button"></button>
+                    <button class="rwwcl-star" data-value="1" aria-label="1 star" type="button"></button>
+                    <input type="hidden" name="rating" id="rwwcl-rating-value" value="0">  <!-- 修改这里 -->
+                </div>
+                <p class="description" style="margin-top: 5px;">
+                    <?php echo esc_html__('Click a star to rate (half-star support: click left/right side)', 'rw-webp-converter-lite'); ?>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label><?php echo esc_html__('Type', 'rw-webp-converter-lite'); ?></label>
+                <select id="rwwcl_feedback_type" class="form-control">
+                    <option value="general" selected><?php echo esc_html__('General', 'rw-webp-converter-lite'); ?></option>
+                    <option value="bug"><?php echo esc_html__('Bug', 'rw-webp-converter-lite'); ?></option>
+                    <option value="feature"><?php echo esc_html__('Feature Request', 'rw-webp-converter-lite'); ?></option>
+                    <option value="improvement"><?php echo esc_html__('Improvement', 'rw-webp-converter-lite'); ?></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><?php echo esc_html__('Message', 'rw-webp-converter-lite'); ?></label>
+                <textarea id="rwwcl_feedback_message" class="form-control" rows="4"
+                          placeholder="<?php echo esc_attr__('What would make this plugin perfect for you?', 'rw-webp-converter-lite'); ?>"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><?php echo esc_html__('Email (optional)', 'rw-webp-converter-lite'); ?></label>
+                <input type="email" id="rwwcl_feedback_email" class="form-control"
+                       placeholder="<?php echo esc_attr__('your@email.com', 'rw-webp-converter-lite'); ?>">
+                <p class="description" style="margin-top: 5px;">
+                    <?php echo esc_html__('We\'ll only use this to follow up on your feedback. No marketing emails.', 'rw-webp-converter-lite'); ?>
+                </p>
+            </div>
+
+            <button type="button" id="rwwcl_send_feedback" class="button button-primary">
+                <?php echo esc_html__('Send Feedback', 'rw-webp-converter-lite'); ?>
+            </button>
+        </form>
+
+        <p class="description" style="margin-top: 15px;">
+            <small>
+                <?php echo esc_html__('Your feedback helps us improve the plugin. ', 'rw-webp-converter-lite'); ?>
+                <a href="https://robertwp.com/privacy-policy" target="_blank"><?php echo esc_html__('Privacy Policy', 'rw-webp-converter-lite'); ?></a>
+            </small>
+        </p>
+    </div>
 
     <div class="about-pro">
         <div class="pro-banner">
@@ -191,3 +250,4 @@ if (!defined('ABSPATH')) exit;
     </div>
 
 </div>
+
