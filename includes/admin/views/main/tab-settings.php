@@ -36,8 +36,8 @@ use RobertWP\WebPConverterLite\Utils\TemplateLoader;
             <div class="rwwcl-pro-features-grid">
                 <?php
                 if (!empty($pro_fields)){
-                   foreach ($pro_fields as $field){
-                     TemplateLoader::load('settings/fields/pro',['field'=>$field]);
+                   foreach ($pro_fields as $rwwcl_field){
+                     TemplateLoader::load('settings/fields/pro',['field'=>$rwwcl_field]);
                    }
                 }
                 ?>

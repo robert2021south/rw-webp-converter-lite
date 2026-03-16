@@ -31,7 +31,7 @@ class AdminAssets {
         // 检查是否是插件设置页面
         if ($hook === 'tools_page_rwwcl-main' || $hook === 'settings_page_rwwcl-main') {
             // 检查当前 tab 是否为 about
-            $current_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'overview';
+            $current_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : 'overview';
 
             if ($current_tab === 'about') {
                 // 在 about 标签页加载反馈相关的 JS

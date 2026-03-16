@@ -23,8 +23,8 @@ $rwwcl_transients = [
     'rwwcl_total_images',
 ];
 
-foreach ( $rwwcl_transients as $transient ) {
-    delete_transient( $transient );
+foreach ( $rwwcl_transients as $rwwcl_transient ) {
+    delete_transient( $rwwcl_transient );
 }
 
 global $wpdb;

@@ -128,7 +128,7 @@ class FeedbackHandler {
             ]),
         ]);
 
-        if (is_wp_error($response)) {error_log(var_export($response,true));
+        if (is_wp_error($response)) {
             return null;
         }
 
